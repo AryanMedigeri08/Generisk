@@ -16,6 +16,8 @@ Open [the demonstration](http://localhost:13000). API [liveness](http://localhos
 
 The API applies migration `0001_demo` and idempotently seeds two explicitly fictional records. The frontend reads them through a server-side API boundary. Empty knowledge returns unavailable. Every protected route denies missing or invented credentials. The UI has no data-entry/upload flow and no clinical interpretation.
 
+Review the completed [P02-to-P03 handoff](handoffs/P02-to-P03.md) and [actual verification evidence](docs/evidence/p02-validation.md). The hackathon engineering gate is PASS; clinical-production governance is BLOCKED. P03 has not started and requires handoff review first.
+
 ```powershell
 python scripts/smoke_stack.py
 docker compose down
