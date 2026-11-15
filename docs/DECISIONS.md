@@ -1,6 +1,6 @@
 # Decision log
 
-Date: 2026-11-15 (Asia/Calcutta). **DESIGN-ONLY / NOT APPROVED.** P00 decisions and the original DEC-008 proposal are preserved below; the subsequent restricted activation is appended. Product permission is not expert approval. P00 and full P01 remain BLOCKED.
+Date: 2026-11-15 (Asia/Calcutta). Historical P00/P01 design decisions are preserved below. DEC-009 authorizes a separate synthetic-only hackathon engineering track. Product direction is not expert approval; P00/full clinical P01 remain BLOCKED for real-world service.
 
 | ID | Decision | Reason / consequence | Approval state |
 |---|---|---|---|
@@ -12,6 +12,7 @@ Date: 2026-11-15 (Asia/Calcutta). **DESIGN-ONLY / NOT APPROVED.** P00 decisions 
 | DEC-006 | Use feature/p00-product-governance for P00 and a new feature branch for each future feature | User requests incremental GitHub updates and later merge | No merge or P01 execution performed |
 | DEC-007 | Treat official source titles/metadata as preliminary, not full legal review | Direct retrieval failed; counsel must verify current authoritative texts and applicability | Source gap D02 remains open |
 | DEC-008 | Restricted P01 DESIGN-ONLY exception; original proposal below and subsequent amendment v1 appended | Permits only expressly authorized provisional documentation while P00 approvals remain pending | **ACCEPTED / ACTIVE FOR RESTRICTED DOCUMENTATION ONLY**, per attributable founder self-attestation; no independent identity/authority verification |
+| DEC-009 | Synthetic-only, non-clinical hackathon scope and P02 foundation implementation | Separate engineering milestones/gates from unresolved clinical-production approvals; explicit current user direction supersedes earlier documentation-only implementation restriction for P02 | ACCEPTED as project direction; P02 only; no P03, clinical readiness or P02 merge authorization |
 
 Evidence and next-scope recommendation are in [the P00 handoff](../handoffs/P00-to-P01.md). Future changes must preserve decision history and record reviewer, scope and artifact version.
 
@@ -44,3 +45,13 @@ See [the reconciled governance register](governance-approval-register.md) and [d
 - **Branch:** `feature/p01-architecture-design`, from reverified baseline above. No history rewrite/default-branch change.
 - **Expiry/stop:** Earlier of completed P01 design-only review or 2026-12-15 23:59 IST (+05:30); also stop upon withdrawal, scope uncertainty or attempted excluded work. Drafting the handoff is not human review completion. Expansion or the next phase needs separate explicit authorization.
 - **Evidence before status change:** Authorization text and its limits are recorded in the governance register and linked evidence; the original proposal and preflight remain historical. Named clinical/legal/privacy/security reviewers remain unassigned and required.
+
+## DEC-009 — Hackathon-only scope revision and P02 authorization
+
+- **Source/date:** The current user's message titled “Amanah Genetics — Hackathon Scope Revision and P02 Authorization”, 2026-11-15 (Asia/Calcutta). It explicitly revises the target to a functional synthetic-data-only, non-clinical hackathon demonstration and authorizes P02 scaffolding. This is attributable project direction, not independent identity verification, clinical approval or legal clearance.
+- **Current scope:** Next.js/TypeScript/Tailwind accessible foundation; modular FastAPI; PostgreSQL/Alembic; local Docker Compose; placeholder configuration; lint/format/type/tests and GitHub Actions; health/error handling; default-deny authentication/consent interfaces; empty KnowledgeProvider; conspicuously fictional fixtures. No real patient enrollment, commercial healthcare operation or public clinical deployment is intended in this track.
+- **Gate separation:** Hackathon P02 engineering has its own PASS/FAIL/BLOCKED gate using [explicit acceptance criteria](hackathon-roadmap.md). Historical P00/full P01 clinical gates remain BLOCKED, APR-01 through APR-08 PENDING and H01 through H12 OPEN for any future real-world service. Their unresolved status does not prohibit this newly authorized fictional local foundation. No approvals or hazards are closed by the revision.
+- **Supersession:** For the hackathon P02 track only, this explicit instruction supersedes DEC-001/DEC-008's earlier prohibition on implementation. Prior decisions, evidence and restrictions on real clinical use remain historical and intact. P01 documents are design inputs, not claims that full P01 passed.
+- **Branch process:** Establish `main` by a normal reviewed merge of existing documentation history, then implement on `feature/p02-hackathon-foundation`. Review evidence and actual merge/parent hashes are in [baseline review](evidence/p02-baseline-review.md). No rewrite, force push, deletion or default-branch change. P02 is not merged into main in this task.
+- **Restrictions:** Fictional fixtures only. No real genomic files, healthcare integrations, real appointments, personalized clinical advice, diagnosis, marriage-compatibility judgement, pathogenicity inference or compliance/certification claims. Empty RAG safely returns unavailable; no model needed. Authentication/consent remain deny-all interfaces, not P03 implementations.
+- **Completion/continuation:** Run actual local/API/frontend/database/migration checks, CI, secret scan and negative access tests; produce `handoffs/P02-to-P03.md` with separate engineering and clinical gates, reproducible evidence and exact snapshot. Do not start P03 until the handoff is reviewed and its scope is authorized. No P02 merge without review.

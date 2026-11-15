@@ -1,5 +1,7 @@
 # P00 governance approval register
 
+Current scope note (2026-11-15): [DEC-009](DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization) separately authorizes synthetic-only hackathon P02 engineering. The clinical-production approval and hazard statuses below are unchanged. Historical DEC-008 documentation-only limits do not prohibit the newly authorized fictional prototype, and no engineering PASS closes any APR/H item.
+
 Version: reconciliation draft 0.1 | Reviewed: 2026-11-15 (Asia/Calcutta)
 
 **DESIGN-ONLY / NOT APPROVED. P00 gate: BLOCKED. Full P01: BLOCKED.** Restricted P01 documentation is authorized only by the separately recorded DEC-008 amendment below. This register grants no clinical, legal or regulatory approval. APR reviewer appointments, professional authority and approval evidence remain **UNASSIGNED / PENDING**. Aryan Medigeri is attributable solely as the self-declared founder/product owner authorizing software documentation; independent identity/authority verification has not been performed. No APR/H closure evidence was supplied.

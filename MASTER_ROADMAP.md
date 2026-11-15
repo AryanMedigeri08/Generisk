@@ -1,5 +1,7 @@
 # Amanah Genetics — Production Build Master Roadmap
 
+> **2026-11-15 scope amendment (DEC-009):** Current development is a synthetic-only, non-clinical hackathon prototype. See `docs/hackathon-roadmap.md` for authorized P02 engineering scope/gates. The clinical-production baseline below is preserved as planning history; unresolved clinical/legal approvals remain blockers for any future real-world service and are not claims of prototype authorization or compliance.
+
 **Status:** PLANNING BASELINE — not evidence of a completed implementation.  
 **Owner:** Project team.  
 **Target market:** Abu Dhabi, UAE.  
