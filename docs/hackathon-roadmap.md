@@ -14,7 +14,7 @@ P00/full clinical P01 remain BLOCKED. APR-01 through APR-08 stay PENDING; H01 th
 |---|---|---|
 | Baseline reconciliation | Inspect/review P01, preserve history, establish main through normal merge | Baseline review and parent SHAs; no force push/default-branch change |
 | P02 foundation — engineering PASS | Web/API/PostgreSQL/local Compose, fictional fixtures, safe providers and initial deny-all interfaces | Green exact tip 8ced145; preserved as the stacked parent, still unmerged |
-| P03 identity/consent — CURRENT | User-authorized fictional authentication, independent invitations/consent, relationship checks and transactional audit | DEC-010 and attached authorization's 10 engineering criteria; actual PostgreSQL race/negative/browser tests; P03-to-P04 handoff |
+| P03 identity/consent — engineering PASS | Fictional sessions, independent invitations/versioned choices, relationship checks and transactional audit | Exact implementation 1ed2bf1; green run 43719879238; [evidence](evidence/p03-validation.md), [handoff](../handoffs/P03-to-P04.md); human review pending, unmerged |
 | Later demo journeys — NOT AUTHORIZED HERE | Reviewed fictional ingestion/review/navigation and optional curated education | Separate scoped instructions, fixtures and engineering gates; no unsupported clinical claims |
 | Any real-world service | Outside hackathon authorization | Reopen intended use, lawful basis/operator, clinical/legal/security approvals and original clinical gates |
 
