@@ -1,6 +1,6 @@
 # Decision log
 
-Date: 2026-11-15 (Asia/Calcutta). These are P00 planning decisions, not expert approval. No architecture ADR or P01 design is created.
+Date: 2026-11-15 (Asia/Calcutta). **DESIGN-ONLY / NOT APPROVED.** P00 decisions and the original DEC-008 proposal are preserved below; the subsequent restricted activation is appended. Product permission is not expert approval. P00 and full P01 remain BLOCKED.
 
 | ID | Decision | Reason / consequence | Approval state |
 |---|---|---|---|
@@ -11,11 +11,13 @@ Date: 2026-11-15 (Asia/Calcutta). These are P00 planning decisions, not expert a
 | DEC-005 | P00 gate is BLOCKED, even if documentation checks pass | No invented clinical/legal signatures or designated operator | Pending APR-01/APR-02/APR-03/APR-08 |
 | DEC-006 | Use feature/p00-product-governance for P00 and a new feature branch for each future feature | User requests incremental GitHub updates and later merge | No merge or P01 execution performed |
 | DEC-007 | Treat official source titles/metadata as preliminary, not full legal review | Direct retrieval failed; counsel must verify current authoritative texts and applicability | Source gap D02 remains open |
-| DEC-008 | Proposed restricted P01 DESIGN-ONLY exception for synthetic-only architecture documentation while human P00 approvals remain pending | Could permit explicitly bounded design exploration without passing P00 or permitting implementation; details below | **PROPOSED; NOT ACCEPTED; INACTIVE.** Product-owner authorization PENDING; product-owner identity/authority UNASSIGNED |
+| DEC-008 | Restricted P01 DESIGN-ONLY exception; original proposal below and subsequent amendment v1 appended | Permits only expressly authorized provisional documentation while P00 approvals remain pending | **ACCEPTED / ACTIVE FOR RESTRICTED DOCUMENTATION ONLY**, per attributable founder self-attestation; no independent identity/authority verification |
 
 Evidence and next-scope recommendation are in [the P00 handoff](../handoffs/P00-to-P01.md). Future changes must preserve decision history and record reviewer, scope and artifact version.
 
 ## DEC-008 — Proposed restricted P01 DESIGN-ONLY exception
+
+Historical proposal at `9dedc9b87ae30da74171c6aaa63292ed4134baf6`; statements in this section describe the pre-authorization state. Current restricted status is in the appended amendment, which supersedes only the documentation-scope restriction and activation state.
 
 - **Status:** PROPOSED. NOT ACCEPTED. INACTIVE.
 - **Proposed on:** 2026-11-15 (Asia/Calcutta), during P00 verification/governance reconciliation at the user's request. This request authorizes drafting the proposal only; it does not activate the exception or start P01.
@@ -30,3 +32,15 @@ Evidence and next-scope recommendation are in [the P00 handoff](../handoffs/P00-
 - **Current outcome:** No authorization evidence received; DEC-008 remains PROPOSED and INACTIVE. P01 has not started.
 
 See [the reconciled governance register](governance-approval-register.md) and [delivery verification](evidence/p00-delivery-verification.md). DEC-001 and DEC-005 continue to apply without change until an explicitly recorded decision authorizes a bounded exception.
+
+## DEC-008 amendment v1 — Restricted documentation activation
+
+- **Current status:** ACCEPTED / ACTIVE FOR RESTRICTED DOCUMENTATION ONLY. **DESIGN-ONLY / NOT APPROVED** applies to every resulting specification; this is not acceptance of clinical/legal content or full P01.
+- **Evidence and attribution:** [User-supplied authorization](evidence/p01-product-owner-authorization.md), dated 2026-11-15, from Aryan Medigeri, self-declared Founder/product owner. Author identity/authority are self-attested, not independently verified. The statement explicitly accepts the exact baseline `9dedc9b87ae30da74171c6aaa63292ed4134baf6`, scope amendment, restrictions and expiry. No signature or outside verification is invented.
+- **Recorded activation:** 2026-11-15 16:09:00 +05:30, Asia/Calcutta. Author's signing time was not supplied. Attributable founder statement is accepted as project direction for documentation only; it does not establish accountable clinical operation, formal professional authority or statutory permissions.
+- **Scope amendment:** Draft Markdown requirements/NFRs and acceptance scenarios; architecture/static component diagrams; data inventory/flows/trust boundaries; consent/permissions; privacy/security threat model; individual/partner/counsellor/admin workflows; conceptual Markdown API outline; Arabic/English/RTL/accessibility requirements; draft ADRs; future RAG/empty-corpus architecture; document-validation evidence and restricted review handoff. Fictional scenarios only. This expressly broadens the original architecture-only proposal without passing the full P01 gate.
+- **Preserved exclusions:** No application/executable API code or schemas, migrations/databases, auth services, UI, CI/CD/provisioning, RAG/model execution, clinical rules/probabilities, real health information, live integrations, deployment, autonomous diagnosis, reproductive directives or marriage-compatibility labels. No P02 or merge without separate authorization/review.
+- **Unchanged gates:** P00 BLOCKED; full P01 BLOCKED; APR-01 through APR-08 PENDING; H01 through H12 OPEN. No professional/regulatory approval or residual-risk acceptance is conferred.
+- **Branch:** `feature/p01-architecture-design`, from reverified baseline above. No history rewrite/default-branch change.
+- **Expiry/stop:** Earlier of completed P01 design-only review or 2026-12-15 23:59 IST (+05:30); also stop upon withdrawal, scope uncertainty or attempted excluded work. Drafting the handoff is not human review completion. Expansion or the next phase needs separate explicit authorization.
+- **Evidence before status change:** Authorization text and its limits are recorded in the governance register and linked evidence; the original proposal and preflight remain historical. Named clinical/legal/privacy/security reviewers remain unassigned and required.

@@ -2,7 +2,7 @@
 
 Version: reconciliation draft 0.1 | Reviewed: 2026-11-15 (Asia/Calcutta)
 
-**P00 gate: BLOCKED.** P01 has not started. This register records evidence requirements and unresolved decisions; it grants no clinical, legal, regulatory or product approval. All reviewer identities and appointment evidence are **UNASSIGNED**. All approval decisions, dates, approval references and expiry/review dates are **PENDING**. No evidence supporting closure was found in the inspected repository or supplied in this task.
+**DESIGN-ONLY / NOT APPROVED. P00 gate: BLOCKED. Full P01: BLOCKED.** Restricted P01 documentation is authorized only by the separately recorded DEC-008 amendment below. This register grants no clinical, legal or regulatory approval. APR reviewer appointments, professional authority and approval evidence remain **UNASSIGNED / PENDING**. Aryan Medigeri is attributable solely as the self-declared founder/product owner authorizing software documentation; independent identity/authority verification has not been performed. No APR/H closure evidence was supplied.
 
 ## Source and reconciliation rules
 
@@ -23,7 +23,7 @@ Every row has named reviewer **UNASSIGNED**, decision **PENDING**, approval evid
 | APR-05 | Security lead, operator and counsel | Current ADHICS applicability/version, assurance responsibilities and security readiness | Current authoritative standard/guideline/applicability materials; accountable owner; applicable-control mapping and verified assurance evidence | PENDING; reviewers UNASSIGNED; approval evidence PENDING | Deployment and real-data release blocked; documentation validation is no control certification |
 | APR-06 | Arabic/English clinical-content reviewers and accessibility lead | Clinical wording/terminology, translation equivalence, RTL and accessible comprehension plan/content | Verified reviewer roles; versioned content/source/license approvals; bilingual, comprehension and accessibility evaluation evidence with conditions | PENDING; reviewers UNASSIGNED; approval evidence PENDING | Patient-facing clinical content and bilingual/accessibility readiness claims blocked |
 | APR-07 | Operator and qualified clinical lead | Professional credentials, referral arrangements, escalation/incident contacts and coverage | Verified professional scope/credentials; provider agreements; approved referral/escalation pathways, contacts, response commitments and drill evidence | PENDING; reviewers UNASSIGNED; approval evidence PENDING | Real counselling, referrals, booked-appointment claims and operational response commitments blocked |
-| APR-08 | Product owner, clinical lead and UAE counsel | P00 artifact/residual-risk acceptance at an exact commit and authorization of full P01 scope | Explicit dated acceptance by each accountable role; exact commit/artifact scope, conditions, unresolved-risk disposition and P01 authorization | PENDING; reviewers UNASSIGNED; approval evidence PENDING | P00 remains BLOCKED; full P01 is not authorized. Proposed DEC-008 would not close this approval |
+| APR-08 | Product owner, clinical lead and UAE counsel | P00 artifact/residual-risk acceptance at an exact commit and authorization of full P01 scope | Explicit dated acceptance by each accountable role; exact commit/artifact scope, conditions, unresolved-risk disposition and P01 authorization | PENDING; reviewers UNASSIGNED; approval evidence PENDING | P00 remains BLOCKED; full P01 is not authorized. Restricted DEC-008 does not close this approval |
 
 ## Hazard-by-hazard review
 
@@ -54,8 +54,17 @@ Appointing a person does not itself approve the product. Authoring a policy, run
 
 ## DEC-008 authorization boundary
 
-[DEC-008](DECISIONS.md#dec-008--proposed-restricted-p01-design-only-exception) is **PROPOSED, NOT ACCEPTED, INACTIVE**. The request for this reconciliation is permission to draft it only. Product-owner name/authority UNASSIGNED; authorization, date, exact scope/commit and review/expiry conditions PENDING.
+At baseline `9dedc9b87ae30da74171c6aaa63292ed4134baf6`, DEC-008 was PROPOSED / INACTIVE. That historical state and the initial blocked preflight are preserved. The later [amendment v1](DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation) is **ACCEPTED / ACTIVE FOR RESTRICTED DOCUMENTATION ONLY**.
 
-The proposed decision would permit only expressly authorized, synthetic-only architecture documentation despite pending P00 human approvals. It would preserve P00 BLOCKED, all unresolved approvals/hazards, the prohibition on application implementation/real data, and independent expert sign-off requirements. It would not authorize full P01 or claim P01 completion. No architecture documents have been created under it.
+| Activation field | Attributable record and limit |
+|---|---|
+| Decision maker / basis | Aryan Medigeri, self-declared Founder/product owner; attributable founder statement, not independent identity/authority verification or an operator appointment |
+| Source | User's reply to this chat's authorization question; exact question identifier and original text in [authorization evidence](evidence/p01-product-owner-authorization.md) |
+| Accepted version | Original DEC-008 at baseline `9dedc9b87ae30da74171c6aaa63292ed4134baf6`, with the expressly accepted expanded documentation scope recorded as amendment v1 |
+| Date/time | Author-supplied date 2026-11-15; signing time not supplied; recorded activation 2026-11-15 16:09:00 +05:30 (Asia/Calcutta) |
+| Scope / purpose | Eleven draft documentation groups and design-review handoff enumerated in amendment v1, Markdown/static diagrams only; prepare provisional design for review |
+| Expiry | Completion of P01 design-only review or 2026-12-15 23:59 IST, whichever occurs first; withdrawal stops work |
+| Preserved conditions | P00/full P01 BLOCKED, APR-01 through APR-08 PENDING, H01 through H12 OPEN; fictional data only; no executable implementation, real processing, clinical advice, next phase or merge |
+| Scope of verification | Statement content matched against exact baseline/DEC-008 and requested scope/restrictions; attributable self-attestation accepted for project direction only; no external verification or expert sign-off |
 
-The decision requiring product-owner authorization is whether to accept that exact restricted exception, including its exclusions and stop conditions. No activation is requested or inferred as part of this P00 reconciliation; a later explicit, evidenced authorization is required before dependent design work.
+This bounded exception satisfies only the project-documentation activation record; it does not satisfy APR-08 or designate any expert reviewer. Full P01 acceptance, implementation, scope expansion and P02 remain unauthorized. No approval or hazard status above is changed. See the original [P00 verification](evidence/p00-delivery-verification.md) for the earlier inactive state; it is not overwritten.
