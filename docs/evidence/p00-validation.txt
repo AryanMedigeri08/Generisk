@@ -1,0 +1,33 @@
+P00 documentation validation evidence
+Recorded at: 2026-11-15 15:25:24 +05:30 (Asia/Calcutta)
+Implementation snapshot: f80c2aed4b6cc394dec5586e17717a78efd6c618
+Branch: feature/p00-product-governance
+
+Command: python scripts/validate_p00.py --snapshot
+Observed before implementation commit: 8 documents; 12 hazards; 8 approval entries; 118 assertions passed; 0 failed.
+
+Command: python scripts/validate_p00.py
+P00 documentation validation (delivery mode)
+Documents checked: 9
+Hazard entries: 12; approval entries: 8
+Assertions: 164; passed: 164; failed: 0
+Assurance scope: document integrity only; no clinical/legal/bilingual approval.
+
+Command: git diff --check
+Observed: exit 0; no whitespace errors in tracked modifications.
+
+Earlier command: git diff --cached --check
+Observed: exit 2 on pre-existing two-space Markdown hard breaks in supplied MASTER_ROADMAP.md and PHASE_HANDOFF_TEMPLATE.md. No commit occurred on that attempt. Supplied input text was preserved.
+
+Corrected scoped command: git diff --cached --check -- . ':!MASTER_ROADMAP.md' ':!PHASE_HANDOFF_TEMPLATE.md' ':!START_PHASE_00_PROMPT.md'
+Observed: exit 0 for generated/staged artifacts.
+
+Command: git push -u origin feature/p00-product-governance
+Observed: exit 0; new remote branch created at f80c2aed4b6cc394dec5586e17717a78efd6c618.
+
+Command: git grep -I -l -E '(gh[pousr]_[A-Za-z0-9]{20,}|github_pat_[A-Za-z0-9_]{20,}|AKIA[0-9A-Z]{16}|sk-(proj-)?[A-Za-z0-9_-]{32,}|-----BEGIN (RSA |EC |OPENSSH )?PRIVATE KEY-----)' -- .
+Observed: no matches (Git grep exit 1); wrapper reported PASS and exit 0.
+
+Not executed: application unit/integration/E2E, clinical efficacy, Arabic/RTL runtime, accessibility runtime, comprehensive secret/PHI scanning, CI or deployment tests. No runtime exists.
+Assurance limitation: document integrity and limited credential patterns only. No clinical/legal/operator approval or compliance certification.
+Gate: BLOCKED. Required human review and designation of accountable roles remain pending. P01 has not started.
