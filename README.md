@@ -1,12 +1,12 @@
 # Amanah Genetics (Generisk)
 
-P00 product and governance documentation only. **Synthetic-only; not approved for clinical use.** No application, clinical engine, real report ingestion, integrations or deployment exists.
+**DESIGN-ONLY / NOT APPROVED.** P00 governance documentation and restricted P01 draft specifications only. **Synthetic-only; not approved for clinical use.** No application, clinical engine, real report ingestion, integrations or deployment exists.
 
 Read [the roadmap](MASTER_ROADMAP.md), [decisions](docs/DECISIONS.md), [product charter](docs/product-charter.md), [intended use](docs/intended-use.md), [safety plan](docs/clinical-safety-plan.md), [regulatory assessment](docs/regulatory-applicability.md), [risk register](docs/risk-register.md) and [P00 handoff](handoffs/P00-to-P01.md).
 
-P00 gate: **BLOCKED** pending human clinical/legal review and designation of the accountable operator. Draft artifacts are not approvals. P01 has not started.
+P00 gate: **BLOCKED** pending human clinical/legal review and designation of the accountable operator. Full P01: **BLOCKED**. Draft artifacts are not approvals. Restricted documentation alone is authorized by DEC-008 amendment v1.
 
-The [delivery verification](docs/evidence/p00-delivery-verification.md) reconciles GitHub delivery and actual checks. The [governance approval register](docs/governance-approval-register.md) records all eight pending approvals and twelve open hazards. DEC-008 in the decision log is a **PROPOSED, INACTIVE** design-only exception requiring explicit product-owner authorization; it grants no current permission to begin P01.
+The [P00 delivery verification](docs/evidence/p00-delivery-verification.md) preserves the original evidence. The [governance approval register](docs/governance-approval-register.md) retains eight pending approvals and twelve open hazards. [DEC-008 amendment v1](docs/DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation) permits the requested documentation only, based on [attributable founder self-attestation](docs/evidence/p01-product-owner-authorization.md); identity/authority are not independently verified. It expires at completed design-only review or 15 December 2026, 23:59 IST, whichever occurs first. It authorizes no implementation or clinical use.
 
 ## Verify the documentation
 
