@@ -6,6 +6,8 @@ Read [the roadmap](MASTER_ROADMAP.md), [decisions](docs/DECISIONS.md), [product 
 
 P00 gate: **BLOCKED** pending human clinical/legal review and designation of the accountable operator. Draft artifacts are not approvals. P01 has not started.
 
+The [delivery verification](docs/evidence/p00-delivery-verification.md) reconciles GitHub delivery and actual checks. The [governance approval register](docs/governance-approval-register.md) records all eight pending approvals and twelve open hazards. DEC-008 in the decision log is a **PROPOSED, INACTIVE** design-only exception requiring explicit product-owner authorization; it grants no current permission to begin P01.
+
 ## Verify the documentation
 
 Requires Python 3.10+ and Git. No dependencies, environment variables, database or seed data are needed.
