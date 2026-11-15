@@ -1,32 +1,55 @@
 # Amanah Genetics (Generisk)
 
-**DESIGN-ONLY / NOT APPROVED.** P00 governance documentation and restricted P01 draft specifications only. **Synthetic-only; not approved for clinical use.** No application, clinical engine, real report ingestion, integrations or deployment exists.
+**Synthetic-only hackathon prototype — not for clinical use.** P02 provides a local Next.js/FastAPI/PostgreSQL foundation with invented fixtures. There are no real patient records, genetic results, medical answers, login/consent grants, live integrations or appointment bookings.
 
-Read [the roadmap](MASTER_ROADMAP.md), [decisions](docs/DECISIONS.md), [product charter](docs/product-charter.md), [intended use](docs/intended-use.md), [safety plan](docs/clinical-safety-plan.md), [regulatory assessment](docs/regulatory-applicability.md), [risk register](docs/risk-register.md) and [P00 handoff](handoffs/P00-to-P01.md).
+Current scope is [DEC-009](docs/DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization) and the [hackathon milestones/engineering gates](docs/hackathon-roadmap.md). Historical clinical-production P00/full P01 remain **BLOCKED**, eight approvals **PENDING**, twelve hazards **OPEN**. An engineering PASS does not imply clinical certification, regulatory compliance or authorization for real health information.
 
-P00 gate: **BLOCKED** pending human clinical/legal review and designation of the accountable operator. Full P01: **BLOCKED**. Draft artifacts are not approvals. Restricted documentation alone is authorized by DEC-008 amendment v1.
+## Start the local demonstration
 
-The [P00 delivery verification](docs/evidence/p00-delivery-verification.md) preserves the original evidence. The [governance approval register](docs/governance-approval-register.md) retains eight pending approvals and twelve open hazards. [DEC-008 amendment v1](docs/DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation) permits the requested documentation only, based on [attributable founder self-attestation](docs/evidence/p01-product-owner-authorization.md); identity/authority are not independently verified. It expires at completed design-only review or 15 December 2026, 23:59 IST, whichever occurs first. It authorizes no implementation or clinical use.
-
-## Restricted design review inputs
-
-Read the draft [requirements](docs/requirements.md), [architecture](docs/architecture.md), [data flows](docs/data-flows.md), [consent matrix](docs/consent-matrix.md), [threat model](docs/threat-model.md), [UX workflows](docs/ux-workflows.md), [conceptual API outline](docs/api-outline.md), [accessibility/localization](docs/accessibility-localization.md), [RAG architecture](docs/rag-architecture.md) and [ADR index](docs/adr/README.md). Every choice is provisional; document verification is not human clinical, security, privacy or legal acceptance.
-
-See the [restricted review handoff](handoffs/P01-design-only-review.md) and [actual document/diagram validation evidence](docs/evidence/p01-design-validation.md). Full P01 remains BLOCKED; no P02 handoff is issued.
-
-## Verify the documentation
-
-Requires Python 3.10+ and Git. No dependencies, environment variables, database or seed data are needed.
+Requires Docker Engine/Desktop with Linux containers and Docker Compose v2. From the repository root:
 
 ```powershell
-python scripts/validate_p00.py
-git diff --check
+docker compose up --build -d --wait --wait-timeout 180
 ```
 
-The validation checks document structure, local links, traceable hazards and the explicit blocked gate. It cannot establish legal applicability, clinical validity, bilingual comprehension or regulatory compliance. See [recorded evidence](docs/evidence/p00-validation.txt).
+Open [the demonstration](http://localhost:13000). API [liveness](http://localhost:18000/health/live), [readiness](http://localhost:18000/health/ready) and [local API reference](http://localhost:18000/docs) are available on loopback. Host database port is 15432. No `.env` is necessary: defaults are deliberately public local placeholders; `.env.example` documents optional port overrides. Never use these credentials for real data or external hosting.
+
+The API applies migration `0001_demo` and idempotently seeds two explicitly fictional records. The frontend reads them through a server-side API boundary. Empty knowledge returns unavailable. Every protected route denies missing or invented credentials. The UI has no data-entry/upload flow and no clinical interpretation.
+
+```powershell
+python scripts/smoke_stack.py
+docker compose down
+```
+
+Stopping preserves the synthetic local database volume. See [local development](docs/local-development.md) for native commands and disposable migration tests, and [testing strategy](docs/testing-strategy.md) for actual verification scope.
+
+## Repository and quality checks
+
+`apps/web` contains the accessible frontend foundation; `services/api` the modular API, interfaces, migrations and tests; `data/synthetic` invented fixtures; `scripts` stack smoke/limited credential scanning; `.github/workflows/ci.yml` the initial CI. Root npm workspaces share a lockfile. Python runtime and verification dependencies are locked in `services/api/requirements.lock`.
+
+With Node 22.13+ and Python 3.10+:
+
+```powershell
+npm ci
+npm run lint
+npm run format:check
+npm run typecheck
+npm test
+npm run build
+python -m venv .venv
+.\.venv\Scripts\python.exe -m pip install -r services/api/requirements.lock
+.\.venv\Scripts\python.exe -m ruff check services/api scripts/check_secrets.py scripts/smoke_stack.py tests
+.\.venv\Scripts\python.exe -m mypy --config-file services/api/pyproject.toml services/api/src
+.\.venv\Scripts\python.exe -m pytest -c services/api/pyproject.toml services/api/tests
+python scripts/check_secrets.py
+```
+
+Without `TEST_DATABASE_URL`, PostgreSQL integration is explicitly skipped; it is not a passing database test. CI supplies a disposable `_test` database and also builds/starts Compose, runs smoke checks, and runs browser/accessibility tests. The [engineering ADR](docs/adr/ADR-005-hackathon-foundation.md) records selected boundaries and the narrowly scoped lint dependency override. Credential scanning is limited pattern detection, not a comprehensive PHI/security assessment.
 
 ## Branch and review workflow
 
-Use an individual `feature/<phase-or-feature>` branch for every new feature. P00 uses `feature/p00-product-governance`; restricted P01 documentation uses `feature/p01-architecture-design`. Commit coherent progress and push the branch to [GitHub](https://github.com/AryanMedigeri08/Generisk). Review changes and gate evidence before any later merge; no merge or default-branch change is authorized here. DEC-008 permits its bounded documentation only, not full P01 completion, implementation or P02. Never force-push shared history. Keep each handoff tied to an immutable snapshot commit. Any credentials stay in the local credential manager, never in this repository.
+`main` was established by a normal reviewed documentation merge; its [review and parent hashes](docs/evidence/p02-baseline-review.md) preserve all prior work. P02 uses `feature/p02-hackathon-foundation`. Push coherent feature checkpoints; review before merging into main. This task does not merge P02 or change GitHub's default branch. No force pushes or automatic phase advancement. P03 must wait for review of the P02 handoff and its own authorized scope.
 
-The supplied roadmap, start prompt and handoff template remain planning inputs. Future-phase instructions in them are not authorization to execute those phases.
+## Historical design and clinical governance
+
+The [master roadmap](MASTER_ROADMAP.md), [P01 design handoff](handoffs/P01-design-only-review.md), [product charter](docs/product-charter.md), [intended use](docs/intended-use.md), [safety plan](docs/clinical-safety-plan.md), [regulatory assessment](docs/regulatory-applicability.md), [risk register](docs/risk-register.md) and [governance register](docs/governance-approval-register.md) remain review inputs for any future real-world service. They are not clinical approvals. DEC-009 supersedes the earlier documentation-only implementation restriction solely for this fictional hackathon P02 track.

@@ -1,0 +1,30 @@
+{
+  "name": "amanah-genetics",
+  "version": "0.2.0",
+  "private": true,
+  "packageManager": "npm@11.21.2",
+  "overrides": {
+    "@typescript-eslint/typescript-estree": {
+      "minimatch": "11.0.8"
+    }
+  },
+  "workspaces": [
+    "apps/web"
+  ],
+  "engines": {
+    "node": ">=22.13.0"
+  },
+  "scripts": {
+    "dev": "npm run dev --workspace @amanah/web",
+    "build": "npm run build --workspace @amanah/web",
+    "lint": "npm run lint --workspace @amanah/web",
+    "typecheck": "npm run typecheck --workspace @amanah/web",
+    "test": "npm run test --workspace @amanah/web",
+    "test:e2e": "npm run test:e2e --workspace @amanah/web",
+    "format": "prettier --write apps/web package.json compose.yaml .github/workflows/ci.yml",
+    "format:check": "prettier --check apps/web package.json compose.yaml .github/workflows/ci.yml"
+  },
+  "devDependencies": {
+    "prettier": "3.10.1"
+  }
+}

@@ -1,0 +1,9 @@
+repos:
+  - repo: local
+    hooks:
+      - id: tracked-credential-patterns
+        name: Tracked credential patterns (limited scan)
+        entry: python scripts/check_secrets.py
+        language: system
+        pass_filenames: false
+        always_run: true

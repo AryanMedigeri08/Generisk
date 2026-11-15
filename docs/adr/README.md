@@ -1,5 +1,7 @@
 # Draft architecture decision index
 
+Current hackathon amendment: [ADR-005](ADR-005-hackathon-foundation.md) is an engineering decision under DEC-009. The P01 ADR-001 through ADR-004 below remain DRAFT/PROPOSED for any future real-world service; no clinical approval is conferred.
+
 **DESIGN-ONLY / NOT APPROVED** | 2026-11-15, Asia/Calcutta
 
 ## Assumptions and dependencies
@@ -15,4 +17,4 @@ These are DRAFT / PROPOSED design choices under [DEC-008 amendment v1](../DECISI
 
 ## Review gaps
 
-No ADR is ACCEPTED by an architecture, security, clinical or legal reviewer. Each requires recorded review at an exact commit, conditions and supersession history. A product-owner authorization to draft these documents is not approval of their contents. Future implementation and P02 require separate authorization.
+ADR-001 through ADR-004 have no qualified architecture/security/clinical/legal acceptance. Each needs recorded review for real-world service. The later user direction in DEC-009 separately authorizes only fictional hackathon P02 implementation; ADR-005 records that engineering choice without closing the older approval gaps.

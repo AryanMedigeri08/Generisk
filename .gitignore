@@ -8,5 +8,16 @@ __pycache__/
 *.py[cod]
 .venv/
 node_modules/
+.next/
+coverage/
+playwright-report/
+test-results/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+*.egg-info/
+*.tsbuildinfo
+artifacts/local/
 .DS_Store
 Thumbs.db
