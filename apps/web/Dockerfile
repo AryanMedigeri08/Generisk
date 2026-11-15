@@ -5,6 +5,7 @@ COPY package.json package-lock.json ./
 COPY apps/web/package.json ./apps/web/package.json
 RUN npm ci --include=dev
 COPY apps/web ./apps/web
+COPY data/synthetic ./data/synthetic
 RUN npm run build
 RUN chown -R node:node /workspace/apps/web/.next
 USER node
