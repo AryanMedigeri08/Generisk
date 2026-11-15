@@ -12,6 +12,8 @@ The [P00 delivery verification](docs/evidence/p00-delivery-verification.md) pres
 
 Read the draft [requirements](docs/requirements.md), [architecture](docs/architecture.md), [data flows](docs/data-flows.md), [consent matrix](docs/consent-matrix.md), [threat model](docs/threat-model.md), [UX workflows](docs/ux-workflows.md), [conceptual API outline](docs/api-outline.md), [accessibility/localization](docs/accessibility-localization.md), [RAG architecture](docs/rag-architecture.md) and [ADR index](docs/adr/README.md). Every choice is provisional; document verification is not human clinical, security, privacy or legal acceptance.
 
+See the [restricted review handoff](handoffs/P01-design-only-review.md) and [actual document/diagram validation evidence](docs/evidence/p01-design-validation.md). Full P01 remains BLOCKED; no P02 handoff is issued.
+
 ## Verify the documentation
 
 Requires Python 3.10+ and Git. No dependencies, environment variables, database or seed data are needed.
