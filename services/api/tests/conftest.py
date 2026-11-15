@@ -1,4 +1,5 @@
 import json
+import os
 from collections.abc import Iterator
 from pathlib import Path
 
@@ -9,8 +10,15 @@ from sqlalchemy.orm import Session
 from sqlalchemy.pool import StaticPool
 
 from app.config import Settings
-from app.database import Base, DemoCase
+from app.database import HEAD_REVISION, Base, DemoCase
 from app.main import create_app
+
+
+def pytest_sessionstart(session: pytest.Session) -> None:
+    if os.environ.get("CI") and not os.environ.get("TEST_DATABASE_URL"):
+        raise pytest.UsageError(
+            "CI must supply TEST_DATABASE_URL; PostgreSQL tests cannot be skipped."
+        )
 
 
 @pytest.fixture
@@ -21,7 +29,9 @@ def client() -> Iterator[TestClient]:
     Base.metadata.create_all(engine)
     with engine.begin() as connection:
         connection.execute(text("CREATE TABLE alembic_version (version_num VARCHAR(32))"))
-        connection.execute(text("INSERT INTO alembic_version VALUES ('0001_demo')"))
+        connection.execute(
+            text("INSERT INTO alembic_version VALUES (:revision)"), {"revision": HEAD_REVISION}
+        )
     fixtures = Path(__file__).resolve().parents[3] / "data/synthetic/demo-cases.json"
     with Session(engine) as session, session.begin():
         for row in json.loads(fixtures.read_text(encoding="utf-8")):

@@ -2,6 +2,8 @@
 
 **DESIGN-ONLY / NOT APPROVED** | Draft 0.1 | 2026-11-15, Asia/Calcutta
 
+Fictional hackathon P03 implements a bounded subset under DEC-010; see [ADR-006](adr/ADR-006-demo-identity-consent.md) and [runtime API](p03-api.md). Processing includes assigned fictional counsellor metadata access only; this shortcut does not settle the professional-purpose choices below. No legal consent form or real-world clinical processing is approved.
+
 Scope: [DEC-008 amendment v1](DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation). No consent service or legal consent form is implemented. P00 and full P01 remain BLOCKED.
 
 ## Assumptions and dependencies

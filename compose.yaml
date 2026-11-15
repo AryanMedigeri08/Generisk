@@ -26,6 +26,7 @@ services:
     environment:
       AMANAH_DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-amanah_demo}:${POSTGRES_PASSWORD:-demo-local-only}@db:5432/${POSTGRES_DB:-amanah_demo}
       AMANAH_DEMO_ONLY: "true"
+      AMANAH_WEB_ORIGIN: http://localhost:${WEB_PORT:-13000}
     ports:
       - "127.0.0.1:${API_PORT:-18000}:8000"
     depends_on:
@@ -52,6 +53,7 @@ services:
       dockerfile: apps/web/Dockerfile
     environment:
       API_INTERNAL_URL: http://api:8000
+      DEMO_WEB_ORIGIN: http://localhost:${WEB_PORT:-13000}
       NEXT_TELEMETRY_DISABLED: "1"
     ports:
       - "127.0.0.1:${WEB_PORT:-13000}:3000"

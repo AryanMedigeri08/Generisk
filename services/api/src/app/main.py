@@ -4,10 +4,10 @@ import logging
 import time
 from collections.abc import AsyncIterator, Awaitable, Callable
 from contextlib import asynccontextmanager
-from typing import Annotated, Literal
+from typing import Literal
 from uuid import uuid4
 
-from fastapi import Depends, FastAPI, Header, Request
+from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from sqlalchemy import select
 from sqlalchemy.engine import Engine
@@ -20,19 +20,11 @@ from app.config import Settings
 from app.database import DemoCase, database_ready, make_engine
 from app.errors import DemoError, error_response
 from app.modules.clinical_rules import UnavailableClinicalRules
-from app.modules.consent import DenyAllConsent
-from app.modules.identity import Principal, UnavailableAuthentication
 from app.modules.knowledge import EmptyKnowledgeProvider
+from app.p03.router import create_router
 from app.schemas import DemoCaseOut, DemoCasesOut, KnowledgeStatus
 
 logger = logging.getLogger("amanah.requests")
-
-
-def require_principal(authorization: Annotated[str | None, Header()] = None) -> Principal:
-    principal = UnavailableAuthentication().authenticate(authorization)
-    if principal is None:
-        raise DemoError(401, "AUTHENTICATION_UNAVAILABLE", "Protected access is disabled in P02.")
-    return principal
 
 
 def create_app(settings: Settings | None = None, engine: Engine | None = None) -> FastAPI:
@@ -46,8 +38,8 @@ def create_app(settings: Settings | None = None, engine: Engine | None = None) -
 
     application = FastAPI(
         title="Amanah Genetics — synthetic hackathon demonstration",
-        version="0.2.0",
-        description="Fictional fixtures only. Not for clinical use. Protected access is disabled.",
+        version="0.3.0",
+        description="Fictional local accounts and consent only. Not for clinical use.",
         lifespan=lifespan,
     )
 
@@ -118,24 +110,14 @@ def create_app(settings: Settings | None = None, engine: Engine | None = None) -
     def capabilities() -> dict[str, bool | str]:
         return {
             "demo_only": True,
-            "authentication": False,
-            "consent_grants": False,
+            "authentication": True,
+            "consent_grants": True,
             "clinical_rules": UnavailableClinicalRules().availability().status,
             "approved_knowledge": False,
             "real_integrations": False,
         }
 
-    @application.get("/api/v1/private/cases/{case_id}")
-    def private_case(
-        case_id: str, principal: Annotated[Principal, Depends(require_principal)]
-    ) -> None:
-        if not DenyAllConsent().allows(principal, case_id, "view_case"):
-            raise DemoError(403, "ACCESS_DENIED", "Protected access is disabled in P02.")
-
-    @application.post("/api/v1/private/consents")
-    def private_consent(principal: Annotated[Principal, Depends(require_principal)]) -> None:
-        if not DenyAllConsent().allows(principal, "consent", "grant"):
-            raise DemoError(403, "ACCESS_DENIED", "Consent grants are not implemented in P02.")
+    application.include_router(create_router(db, config))
 
     return application
 

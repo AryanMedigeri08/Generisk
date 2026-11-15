@@ -1,6 +1,6 @@
 # Amanah Genetics (Generisk)
 
-**Synthetic-only hackathon prototype — not for clinical use.** P02 provides a local Next.js/FastAPI/PostgreSQL foundation with invented fixtures. There are no real patient records, genetic results, medical answers, login/consent grants, live integrations or appointment bookings.
+**Synthetic Demo — Not for Clinical Use.** P03 adds fictional local identity, independent consent, recipient-bound invitations and transactional audit to the Next.js/FastAPI/PostgreSQL foundation. No real records, genetic results, medical answers, integrations or appointments.
 
 Current scope is [DEC-009](docs/DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization) and the [hackathon milestones/engineering gates](docs/hackathon-roadmap.md). Historical clinical-production P00/full P01 remain **BLOCKED**, eight approvals **PENDING**, twelve hazards **OPEN**. An engineering PASS does not imply clinical certification, regulatory compliance or authorization for real health information.
 
@@ -14,9 +14,9 @@ docker compose up --build -d --wait --wait-timeout 180
 
 Open [the demonstration](http://localhost:13000). API [liveness](http://localhost:18000/health/live), [readiness](http://localhost:18000/health/ready) and [local API reference](http://localhost:18000/docs) are available on loopback. Host database port is 15432. No `.env` is necessary: defaults are deliberately public local placeholders; `.env.example` documents optional port overrides. Never use these credentials for real data or external hosting.
 
-The API applies migration `0001_demo` and idempotently seeds two explicitly fictional records. The frontend reads them through a server-side API boundary. Empty knowledge returns unavailable. Every protected route denies missing or invented credentials. The UI has no data-entry/upload flow and no clinical interpretation.
+The API applies `0001_demo` then additive `0002_identity`, preserving two fictional templates and seeding four local demo accounts. Open [the identity workspace](http://localhost:13000/workspace); its public credentials section lists all logins, including `demo-a` / `demo-a-only` and `demo-b` / `demo-b-only`. Use separate browser profiles/private windows for A/B. Grant processing independently, create/copy a recipient-bound code, accept as B, then grant assessment separately. Withdraw one grant and refresh the other context: neutral unavailability appears. Assessment never grants disclosure; no reviewed output is generated. Empty knowledge and unauthorized access remain unavailable.
 
-Review the completed [P02-to-P03 handoff](handoffs/P02-to-P03.md) and [actual verification evidence](docs/evidence/p02-validation.md). The hackathon engineering gate is PASS; clinical-production governance is BLOCKED. P03 has not started and requires handoff review first.
+Review the [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for the current gate and verified snapshot. Clinical-production governance stays BLOCKED. P04 needs review and separate authorization.
 
 ```powershell
 python scripts/smoke_stack.py
@@ -50,7 +50,7 @@ Without `TEST_DATABASE_URL`, PostgreSQL integration is explicitly skipped; it is
 
 ## Branch and review workflow
 
-`main` was established by a normal reviewed documentation merge; its [review and parent hashes](docs/evidence/p02-baseline-review.md) preserve all prior work. P02 uses `feature/p02-hackathon-foundation`. Push coherent feature checkpoints; review before merging into main. This task does not merge P02 or change GitHub's default branch. No force pushes or automatic phase advancement. P03 must wait for review of the P02 handoff and its own authorized scope.
+`main` was established by a normal reviewed documentation merge; its [review and parent hashes](docs/evidence/p02-baseline-review.md) preserve all prior work. P02 uses `feature/p02-hackathon-foundation`. Push coherent feature checkpoints; review before merging into main. This task does not merge P02 or change GitHub's default branch. No force pushes or automatic phase advancement. P03 uses `feature/p03-identity-consent`, stacked on verified unmerged P02 tip `8ced1458cba1bf84deaf2fc4ce00f1d79aa5f70e`; neither feature branch is merged. P04 requires separate authorization.
 
 ## Historical design and clinical governance
 

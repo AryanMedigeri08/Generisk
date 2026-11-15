@@ -50,7 +50,7 @@ def test_protected_cases_deny_every_identity_claim(
         headers["Authorization"] = authorization
     response = client.get(f"/api/v1/private/cases/{case_id}", headers=headers)
     assert response.status_code == 401
-    assert response.json()["error"]["code"] == "AUTHENTICATION_UNAVAILABLE"
+    assert response.json()["error"]["code"] == "AUTHENTICATION_REQUIRED"
     assert "cases" not in response.json()
 
 
@@ -108,8 +108,8 @@ def test_real_mode_configuration_is_rejected() -> None:
 
 def test_capabilities_never_claim_future_features(client: TestClient) -> None:
     capabilities = client.get("/api/v1/capabilities").json()
-    assert capabilities["authentication"] is False
-    assert capabilities["consent_grants"] is False
+    assert capabilities["authentication"] is True
+    assert capabilities["consent_grants"] is True
     assert capabilities["approved_knowledge"] is False
     assert capabilities["real_integrations"] is False
     assert UnavailableClinicalRules().availability().status == "unavailable"

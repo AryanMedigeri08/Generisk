@@ -1,6 +1,6 @@
 # Local hackathon development
 
-Synthetic-only, non-clinical P02 foundation under DEC-009. No real data, real provider connectivity or clinical readiness. Clinical gates remain BLOCKED; P03 is not implemented.
+Synthetic-only P02/P03 under DEC-009/DEC-010. Clinical gates remain BLOCKED. See [ADR-006](adr/ADR-006-demo-identity-consent.md) and [P03 API](p03-api.md).
 
 ## One-command Docker startup
 
@@ -19,6 +19,7 @@ python -m venv .venv
 $env:PYTHONPATH = 'services/api/src'
 .\.venv\Scripts\python.exe -m alembic -c services/api/alembic.ini upgrade head
 .\.venv\Scripts\python.exe -m app.seed
+.\.venv\Scripts\python.exe -m app.seed_identity
 .\.venv\Scripts\python.exe -m uvicorn app.main:app --host 127.0.0.1 --port 18000 --no-access-log
 ```
 
@@ -36,7 +37,7 @@ $env:TEST_DATABASE_URL = 'postgresql+psycopg://amanah_demo:demo-local-only@127.0
 .\.venv\Scripts\python.exe -m pytest -c services/api/pyproject.toml services/api/tests
 ```
 
-Create the test database once; skip the creation command when it already exists. Tests upgrade, seed twice, read through FastAPI/PostgreSQL, verify the synthetic flag constraint, downgrade (dropping only that disposable fixture table), re-upgrade and reseed. Migration `0001_demo` adds only demonstration fields, no health/genomic schema. Seeding CLI is `python -m app.seed` with PYTHONPATH set as above.
+Create the test database once; skip the creation command when it already exists. Tests reset only the dedicated `_test` database through downgrade/upgrade and fictional seeds, and exercise actual identity, consent, audit and PostgreSQL locking. `0001_demo` is preserved; additive `0002_identity` creates local account/session/ownership/assignment/invitation/consent/joint/audit/rate tables. Both seeds are idempotent; existing choices are not reset. CI requires TEST_DATABASE_URL; absent local database tests are skips, not evidence of a passing gate.
 
 ## Browser and accessibility checks
 
@@ -48,4 +49,8 @@ The web foundation uses semantic regions/headings, a keyboard skip link, visible
 
 Readiness 503 means unavailable/missing migration/seed; liveness may still be 200. No raw exception, SQL, token, URL query or request body appears in API error messages or request logs. Log fields are method/status/duration/request ID only; Uvicorn access logging is disabled by the provided startup commands. Check `docker compose ps` and minimal local logs without inserting real data.
 
-Missing RAG is expected: the provider returns unavailable with no sources. Protected routes always deny; fabricated tokens and role headers cannot enable them. There is no auth bypass configuration. Do not fix a protected denial by adding a development token. P03 requires review and separate authorization. No real-data retention, hosting or regulator requirement is decided by this local setup.
+Missing RAG is expected: unavailable with no sources. P03 permits only valid fictional sessions with the necessary relationships and current scoped choices. No administrator bypass. Workspace public credentials cover A/B/counsellor/support; use separate browser contexts for A/B and manually copy recipient-bound invitation codes. No real notification or enrollment. Processing permission also allows assigned fictional counsellor synthetic metadata access, explained in the UI; it never grants joint assessment/disclosure. Logout/expiry clears private UI state.
+
+Optional API names: AMANAH_WEB_ORIGIN, AMANAH_COOKIE_SECURE, AMANAH_SESSION_TTL_SECONDS, AMANAH_INVITATION_TTL_SECONDS, AMANAH_CONSENT_TTL_SECONDS, AMANAH_LOGIN_LIMIT, AMANAH_INVITATION_LIMIT, AMANAH_RATE_WINDOW_SECONDS. Web DEMO_WEB_ORIGIN must match; Compose derives it from WEB_PORT. Secure=false for HTTP loopback, true for HTTPS loopback; external origins fail configuration. Sessions/permissions 30 minutes, challenges five, invitations ten are demo timeouts, not approved retention. Expired rows remain stored; no purge schedule. Five login attempts/account and invitations/sender per minute plus shared 30/IP login/challenge ceiling can yield 429; wait the 60-second window. Forwarded IP headers are not trusted.
+
+Authenticated browser traces are off; screenshots mask invitation fields. Public credentials, HTTP loopback and database-owner privileges are unsuitable for external hosting. No clinical data input/output or P04. Future professional permissions, retention, hosting and regulatory decisions remain unresolved.

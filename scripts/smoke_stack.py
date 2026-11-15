@@ -34,7 +34,7 @@ def main() -> None:
             {"Authorization": "Bearer fictional-admin", "X-Role": "admin"},
         )
         assert status == 401
-        assert body["error"]["code"] == "AUTHENTICATION_UNAVAILABLE"  # type: ignore[index]
+        assert body["error"]["code"] == "AUTHENTICATION_REQUIRED"  # type: ignore[index]
     print(
         "PASS: live/ready, 2 PostgreSQL fixtures, frontend->API->database, "
         "empty knowledge, 2 protected denials"

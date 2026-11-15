@@ -49,7 +49,7 @@ test("mobile foundation stays within viewport and labels its limitations", async
 }, testInfo) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
-  await expect(page.getByText("Protected flows locked")).toBeVisible();
+  await expect(page.getByText("Independent sign-in required")).toBeVisible();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
@@ -72,5 +72,5 @@ test("fabricated credentials do not open protected API routes", async ({
     },
   );
   expect(response.status()).toBe(401);
-  expect((await response.json()).error.code).toBe("AUTHENTICATION_UNAVAILABLE");
+  expect((await response.json()).error.code).toBe("AUTHENTICATION_REQUIRED");
 });

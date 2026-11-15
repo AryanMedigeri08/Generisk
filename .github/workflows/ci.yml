@@ -1,4 +1,4 @@
-name: Hackathon foundation CI
+name: Hackathon foundation and identity CI
 
 on:
   push:
@@ -59,7 +59,8 @@ jobs:
       - run: ruff check services/api scripts/check_secrets.py scripts/smoke_stack.py tests
       - run: ruff format --check services/api scripts/check_secrets.py scripts/smoke_stack.py tests
       - run: mypy --config-file services/api/pyproject.toml services/api/src
-      - run: pytest -c services/api/pyproject.toml services/api/tests
+      - name: P02 regression and P03 PostgreSQL authorization tests
+        run: pytest -c services/api/pyproject.toml services/api/tests
       - run: python -m unittest discover -s tests
       - run: python scripts/check_secrets.py
 
@@ -82,7 +83,8 @@ jobs:
       - run: docker compose config --quiet
       - run: docker compose up --build -d --wait --wait-timeout 180
       - run: python scripts/smoke_stack.py
-      - run: npm run test:e2e
+      - name: P02 foundation and P03 independent-browser consent workflows
+        run: npm run test:e2e
       - if: always()
         run: docker compose logs --no-color --tail 60
       - if: always()

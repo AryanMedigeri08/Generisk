@@ -48,7 +48,9 @@ describe("accessible foundation states", () => {
     expect(
       screen.getByRole("heading", { name: "Fictional participant A" }),
     ).toBeInTheDocument();
-    expect(screen.getByText("Protected flows locked")).toBeInTheDocument();
+    expect(
+      screen.getByText("Independent sign-in required"),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("heading", {
         name: /Approved knowledge is not yet available/,

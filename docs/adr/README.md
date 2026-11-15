@@ -1,5 +1,7 @@
 # Draft architecture decision index
 
+Current P03 engineering amendment: [ADR-006](ADR-006-demo-identity-consent.md) records the authorized local fictional identity/consent implementation under DEC-010. It does not approve the clinical-service drafts below.
+
 Current hackathon amendment: [ADR-005](ADR-005-hackathon-foundation.md) is an engineering decision under DEC-009. The P01 ADR-001 through ADR-004 below remain DRAFT/PROPOSED for any future real-world service; no clinical approval is conferred.
 
 **DESIGN-ONLY / NOT APPROVED** | 2026-11-15, Asia/Calcutta

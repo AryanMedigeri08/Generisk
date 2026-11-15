@@ -1,5 +1,186 @@
 @import "tailwindcss";
 
+.identity-workspace {
+  max-width: 1000px;
+  margin: 20px auto 50px;
+  padding-inline: 24px;
+}
+.workspace-intro {
+  max-width: 720px;
+  color: #526761;
+  font-size: 15px;
+  line-height: 1.8;
+  margin-block: 20px 10px;
+}
+.workspace-message {
+  min-height: 44px;
+  padding-block: 12px;
+  font-size: 14px;
+  font-weight: 600;
+}
+.identity-card {
+  border: 1px solid #dce3d9;
+  border-radius: 10px;
+  background: white;
+  padding: 28px;
+  margin-block: 20px;
+}
+.identity-card h2 {
+  font-size: 23px;
+  margin-bottom: 15px;
+}
+.identity-card h3 {
+  margin-block: 12px;
+}
+.identity-card p {
+  font-size: 14px;
+  line-height: 1.7;
+}
+.identity-card button,
+.identity-card input,
+.identity-card select {
+  min-height: 44px;
+  border: 1px solid #9faf9f;
+  border-radius: 5px;
+  padding: 10px 12px;
+  font: inherit;
+  font-size: 14px;
+  max-width: 100%;
+}
+.identity-card button {
+  cursor: pointer;
+  background: #e7eddf;
+  color: #193b36;
+}
+.identity-card button:hover:not(:disabled) {
+  background: #d5edac;
+}
+.identity-card button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.identity-card input,
+.identity-card select {
+  background: #fff;
+}
+.identity-card label {
+  font-size: 14px;
+  font-weight: 600;
+}
+.identity-form {
+  display: grid;
+  gap: 12px;
+  max-width: 420px;
+}
+.identity-form .primary-choice {
+  background: #173f37;
+  color: #fff;
+  margin-top: 10px;
+}
+.demo-credentials {
+  margin-top: 25px;
+  font-size: 14px;
+}
+.demo-credentials summary {
+  cursor: pointer;
+  padding-block: 10px;
+}
+.demo-credentials li {
+  margin-block: 10px;
+  overflow-wrap: anywhere;
+}
+.session-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+.choice-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.choice-group {
+  margin-block: 20px;
+  padding-top: 8px;
+  border-top: 1px solid #dce3d9;
+}
+.permission-state span {
+  font-size: 12px;
+  color: #526761;
+}
+.private-case,
+.joint-row,
+.invitation-row {
+  margin-top: 18px;
+  border-top: 1px solid #dce3d9;
+  padding-top: 15px;
+  overflow-wrap: anywhere;
+}
+.joint-availability {
+  font-weight: 700;
+  color: #193b36;
+}
+.inline-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block: 20px;
+}
+.delivery-code {
+  background: #f0f2e9;
+  padding: 18px;
+  border-radius: 6px;
+  display: grid;
+  gap: 10px;
+}
+.delivery-code input {
+  width: 100%;
+  font-family: monospace;
+}
+.invitation-row > input {
+  display: block;
+  width: 100%;
+  margin-block: 10px;
+}
+.disclosure-boundary {
+  background: #f5f6f0;
+  padding: 18px;
+  border-radius: 6px;
+  margin-block: 15px;
+}
+.audit-list {
+  list-style: none;
+  padding: 0;
+}
+.audit-list li {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  padding-block: 12px;
+  border-top: 1px solid #dce3d9;
+  font-size: 13px;
+}
+.audit-list strong {
+  margin-inline-start: auto;
+}
+@media (max-width: 600px) {
+  .identity-card {
+    padding: 20px;
+  }
+  .identity-workspace {
+    padding-inline: 16px;
+  }
+  .identity-card .choice-buttons button {
+    flex-grow: 1;
+  }
+  .identity-workspace h1 {
+    font-size: 34px;
+  }
+}
+
 :root {
   --ink: #193b36;
   --muted: #526761;

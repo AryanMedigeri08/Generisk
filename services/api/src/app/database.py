@@ -3,7 +3,7 @@ from sqlalchemy.engine import Engine
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column
 
-HEAD_REVISION = "0001_demo"
+HEAD_REVISION = "0002_identity"
 
 
 class Base(DeclarativeBase):

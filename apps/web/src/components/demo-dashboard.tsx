@@ -46,7 +46,9 @@ export function DemoDashboard({
             Amanah<span className="brand-subtitle">GENETICS</span>
           </span>
         </Link>
-        <span className="phase-badge">P02 / FOUNDATION</span>
+        <Link className="phase-badge" href="/workspace">
+          P03 / PRIVATE DEMO
+        </Link>
       </header>
       <main id="main">
         <section className="hero" aria-labelledby="hero-title">
@@ -166,14 +168,15 @@ export function DemoDashboard({
               <p className="eyebrow">PRIVATE BY DESIGN</p>
               <h3 id="boundaries-title">A boundary worth keeping.</h3>
               <p>
-                Authentication and consent are interfaces only. Protected routes
-                deny access until a later, reviewed phase.
+                Sign in independently with fictional accounts. Processing,
+                assessment and disclosure are separate choices checked on the
+                server.
               </p>
               <div className="locked-label">
-                <span aria-hidden="true">⊘</span> Protected flows locked
+                <span aria-hidden="true">⊘</span> Independent sign-in required
               </div>
               <p className="boundary-footnote">
-                No real accounts. No uploads. No appointment bookings.
+                <Link href="/workspace">Open the private demo workspace</Link>
               </p>
             </aside>
           </div>
