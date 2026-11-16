@@ -39,6 +39,12 @@ def create_report_router(engine: Engine, config: Settings) -> APIRouter:
     def fixtures(request: Request) -> list[FixtureOut]:
         return execute(request, "report_fixtures", service.fixtures)
 
+    @router.get("/gene-fixtures", response_model=list[FixtureOut])
+    def gene_fixtures(request: Request) -> list[FixtureOut]:
+        return execute(
+            request, "report_fixtures", lambda ctx: service.fixtures(ctx, "amanah-report-2")
+        )
+
     @router.get("", response_model=list[ReportOut])
     def reports(request: Request) -> list[ReportOut]:
         return execute(request, "report_list", service.reports)
@@ -46,6 +52,12 @@ def create_report_router(engine: Engine, config: Settings) -> APIRouter:
     @router.post("/import", response_model=Receipt)
     def import_report(body: ImportIn, request: Request) -> Receipt:
         return execute(request, "report_import", lambda ctx: service.import_report(ctx, body))
+
+    @router.post("/scenario", response_model=Receipt)
+    def select_scenario(body: ImportIn, request: Request) -> Receipt:
+        return execute(
+            request, "report_scenario", lambda ctx: service.import_report(ctx, body, scenario=True)
+        )
 
     @router.post("/amend", response_model=Receipt)
     def amend_report(body: AmendIn, request: Request) -> Receipt:

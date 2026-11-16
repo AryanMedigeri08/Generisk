@@ -5,7 +5,15 @@ from pathlib import Path
 
 from pydantic import ValidationError
 
-from app.p04.schemas import Category, Manifest, ManifestEntry, SyntheticReport
+from app.p04.schemas import (
+    Category,
+    GeneReport,
+    Manifest,
+    ManifestEntry,
+    SyntheticReport,
+    parse_report,
+)
+from app.p05.panel import PanelUnavailable, load_panel
 
 LIBRARY_ROOT = Path(__file__).resolve().parents[5] / "data/synthetic/reports"
 MAX_BYTES = 16384
@@ -22,7 +30,7 @@ class ValidationResult:
     category: Category
     reasons: list[str]
     source_hash: str | None = None
-    report: SyntheticReport | None = None
+    report: SyntheticReport | GeneReport | None = None
     source_payload: str | None = None
 
 
@@ -88,12 +96,12 @@ def validate_payload(payload: bytes, entry: ManifestEntry) -> ValidationResult:
         return ValidationResult("malformed", ["structure_invalid"], source_hash)
     if "schema_version" not in data:
         return ValidationResult("malformed", ["required_field_missing"], source_hash)
-    if data.get("schema_version") != "amanah-report-1":
+    if data.get("schema_version") not in ("amanah-report-1", "amanah-report-2"):
         return ValidationResult("unsupported", ["schema_unsupported"], source_hash)
     if data.get("synthetic") is not True:
         return ValidationResult("malformed", ["synthetic_required"], source_hash)
     try:
-        report = SyntheticReport.model_validate_json(payload)
+        report = parse_report(payload)
     except ValidationError as exc:
         errors = exc.errors(include_input=False, include_context=False, include_url=False)
         if any(error["type"] == "extra_forbidden" for error in errors):
@@ -113,6 +121,37 @@ def validate_payload(payload: bytes, entry: ManifestEntry) -> ValidationResult:
         or report.sample.id != expected_sample
     ):
         return ValidationResult("malformed", ["source_association_invalid"], source_hash)
+    if isinstance(report, GeneReport):
+        try:
+            loaded = load_panel()
+        except PanelUnavailable:
+            return ValidationResult("unsupported", ["panel_unavailable"], source_hash)
+        genes = {gene.gene_symbol for gene in loaded.panel.genes}
+        declared = {item.gene_symbol for item in report.observations}
+        if report.coverage:
+            declared |= set(report.coverage.included_genes) | set(report.coverage.excluded_genes)
+        if not declared <= genes:
+            return ValidationResult("unsupported", ["gene_unsupported"], source_hash)
+        if report.panel_version != loaded.version:
+            return ValidationResult("unsupported", ["panel_version_unsupported"], source_hash)
+        incomplete = (
+            report.status == "preliminary"
+            or report.coverage is None
+            or bool(report.coverage.excluded_genes)
+            or set(report.coverage.included_genes) != genes
+            or {o.gene_symbol for o in report.observations} != set(report.coverage.included_genes)
+            or any(
+                o.validity != "recorded" or o.status in {"variant_uncertain", "not_tested"}
+                for o in report.observations
+            )
+        )
+        return ValidationResult(
+            "review_required" if incomplete else "accepted",
+            ["unknown_not_absent"] if incomplete else ["structurally_supported_only"],
+            source_hash,
+            report,
+            payload.decode("utf-8"),
+        )
     incomplete = (
         report.status == "preliminary"
         or report.coverage is None

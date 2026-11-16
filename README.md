@@ -1,8 +1,19 @@
-# Amanah Genetics (Generisk)
+# Generisk (Amanah Genetics)
 
-P04 adds [fixture-only synthetic report management](docs/p04-api.md) under DEC-011: select a packaged fictional report in `/workspace`, validate/import it, inspect coverage/provenance and apply a predefined correction while preserving originals. Changed input supersedes old permissions; grant current processing again before viewing. Reports are owner-only; partners/support/fictional professionals are denied. No arbitrary upload, medical interpretation, risk calculation or report RAG/AI. [Schema](docs/report-schema.md), [provenance](docs/report-provenance.md), [validation](docs/report-validation.md), [evidence](docs/evidence/p04-validation.md), [P04 review handoff](handoffs/P04-to-P05.md). P05 is not started.
+Generisk brings independent consent, traceable synthetic reports and attributed gene references into one local demonstration.
 
-Current branch `feature/p04-synthetic-report-ingestion` is stacked directly on reviewed, unmerged P03 delivery `5cde32ff56d5243ab29b9a05b7a8fc6dfdebfc3d`; no previous branch is merged here. P05 requires P04 handoff review and separate authorization. Clinical governance stays BLOCKED.
+**Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. No risk calculation, diagnosis or clinical interpretation in P05.
+
+```powershell
+docker compose up --build -d --wait --wait-timeout 180
+```
+
+Open [workspace](http://localhost:13000/workspace) or [public demo panel](http://localhost:13000/panel). See [GENERISK_SOLUTION.md](GENERISK_SOLUTION.md) for the current hackathon plan (P06/P07 are future work) and [P05 handoff](handoffs/P05-to-P06.md) for actual results.
+
+
+P04 provides [fixture-only synthetic report management](docs/p04-api.md). P05 adds a [public attributed demo panel](data/public/SOURCES.md) and nine gene-level fixtures under DEC-012. In `/workspace`, grant processing, select a gene-level synthetic scenario, then grant fresh processing to view it. A/B can independently select none, CFTR or HBB carrier fixtures; uncertain/not-tested inputs require review. The predefined A none-to-CFTR correction preserves the original. Changed input invalidates old permissions/outputs. Reports remain owner-only; partners/support/fictional professionals are denied. No arbitrary upload, medical interpretation, risk calculation or report RAG/AI. [Schema](docs/report-schema.md), [P04 evidence](docs/evidence/p04-validation.md), [P05 handoff](handoffs/P05-to-P06.md).
+
+The owner-authorized normal merge of P04 and its P03/P02 ancestry is on `main`, now GitHub's default branch. P05 is delivered separately on `feature/p05-public-panel-unlock` for review; it is not merged. Clinical governance stays BLOCKED. P06 is not started and requires separate authorization.
 
 **Synthetic Demo — Not for Clinical Use.** P03 adds fictional local identity, independent consent, recipient-bound invitations and transactional audit to the Next.js/FastAPI/PostgreSQL foundation. No real records, genetic results, medical answers, integrations or appointments.
 
@@ -20,7 +31,7 @@ Open [the demonstration](http://localhost:13000). API [liveness](http://localhos
 
 The API applies `0001_demo` then additive `0002_identity`, preserving two fictional templates and seeding four local demo accounts. Open [the identity workspace](http://localhost:13000/workspace); its public credentials section lists all logins, including `demo-a` / `demo-a-only` and `demo-b` / `demo-b-only`. Use separate browser profiles/private windows for A/B. Grant processing independently, create/copy a recipient-bound code, accept as B, then grant assessment separately. Withdraw one grant and refresh the other context: neutral unavailability appears. Assessment never grants disclosure; no reviewed output is generated. Empty knowledge and unauthorized access remain unavailable.
 
-Review the [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for the current gate and verified snapshot. Clinical-production governance stays BLOCKED. P03 is the reviewed P04 baseline; P05 needs review and separate authorization.
+Review the historical [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for identity controls; the [P05 handoff](handoffs/P05-to-P06.md) records the current delivery. Clinical-production governance stays BLOCKED.
 
 ```powershell
 python scripts/smoke_stack.py

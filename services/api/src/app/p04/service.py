@@ -17,8 +17,8 @@ from app.p04.schemas import (
     Receipt,
     ReportOut,
     SelectIn,
-    SyntheticReport,
     VersionOut,
+    parse_report,
 )
 from app.p04.validation import LibraryUnavailable, ValidationResult, catalog, validate_fixture
 
@@ -39,7 +39,7 @@ def owner(ctx: Context, *, processing: bool = True) -> CaseOwner:
     return record
 
 
-def fixtures(ctx: Context) -> list[FixtureOut]:
+def fixtures(ctx: Context, schema_version: str = "amanah-report-1") -> list[FixtureOut]:
     own = owner(ctx, processing=False)
     try:
         entries = catalog()
@@ -48,9 +48,17 @@ def fixtures(ctx: Context) -> list[FixtureOut]:
             503, "FIXTURE_LIBRARY_UNAVAILABLE", "The demonstration source is unavailable."
         )
     return [
-        FixtureOut(id=e.id, label=e.label, operation=e.operation, expected=e.expected)
+        FixtureOut(
+            id=e.id,
+            label=e.label,
+            operation=e.operation,
+            expected=e.expected,
+            schema_version=e.schema_version,
+        )
         for e in entries
-        if e.owner_id == ctx.actor.id and e.case_id == own.case_id
+        if e.owner_id == ctx.actor.id
+        and e.case_id == own.case_id
+        and e.schema_version == schema_version
     ]
 
 
@@ -104,6 +112,11 @@ def report_view(ctx: Context, record: ReportRecord) -> ReportOut:
         source_report_id=record.source_report_id,
         active_revision_handle=record.active_revision_id,
         versions=[version_view(row, record, rows) for row in rows],
+        selected_gene_scenario=(
+            selected_gene_revision(ctx) in {row.id for row in rows}
+            if rows and rows[-1].content.get("schema_version") == "amanah-report-2"
+            else None
+        ),
     )
 
 
@@ -137,7 +150,7 @@ def content(ctx: Context, body: SelectIn) -> ContentOut:
     return ContentOut(
         report_handle=record.id,
         revision=version_view(row, record, rows),
-        content=SyntheticReport.model_validate_json(json.dumps(row.content)),
+        content=parse_report(json.dumps(row.content)),
     )
 
 
@@ -159,7 +172,7 @@ def history(ctx: Context) -> list[HistoryOut]:
     return [
         HistoryOut(
             **receipt(row, own.input_version).model_dump(),
-            operation=row.operation,
+            operation=cast(Literal["import", "amend", "scenario"], row.operation),
             fixture_id=row.fixture_id,
             created_at=row.created_at,
         )
@@ -172,10 +185,40 @@ def history(ctx: Context) -> list[HistoryOut]:
     ]
 
 
-def import_report(ctx: Context, body: ImportIn, *, amendment: bool = False) -> Receipt:
+def selected_gene_revision(ctx: Context) -> str | None:
+    return ctx.db.scalar(
+        select(ImportOutcome.revision_id)
+        .join(ReportRevision, ImportOutcome.revision_id == ReportRevision.id)
+        .where(
+            ImportOutcome.actor_id == ctx.actor.id,
+            ImportOutcome.category.in_(("accepted", "review_required")),
+            ReportRevision.content["schema_version"].as_string() == "amanah-report-2",
+        )
+        .order_by(ImportOutcome.input_version_after.desc(), ImportOutcome.created_at.desc())
+        .limit(1)
+    )
+
+
+def activate_gene_scenario(ctx: Context, target: ReportRecord, revision: ReportRevision) -> None:
+    # Only validated, owned, latest predefined revisions reach this operation.
+    for record in ctx.db.scalars(
+        select(ReportRecord).where(ReportRecord.owner_id == ctx.actor.id)
+    ).all():
+        if record.id == target.id or record.active_revision_id is None:
+            continue
+        active_revision = ctx.db.get(ReportRevision, record.active_revision_id)
+        if active_revision and active_revision.content.get("schema_version") == "amanah-report-2":
+            record.active_revision_id = None
+    target.active_revision_id = revision.id if revision.validation_state == "accepted" else None
+    ctx.db.flush()
+
+
+def import_report(
+    ctx: Context, body: ImportIn, *, amendment: bool = False, scenario: bool = False
+) -> Receipt:
     own = owner(ctx)
     ctx.rate("report-operation:" + ctx.actor.id, 20)
-    operation = "amend" if amendment else "import"
+    operation = "scenario" if scenario else "amend" if amendment else "import"
     fingerprint = digest(json.dumps({"operation": operation, **body.model_dump()}, sort_keys=True))
     prior = ctx.db.scalar(
         select(ImportOutcome).where(
@@ -207,8 +250,10 @@ def import_report(ctx: Context, body: ImportIn, *, amendment: bool = False) -> R
     if entry is None:
         identity.fail(404, "RESOURCE_UNAVAILABLE", "Resource unavailable.")
     assert entry is not None
-    if entry.operation != operation:
+    if not scenario and entry.operation != operation:
         identity.fail(409, "FIXTURE_OPERATION_UNAVAILABLE", "Select the matching fixture action.")
+    if scenario and entry.schema_version != "amanah-report-2":
+        identity.fail(409, "FIXTURE_OPERATION_UNAVAILABLE", "Select a gene-level demo scenario.")
     target: ReportRecord | None = None
     predecessor: ReportRevision | None = None
     if amendment:
@@ -245,6 +290,23 @@ def import_report(ctx: Context, body: ImportIn, *, amendment: bool = False) -> R
                     None,
                 )
                 if original and original.source_sha256 == result.source_hash:
+                    if scenario:
+                        latest = revision_rows(ctx, target)[-1]
+                        if original.id != latest.id:
+                            identity.fail(
+                                409, "VERSION_CONFLICT", "Select the latest source revision."
+                            )
+                        if selected_gene_revision(ctx) != original.id:
+                            activate_gene_scenario(ctx, target, original)
+                            identity.supersede_case(ctx, own.case_id, own.input_version)
+                            selection = ValidationResult(
+                                cast(Category, original.validation_state),
+                                ["predefined_scenario_selected"],
+                                result.source_hash,
+                            )
+                            return save_outcome(
+                                ctx, own, body, operation, fingerprint, selection, target, original
+                            )
                     result = ValidationResult(
                         "duplicate", ["source_already_imported"], result.source_hash
                     )
@@ -290,6 +352,8 @@ def import_report(ctx: Context, body: ImportIn, *, amendment: bool = False) -> R
         ctx.db.flush()
         target.active_revision_id = revision.id if result.category == "accepted" else None
         ctx.db.flush()
+        if report.schema_version == "amanah-report-2":
+            activate_gene_scenario(ctx, target, revision)
         # Existing P03 mechanism invalidates current processing/joint/output versions atomically.
         identity.supersede_case(ctx, own.case_id, own.input_version)
     return save_outcome(ctx, own, body, operation, fingerprint, result, target, revision)

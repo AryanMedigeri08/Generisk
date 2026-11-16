@@ -1,0 +1,123 @@
+{
+  "schema_version": "amanah-report-2",
+  "synthetic": true,
+  "report_id": "syn-report-a-v2-none",
+  "revision_id": "syn-revision-a-v2-none-v1",
+  "revision": 1,
+  "owner_id": "demo-user-a",
+  "case_id": "syn-case-01",
+  "laboratory_id": "syn-lab-imaginary",
+  "sample": {
+    "id": "syn-sample-a",
+    "owner_id": "demo-user-a",
+    "case_id": "syn-case-01"
+  },
+  "created_at": "2026-11-01T00:00:00Z",
+  "issued_at": "2026-11-01T00:01:00Z",
+  "panel": "gen-panel-demo-v1",
+  "coverage": {
+    "included_genes": [
+      "HBB",
+      "CFTR",
+      "GJB2",
+      "PAH",
+      "MEFV",
+      "GBA1",
+      "ATP7B",
+      "HEXA",
+      "GALT",
+      "BTD",
+      "CYP21A2",
+      "SMN1"
+    ],
+    "excluded_genes": [],
+    "limitations": [
+      "fictional-only",
+      "gene-level-only"
+    ]
+  },
+  "observations": [
+    {
+      "id": "syn-observation-hbb",
+      "gene_symbol": "HBB",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-cftr",
+      "gene_symbol": "CFTR",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-gjb2",
+      "gene_symbol": "GJB2",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-pah",
+      "gene_symbol": "PAH",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-mefv",
+      "gene_symbol": "MEFV",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-gba1",
+      "gene_symbol": "GBA1",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-atp7b",
+      "gene_symbol": "ATP7B",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-hexa",
+      "gene_symbol": "HEXA",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-galt",
+      "gene_symbol": "GALT",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-btd",
+      "gene_symbol": "BTD",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-cyp21a2",
+      "gene_symbol": "CYP21A2",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-smn1",
+      "gene_symbol": "SMN1",
+      "status": "no_pathogenic_variant_detected",
+      "validity": "recorded"
+    }
+  ],
+  "status": "final",
+  "supersedes_revision_id": null,
+  "amendment_reason": null,
+  "provenance": {
+    "source_id": "syn-source-fixture-library",
+    "generated_by": "syn-fictional-author",
+    "source_version": 1
+  },
+  "disclaimer": "Fictional synthetic report. Not clinically interpretable.",
+  "panel_version": "c92acb05afe29452a4cf1ed30c8ebf6502e019c829e1a870d9a55959835ad3bf"
+}

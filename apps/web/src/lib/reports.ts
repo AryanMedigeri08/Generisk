@@ -4,6 +4,7 @@ export type Fixture = {
   operation: "import" | "amend";
   expected:
     "accepted" | "review_required" | "malformed" | "unsupported" | "duplicate";
+  schema_version?: "amanah-report-1" | "amanah-report-2";
 };
 export type ImportReceipt = {
   outcome_handle: string;
@@ -35,41 +36,64 @@ export type ReportMetadata = {
   source_report_id: string;
   active_revision_handle: string | null;
   versions: ReportVersion[];
+  selected_gene_scenario?: boolean | null;
+};
+type ReportEnvelope = {
+  report_id: string;
+  revision_id: string;
+  laboratory_id: string;
+  sample: { id: string };
+  panel: string;
+  created_at: string;
+  issued_at: string;
+  status: string;
+  provenance: {
+    source_id: string;
+    generated_by: string;
+    source_version: number;
+  };
+};
+export type MarkerReportContent = ReportEnvelope & {
+  schema_version: "amanah-report-1";
+  coverage: {
+    included: string[];
+    excluded: string[];
+    limitations: string[];
+  } | null;
+  observations: {
+    id: string;
+    marker: string;
+    value: string | null;
+    validity: string;
+  }[];
+};
+export type GeneReportContent = ReportEnvelope & {
+  schema_version: "amanah-report-2";
+  panel_version: string;
+  coverage: {
+    included_genes: string[];
+    excluded_genes: string[];
+    limitations: string[];
+  } | null;
+  observations: {
+    id: string;
+    gene_symbol: string;
+    status:
+      | "carrier"
+      | "no_pathogenic_variant_detected"
+      | "variant_uncertain"
+      | "not_tested";
+    validity: string;
+  }[];
 };
 export type ReportDetail = {
   report_handle: string;
   revision: ReportVersion;
   disclaimer: string;
-  content: {
-    report_id: string;
-    revision_id: string;
-    schema_version: string;
-    laboratory_id: string;
-    sample: { id: string };
-    panel: string;
-    created_at: string;
-    issued_at: string;
-    status: string;
-    coverage: {
-      included: string[];
-      excluded: string[];
-      limitations: string[];
-    } | null;
-    observations: {
-      id: string;
-      marker: string;
-      value: string | null;
-      validity: string;
-    }[];
-    provenance: {
-      source_id: string;
-      generated_by: string;
-      source_version: number;
-    };
-  };
+  content: MarkerReportContent | GeneReportContent;
 };
 export type ReportHistory = ImportReceipt & {
-  operation: "import" | "amend";
+  operation: "import" | "amend" | "scenario";
   fixture_id: string;
   created_at: string;
 };

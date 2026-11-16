@@ -250,6 +250,45 @@
   }
 }
 
+.public-panel {
+  overflow-wrap: anywhere;
+}
+.panel-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+.panel-gene {
+  margin-block: 0;
+}
+.panel-gene dd {
+  margin-inline-start: 0;
+  margin-block-end: 14px;
+  font-size: 14px;
+}
+.panel-gene dt {
+  font-weight: 600;
+  font-size: 14px;
+}
+.panel-gene ul {
+  padding-inline-start: 20px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.basis-badge {
+  display: inline-block;
+  padding: 3px 8px;
+  border: 1px solid #91a38d;
+  border-radius: 5px;
+  font-size: 12px;
+  background: #edf3e6;
+  color: #173f37;
+}
+@media (max-width: 760px) {
+  .panel-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
 :root {
   --ink: #193b36;
   --muted: #526761;

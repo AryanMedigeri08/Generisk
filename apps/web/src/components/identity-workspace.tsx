@@ -119,9 +119,10 @@ export function IdentityWorkspace() {
       );
       setPassword("");
       clear();
-      setSession(current);
       setRecipient(current.username === "demo-a" ? "demo-b" : "demo-a");
       await load(current);
+      // Expose authenticated controls only after their current permission state is ready.
+      setSession(current);
       setMessage("Signed in to your fictional demonstration account.");
     });
   }

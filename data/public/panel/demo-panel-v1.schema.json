@@ -1,0 +1,296 @@
+{
+  "$defs": {
+    "Condition": {
+      "additionalProperties": false,
+      "properties": {
+        "name_en": {
+          "maxLength": 120,
+          "minLength": 4,
+          "title": "Name En",
+          "type": "string"
+        },
+        "name_ar": {
+          "title": "Name Ar",
+          "type": "null"
+        },
+        "inheritance": {
+          "const": "autosomal_recessive",
+          "title": "Inheritance",
+          "type": "string"
+        },
+        "severity_band": {
+          "const": "variable",
+          "title": "Severity Band",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 280,
+          "minLength": 20,
+          "title": "Summary",
+          "type": "string"
+        },
+        "source_id": {
+          "title": "Source Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name_en",
+        "name_ar",
+        "inheritance",
+        "severity_band",
+        "summary",
+        "source_id"
+      ],
+      "title": "Condition",
+      "type": "object"
+    },
+    "PanelGene": {
+      "additionalProperties": false,
+      "properties": {
+        "gene_symbol": {
+          "maxLength": 15,
+          "pattern": "^[A-Z][A-Z0-9]{1,14}$",
+          "title": "Gene Symbol",
+          "type": "string"
+        },
+        "hgnc_id": {
+          "pattern": "^HGNC:[1-9][0-9]+$",
+          "title": "Hgnc Id",
+          "type": "string"
+        },
+        "symbol_source_id": {
+          "title": "Symbol Source Id",
+          "type": "string"
+        },
+        "conditions": {
+          "items": {
+            "$ref": "#/$defs/Condition"
+          },
+          "maxItems": 3,
+          "minItems": 1,
+          "title": "Conditions",
+          "type": "array"
+        },
+        "engine_support": {
+          "enum": [
+            "supported",
+            "educational_only"
+          ],
+          "title": "Engine Support",
+          "type": "string"
+        },
+        "support_note": {
+          "maxLength": 350,
+          "minLength": 20,
+          "title": "Support Note",
+          "type": "string"
+        },
+        "reference_values": {
+          "$ref": "#/$defs/ReferenceValues"
+        }
+      },
+      "required": [
+        "gene_symbol",
+        "hgnc_id",
+        "symbol_source_id",
+        "conditions",
+        "engine_support",
+        "support_note",
+        "reference_values"
+      ],
+      "title": "PanelGene",
+      "type": "object"
+    },
+    "PublicSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 80,
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 180,
+          "minLength": 5,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "retrieved_on": {
+          "format": "date",
+          "title": "Retrieved On",
+          "type": "string"
+        },
+        "field": {
+          "maxLength": 250,
+          "minLength": 5,
+          "title": "Field",
+          "type": "string"
+        },
+        "license_url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "License Url",
+          "type": "string"
+        },
+        "license_note": {
+          "maxLength": 500,
+          "minLength": 20,
+          "title": "License Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "url",
+        "retrieved_on",
+        "field",
+        "license_url",
+        "license_note"
+      ],
+      "title": "PublicSource",
+      "type": "object"
+    },
+    "ReferenceValue": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "basis": {
+          "enum": [
+            "sourced",
+            "illustrative"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Id"
+        },
+        "note": {
+          "maxLength": 350,
+          "minLength": 15,
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "basis",
+        "source_id",
+        "note"
+      ],
+      "title": "ReferenceValue",
+      "type": "object"
+    },
+    "ReferenceValues": {
+      "additionalProperties": false,
+      "properties": {
+        "carrier_frequency": {
+          "$ref": "#/$defs/ReferenceValue"
+        },
+        "allele_frequency_q": {
+          "$ref": "#/$defs/ReferenceValue"
+        },
+        "detection_rate": {
+          "$ref": "#/$defs/ReferenceValue"
+        }
+      },
+      "required": [
+        "carrier_frequency",
+        "allele_frequency_q",
+        "detection_rate"
+      ],
+      "title": "ReferenceValues",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "panel_id": {
+      "const": "gen-panel-demo-v1",
+      "title": "Panel Id",
+      "type": "string"
+    },
+    "version": {
+      "const": "1.0.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "label": {
+      "const": "Generisk demo panel, illustrative subset, NOT the Abu Dhabi clinical panel.",
+      "title": "Label",
+      "type": "string"
+    },
+    "curated_on": {
+      "format": "date",
+      "title": "Curated On",
+      "type": "string"
+    },
+    "disclaimer": {
+      "maxLength": 350,
+      "minLength": 30,
+      "title": "Disclaimer",
+      "type": "string"
+    },
+    "genes": {
+      "items": {
+        "$ref": "#/$defs/PanelGene"
+      },
+      "maxItems": 20,
+      "minItems": 12,
+      "title": "Genes",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/PublicSource"
+      },
+      "maxItems": 60,
+      "minItems": 1,
+      "title": "Sources",
+      "type": "array"
+    }
+  },
+  "required": [
+    "panel_id",
+    "version",
+    "label",
+    "curated_on",
+    "disclaimer",
+    "genes",
+    "sources"
+  ],
+  "title": "DemoPanel",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

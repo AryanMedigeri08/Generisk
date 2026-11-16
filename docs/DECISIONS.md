@@ -1,5 +1,13 @@
 # Decision log
 
+## DEC-012 — P05 public panel and gene-level synthetic reports
+
+2026-11-16, Asia/Calcutta. ACCEPTED as the owner's explicit P05-only instruction in this chat. [GENERISK_SOLUTION.md](../GENERISK_SOLUTION.md), supplied on P00 ref 13b3464, is the current hackathon master plan and supersedes older phase names/restrictions only within the new authorized scope.
+
+Merged reviewed green P04 delivery 0377224 into main with normal merge `876b25ffabb42986c9a16c6c6bb0c803ce6cddef`; merge CI green, no conflicts/rewrite. P05 branch starts there; GitHub default changed to main as authorized. Allow public HGNC symbols/condition names and attributed curated gene-level reference data while all people/reports/labs/samples stay synthetic. Implement read-only demo panel/API/page and amanah-report-2 fixture/schema support; preserve v1 behavior and identity/ownership/current processing/audit/invalidation controls. [ADR-008](adr/ADR-008-public-gene-panel.md) records nullable reference values and scenario switching.
+
+Deterministic educational risk belongs to a separately authorized P06; curated education content/studio to P07. No P06/P07 execution here, real records, variant-level HGVS/rsIDs, risk calculations/interpretation, LLM/RAG, education studio, real lab/provider claims or marriage/reproductive advice. Public reference summaries are original wording with attribution, not clinical approval or the Abu Dhabi clinical panel. Keep synthetic/not-clinical labels. P00/full clinical P01 BLOCKED; all APR PENDING and H01–H12 OPEN; no expert sign-offs invented or closed.
+
 ## DEC-011 — Authorized P04 synthetic report ingestion and provenance
 
 2026-11-16, Asia/Calcutta. ACCEPTED as user project direction for P04 only. Source: the current user's 17-section “Amanah Genetics — P04 Hackathon Implementation Authorization”, naming reviewed P03 delivery `5cde32ff56d5243ab29b9a05b7a8fc6dfdebfc3d`. This is not medical/legal approval or independent authority verification. The explicit new instruction supersedes P03's next-phase stop only for its listed P04 scope.
