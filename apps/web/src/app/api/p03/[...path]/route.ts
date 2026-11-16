@@ -8,6 +8,7 @@ const roots = new Set([
   "invitations",
   "joints",
   "professional",
+  "reports",
 ]);
 
 function denied(status = 403) {

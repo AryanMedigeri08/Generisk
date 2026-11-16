@@ -28,6 +28,7 @@ class DemoSession(Base):
 
 class CaseOwner(Base):
     __tablename__ = "p03_case_owners"
+    __table_args__ = (UniqueConstraint("case_id", "user_id", name="uq_p03_case_owner_pair"),)
     case_id: Mapped[str] = mapped_column(ForeignKey("demo_cases.id"), primary_key=True)
     user_id: Mapped[str] = mapped_column(ForeignKey("p03_users.id"), unique=True)
     input_version: Mapped[int] = mapped_column(Integer, default=1)

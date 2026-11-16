@@ -4,3 +4,5 @@
 *.yml text eol=lf
 *.yaml text eol=lf
 Dockerfile text eol=lf
+# Fixture integrity hashes cover exact bytes; preserve LF on Windows and Linux checkouts.
+data/synthetic/reports/** text eol=lf

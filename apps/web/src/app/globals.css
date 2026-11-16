@@ -181,6 +181,75 @@
   }
 }
 
+.report-workspace .inline-form label {
+  display: grid;
+  gap: 8px;
+  min-inline-size: 0;
+  max-inline-size: 100%;
+  flex: 1 1 260px;
+  inline-size: 100%;
+}
+.report-workspace select {
+  inline-size: 100%;
+  min-inline-size: 0;
+}
+.report-record,
+.report-detail,
+.report-receipt {
+  border-block-start: 1px solid #dce3d9;
+  margin-block-start: 24px;
+  padding-block-start: 18px;
+  overflow-wrap: anywhere;
+}
+.report-versions {
+  padding-inline-start: 22px;
+}
+.report-versions li {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-block: 12px;
+}
+.report-provenance {
+  display: grid;
+  grid-template-columns: minmax(120px, 1fr) minmax(0, 3fr);
+  gap: 12px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.report-provenance dt {
+  font-weight: 600;
+}
+.report-provenance dd {
+  margin-inline-start: 0;
+}
+.source-digest {
+  font-family: monospace;
+  overflow-wrap: anywhere;
+}
+.report-history {
+  margin-block-start: 24px;
+  font-size: 14px;
+  line-height: 1.8;
+}
+.report-history summary {
+  cursor: pointer;
+  padding-block: 12px;
+}
+@media (max-width: 600px) {
+  .report-provenance {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 6px;
+  }
+  .report-provenance dd {
+    margin-block-end: 8px;
+  }
+  .report-workspace .inline-form button {
+    inline-size: 100%;
+  }
+}
+
 :root {
   --ink: #193b36;
   --muted: #526761;

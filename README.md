@@ -1,5 +1,9 @@
 # Amanah Genetics (Generisk)
 
+P04 adds [fixture-only synthetic report management](docs/p04-api.md) under DEC-011: select a packaged fictional report in `/workspace`, validate/import it, inspect coverage/provenance and apply a predefined correction while preserving originals. Changed input supersedes old permissions; grant current processing again before viewing. Reports are owner-only; partners/support/fictional professionals are denied. No arbitrary upload, medical interpretation, risk calculation or report RAG/AI. [Schema](docs/report-schema.md), [provenance](docs/report-provenance.md), [validation](docs/report-validation.md), [evidence](docs/evidence/p04-validation.md), [P04 review handoff](handoffs/P04-to-P05.md). P05 is not started.
+
+Current branch `feature/p04-synthetic-report-ingestion` is stacked directly on reviewed, unmerged P03 delivery `5cde32ff56d5243ab29b9a05b7a8fc6dfdebfc3d`; no previous branch is merged here. P05 requires P04 handoff review and separate authorization. Clinical governance stays BLOCKED.
+
 **Synthetic Demo — Not for Clinical Use.** P03 adds fictional local identity, independent consent, recipient-bound invitations and transactional audit to the Next.js/FastAPI/PostgreSQL foundation. No real records, genetic results, medical answers, integrations or appointments.
 
 Current scope is [DEC-009](docs/DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization), [DEC-010 P03 authorization](docs/DECISIONS.md#dec-010--authorized-synthetic-p03-identity-and-consent) and the [hackathon milestones/engineering gates](docs/hackathon-roadmap.md). Historical clinical-production P00/full P01 remain **BLOCKED**, eight approvals **PENDING**, twelve hazards **OPEN**. An engineering PASS does not imply clinical certification, regulatory compliance or authorization for real health information.

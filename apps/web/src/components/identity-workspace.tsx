@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import { ReportWorkspace } from "./report-workspace";
 import {
   identityApi,
   DemoRequestError,
@@ -365,6 +366,13 @@ export function IdentityWorkspace() {
             </section>
             {session.role === "individual" && (
               <>
+                <ReportWorkspace
+                  session={session}
+                  currentCase={cases[0]}
+                  permissions={permissions}
+                  refresh={() => load(session)}
+                  perform={action}
+                />
                 <section
                   className="identity-card"
                   aria-labelledby="invite-title"

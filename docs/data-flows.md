@@ -1,5 +1,7 @@
 # Data inventory, conceptual flows and authorization boundaries
 
+P04 amendment (2026-11-16, DEC-011): fictional D04/F04 input is a server-packaged allowlisted fixture, never a public upload/URL. Authenticated owner + current processing -> existing P03 transaction/audit -> deterministic validation -> immutable original TEXT/validated JSONB/provenance -> constrained active head. Invalid inputs append minimized outcomes only. Corrections invalidate affected F05 scopes atomically. Reports remain owner-only in PostgreSQL; no D08 educational corpus/model/embedding transfer. Professional report purpose defaults deny. [Schema](report-schema.md), [provenance](report-provenance.md), [API](p04-api.md). Historical clinical-service owner/retention/legal decisions remain unresolved: APR-01–APR-08 PENDING, H01–H12 OPEN.
+
 **DESIGN-ONLY / NOT APPROVED** | Draft 0.1 | 2026-11-15, Asia/Calcutta
 
 Authorized by [DEC-008 amendment v1](DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation). This is a proposed inventory, not stored data or a lawful-basis finding. P00 and full P01 remain BLOCKED.

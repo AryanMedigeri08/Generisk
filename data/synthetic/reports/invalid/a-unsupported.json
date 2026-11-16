@@ -1,0 +1,56 @@
+{
+  "schema_version": "amanah-report-999",
+  "synthetic": true,
+  "report_id": "syn-report-a-complete",
+  "revision_id": "syn-revision-a-complete-v1",
+  "revision": 1,
+  "owner_id": "demo-user-a",
+  "case_id": "syn-case-01",
+  "laboratory_id": "syn-lab-imaginary",
+  "sample": {
+    "id": "syn-sample-a",
+    "owner_id": "demo-user-a",
+    "case_id": "syn-case-01"
+  },
+  "created_at": "2026-11-01T00:00:00Z",
+  "issued_at": "2026-11-01T00:01:00Z",
+  "panel": "syn-panel-widgets",
+  "coverage": {
+    "included": [
+      "syn-marker-orbit",
+      "syn-marker-lantern"
+    ],
+    "excluded": [
+      "syn-marker-kite"
+    ],
+    "limitations": [
+      "fictional-only",
+      "limited-panel"
+    ]
+  },
+  "observations": [
+    {
+      "id": "syn-observation-orbit",
+      "marker": "syn-marker-orbit",
+      "value_type": "synthetic-token",
+      "value": "demo-token-amber",
+      "validity": "recorded"
+    },
+    {
+      "id": "syn-observation-lantern",
+      "marker": "syn-marker-lantern",
+      "value_type": "synthetic-token",
+      "value": "demo-token-blue",
+      "validity": "recorded"
+    }
+  ],
+  "status": "final",
+  "supersedes_revision_id": null,
+  "amendment_reason": null,
+  "provenance": {
+    "source_id": "syn-source-fixture-library",
+    "generated_by": "syn-fictional-author",
+    "source_version": 1
+  },
+  "disclaimer": "Fictional synthetic report. Not clinically interpretable."
+}

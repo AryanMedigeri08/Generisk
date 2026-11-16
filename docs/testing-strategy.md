@@ -1,4 +1,8 @@
-# P02/P03 hackathon verification strategy
+# P02–P04 hackathon verification strategy
+
+P04 adds fixture/schema/source-bound tests and real PostgreSQL owner/current-processing, raw partner/professional denial, immutable source/head constraints, duplicates/idempotency, correction invalidation, audit rollback and both actual correction/withdrawal lock-waiter orders. Original JSON hashing, byte/depth/node/type/path limits and migration downgrade/re-upgrade preserving P03 are checked. [P04 evidence](evidence/p04-validation.md) records observed counts/failures; no skipped database test passes the gate. No clinical interpretation is tested or claimed.
+
+Browser suites use one worker because four fictional accounts share consent/input state; foundation/P03 precede the full P04 journey. P04 has no automatic retry: predefined revisions need a fresh disposable database volume. CI gets a new runner/volume; locally use the separate `amanah-p04-verify` project on alternate loopback ports in local development. Never reset normal demo history to make a test pass. Report screenshots are fictional; authenticated traces are off. A green unit suite cannot replace working full-stack import/correction.
 
 DEC-009 separates synthetic prototype engineering from unresolved clinical-production governance. Engineering gate criteria ENG-01 to ENG-10 are in [hackathon milestones](hackathon-roadmap.md). Never report runtime/security/clinical assurances from a document check alone.
 

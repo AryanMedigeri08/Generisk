@@ -1,5 +1,26 @@
 # Local hackathon development
 
+P04 (DEC-011) adds fixture-only report management in `/workspace`; see [schema](report-schema.md), [API](p04-api.md), [validation](report-validation.md), [ADR-007](adr/ADR-007-synthetic-report-storage.md). Startup applies additive `0003_reports` after preserved `0001_demo`/`0002_identity`, never resetting P03 rows. Grant own current processing, select/import a fictional fixture, regrant processing for the changed input, inspect coverage/source fields, apply A's correction, regrant and compare revisions. Persisted input changes intentionally supersede old processing/joint/output permissions. No raw partner/professional/support report access, upload, report RAG/model/clinical calculation or deployment.
+
+## Isolated P04 browser verification
+
+Use a fresh disposable project so predefined initial/correction revisions do not alter normal demo history:
+
+```powershell
+$env:DB_PORT='25432'
+$env:API_PORT='28000'
+$env:WEB_PORT='23000'
+docker compose -p amanah-p04-verify up --build -d --wait --wait-timeout 180
+$env:PLAYWRIGHT_CHANNEL='msedge'
+$env:PLAYWRIGHT_BASE_URL='http://127.0.0.1:23000'
+$env:API_TEST_URL='http://127.0.0.1:28000'
+npm run test:e2e
+```
+
+CI uses clean Chromium/default ports. Set API_TEST_URL with alternate API ports because the preserved foundation test calls FastAPI directly. Each full P04 E2E needs a fresh disposable volume. Before reset, verify `docker volume inspect amanah-p04-verify_demo-data` labels identify only `amanah-p04-verify`; `docker compose -p amanah-p04-verify down --volumes` then removes only this expressly disposable test project. Never reset `amanah-hackathon` or real data. Pytest separately uses `_test` PostgreSQL. Clear task port/browser overrides or open a new terminal before normal localhost:13000 startup.
+
+No new runtime library/model key. `.gitattributes` preserves LF fixture bytes on Windows/Linux; don't regenerate hashes to hide source changes. Original JSON/parsed content/prior provenance are immutable in PostgreSQL. Twenty report attempts/actor/minute; no purge or approved retention period. Public credentials/HTTP/DB-owner privileges remain local-demo limits.
+
 Synthetic-only P02/P03 under DEC-009/DEC-010. Clinical gates remain BLOCKED. See [ADR-006](adr/ADR-006-demo-identity-consent.md) and [P03 API](p03-api.md).
 
 ## One-command Docker startup

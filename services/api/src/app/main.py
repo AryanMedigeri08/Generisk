@@ -22,6 +22,7 @@ from app.errors import DemoError, error_response
 from app.modules.clinical_rules import UnavailableClinicalRules
 from app.modules.knowledge import EmptyKnowledgeProvider
 from app.p03.router import create_router
+from app.p04.router import create_report_router
 from app.schemas import DemoCaseOut, DemoCasesOut, KnowledgeStatus
 
 logger = logging.getLogger("amanah.requests")
@@ -38,8 +39,8 @@ def create_app(settings: Settings | None = None, engine: Engine | None = None) -
 
     application = FastAPI(
         title="Amanah Genetics — synthetic hackathon demonstration",
-        version="0.3.0",
-        description="Fictional local accounts and consent only. Not for clinical use.",
+        version="0.4.0",
+        description="Fictional identity, consent and fixture-only reports. Not for clinical use.",
         lifespan=lifespan,
     )
 
@@ -118,6 +119,7 @@ def create_app(settings: Settings | None = None, engine: Engine | None = None) -
         }
 
     application.include_router(create_router(db, config))
+    application.include_router(create_report_router(db, config))
 
     return application
 

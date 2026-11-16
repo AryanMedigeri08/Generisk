@@ -1,0 +1,136 @@
+{
+  "manifest_version": 1,
+  "synthetic_only": true,
+  "fixtures": [
+    {
+      "id": "fixture-a-complete",
+      "file": "valid/a-complete.json",
+      "sha256": "4a33f8bd096fb737f704533b69d6108a42422d6cbcfa1aedd8cfbcd48b048429",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: complete fictional fields",
+      "operation": "import",
+      "expected": "accepted"
+    },
+    {
+      "id": "fixture-a-duplicate",
+      "file": "valid/a-duplicate.json",
+      "sha256": "4a33f8bd096fb737f704533b69d6108a42422d6cbcfa1aedd8cfbcd48b048429",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: identical source import (duplicate)",
+      "operation": "import",
+      "expected": "duplicate"
+    },
+    {
+      "id": "fixture-b-limited",
+      "file": "valid/b-limited.json",
+      "sha256": "6dfa655b9638c318bfe2dba5145ed9de0877870ed8d734ef9ed1664c77c307e6",
+      "owner_id": "demo-user-b",
+      "case_id": "syn-case-02",
+      "label": "B: limited fictional panel; exclusions explicit",
+      "operation": "import",
+      "expected": "accepted"
+    },
+    {
+      "id": "fixture-a-incomplete",
+      "file": "valid/a-incomplete.json",
+      "sha256": "516840e1ccef7c501a36fd48e13132752e87e697bf3bffe958d732015e342608",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: incomplete, non-interpretable review state",
+      "operation": "import",
+      "expected": "review_required"
+    },
+    {
+      "id": "fixture-a-unsupported",
+      "file": "invalid/a-unsupported.json",
+      "sha256": "72788a2b4cf0fa8cfda23ebada54c90f3cc132cfe9715202989bda4b8646ada8",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: intentionally unsupported schema",
+      "operation": "import",
+      "expected": "unsupported"
+    },
+    {
+      "id": "fixture-a-wrong-association",
+      "file": "invalid/a-wrong-association.json",
+      "sha256": "ca98e794a17106212491ea15059ba7e9efbd551477fe7512f9039cf13e201d63",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: intentionally incorrect sample/case binding",
+      "operation": "import",
+      "expected": "malformed"
+    },
+    {
+      "id": "fixture-a-amend",
+      "file": "valid/a-amend.json",
+      "sha256": "d9cb27444f191bd3b38d3fe478facf10e5feda12832fcf3c58c4b6dec09bc2dd",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: predefined version two correction",
+      "operation": "amend",
+      "expected": "accepted"
+    },
+    {
+      "id": "fixture-a-conflict",
+      "file": "invalid/a-conflict.json",
+      "sha256": "41cd1c9aa57bc900cfa022299634edda07de66f93f9d565e29a88013291f3c66",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: conflicting duplicate observation identifier",
+      "operation": "import",
+      "expected": "malformed"
+    },
+    {
+      "id": "fixture-a-missing-required",
+      "file": "invalid/a-missing-required.json",
+      "sha256": "98d63a09d1eeef706e525bf65eaec178fb98b678d166b9a7c7904f4d95663344",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: intentionally missing required laboratory field",
+      "operation": "import",
+      "expected": "malformed"
+    },
+    {
+      "id": "fixture-a-bad-provenance",
+      "file": "invalid/a-bad-provenance.json",
+      "sha256": "dd7c5020ea457258e738a3fcfb3cd2bc26c170e871f762c68d7d2d9352a9ea00",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: intentionally invalid source provenance",
+      "operation": "import",
+      "expected": "malformed"
+    },
+    {
+      "id": "fixture-a-unsupported-field",
+      "file": "invalid/a-unsupported-field.json",
+      "sha256": "f50c0be07c75c5864615fe25a0ef5d5453fd768fafe560ef85d282e429058a10",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: intentionally unsupported extra field",
+      "operation": "import",
+      "expected": "unsupported"
+    },
+    {
+      "id": "fixture-a-invalid-value",
+      "file": "invalid/a-invalid-value.json",
+      "sha256": "d839f3cf9952ea94dc828e83ab6483ee8e67aa63d4e27e88de0622823eb9848c",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: intentionally invalid observation value type",
+      "operation": "import",
+      "expected": "malformed"
+    },
+    {
+      "id": "fixture-a-invalid-amend",
+      "file": "invalid/a-invalid-amend.json",
+      "sha256": "76fdd846a33ae6e5e2ee78b5a39cf2556490735a6e2cf5d38ba85fe790692d43",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: invalid correction with absent predecessor",
+      "operation": "amend",
+      "expected": "malformed"
+    }
+  ]
+}

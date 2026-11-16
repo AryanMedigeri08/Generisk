@@ -1,5 +1,11 @@
 # Proposed privacy and security threat model
 
+## P04 fictional implementation traceability — DEC-011
+
+2026-11-16. T04/T08/T09: owner/current processing, nested ownership, neutral foreign/missing-handle denials, POST-body selectors, no report telemetry/export. T06: support and all fictional professionals denied reports; metadata assignment is insufficient. T10: allowlisted refs, path/symlink/byte/depth/node/hash checks, strict fictional enums, no arbitrary upload. T11/T12: immutable source/provenance, constrained head, P03 input/joint/output invalidation, both actual correction/withdrawal lock-waiter orders. T03/T15: append-only outcomes/source and actual audit INSERT failure rollback. No report RAG/LLM/educational-store flow.
+
+These are scoped engineering controls, not hazard closure or security certification. Public credentials, HTTP loopback, DB-owner trigger override, global lock, no purge and unresolved professional/hosting/retention purpose remain real-service gaps. [Validation](report-validation.md), [ADR-007](adr/ADR-007-synthetic-report-storage.md) and [evidence](evidence/p04-validation.md) record actual results. APR-01–APR-08 PENDING, H01–H12 OPEN, clinical gate BLOCKED. The historical clinical-service proposals below remain unapproved.
+
 **DESIGN-ONLY / NOT APPROVED** | Draft 0.1 | 2026-11-15, Asia/Calcutta
 
 Scope: [DEC-008 amendment v1](DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation). This is threat analysis and proposed verification, not a tested secure system. P00 and full P01 remain BLOCKED.
