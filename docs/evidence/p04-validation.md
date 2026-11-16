@@ -1,6 +1,6 @@
 # P04 verification evidence
 
-2026-11-16, Asia/Calcutta. Synthetic-only hackathon P04 under DEC-011. Engineering IN PROGRESS pending exact implementation CI and final handoff. Clinical-production BLOCKED; APR-01–APR-08 PENDING, H01–H12 OPEN. Authorization/ref/CI preflight: [baseline record](p04-preflight.md).
+2026-11-16, Asia/Calcutta. Synthetic-only hackathon P04 under DEC-011. **Hackathon engineering PASS**, exact implementation CI observed. Human handoff acceptance PENDING. Clinical-production BLOCKED; APR-01–APR-08 PENDING, H01–H12 OPEN. Authorization/ref/CI preflight: [baseline record](p04-preflight.md).
 
 ## Implemented boundary
 
@@ -24,4 +24,31 @@ Verified disposable volume's Compose project label, reset only `amanah-p04-verif
 
 Fixture bytes are LF-pinned by a scoped `.gitattributes` rule, preserving existing newline policy. Manifest source hashes checked before parsing, not recalculated to hide failures. P04 reuses P03 transaction gate; tests cover real lock waiters in both correction/withdrawal orders and actual audit INSERT failure rollback of revisions/head/outcomes/input/permissions. DB constraints/triggers protect source/history/head, but DB owner can alter them. Public credentials, HTTP loopback, global lock/shared limits, no cleanup/MFA/production identity lifecycle, finite synthetic samples and no professional report purpose remain real-service gaps. No independent clinical/legal/security/accessibility/FHIR conformance approval.
 
-No report goes to KnowledgeProvider, pgvector, embeddings, a model, arbitrary external URL or clinical rules. Empty knowledge/unavailable rules regressions remain. FHIR primary R4 concept mapping is documented in schema, without formal resource/profile conformance. Historical approval/hazard records remain unchanged. Exact implementation SHA/CI, final staged scans/document evidence and review handoff will be recorded after verification; no passing gate is inferred before then.
+No report goes to KnowledgeProvider, pgvector, embeddings, a model, arbitrary external URL or clinical rules. Empty knowledge/unavailable rules regressions remain. FHIR primary R4 concept mapping is documented in schema, without formal resource/profile conformance. Historical approval/hazard records remain unchanged.
+
+## Exact implementation, CI and delivery
+
+Pushed implementation **`721d82e79117a91299602d855b55c86385742c6a`** on `feature/p04-synthetic-report-ingestion`, parent authorization checkpoint `80459a026a30fe25be47a684b864b17ba3fca025`, stacked directly on reviewed unmerged P03 `5cde32ff56d5243ab29b9a05b7a8fc6dfdebfc3d`. No merge, force push, default-branch change or P05 implementation.
+
+[Run 43859739332](https://github.com/AryanMedigeri08/Generisk/actions/runs/43859739332): **completed/success** at that exact SHA; **web, api, compose-smoke all success**, observed using GitHub API/connector. Job logs confirm **103 PostgreSQL-inclusive backend tests passed/one warning/34.91s**, strict mypy **27 sources**, Ruff **40 files formatted**, **23 frontend tests/four files**, **nine Chromium browser tests/14.0s**, smoke PASS, npm zero vulnerabilities, **159 tracked text files/zero secret findings**. These are actual runtime checks, not a documentation-only claim. Earlier preflight-only run 43854733035 also passed but does not substitute for implementation evidence.
+
+Local advisory checks: `npm audit --audit-level=moderate` found **zero vulnerabilities**; `python -m pip check` **no broken requirements**; four `python -m unittest discover -s tests` scanner tests **OK**. Isolated ignored pip-audit tool, `$env:PYTHONPATH='artifacts/local/pip-audit'; .\.venv\Scripts\python.exe -m pip_audit --no-deps --disable-pip -r services/api/requirements.lock`: **No known vulnerabilities found**, exit 0; warns that full package hashes are absent. No runtime/lockfile changed for the scan.
+
+Normal `docker compose up --build -d --wait --wait-timeout 180` updated localhost13000/18000/15432 services: all healthy, preserved original volume/P03 data; `python scripts/smoke_stack.py`: **PASS: live/ready, 2 PostgreSQL fixtures, frontend->API->database, empty knowledge, 2 protected denials**. [Desktop](p04-report-desktop.png) and [mobile](p04-report-mobile.png) report-only screenshots were visually inspected. Original values/provenance and explicit superseded/current/review states are legible; no real data or auth/invitation secrets included.
+
+[Changed-file inventory](p04-files-changed.txt) records all paths relative to the exact reviewed P03 baseline, including final evidence. [P04-to-P05](../../handoffs/P04-to-P05.md) is a review handoff; human acceptance and separately bounded P05 authorization remain pending. A final documentation-only commit adds inventory/handoff/screenshots/evidence/milestone updates, without changing runtime since the green implementation. Its final SHA/run are reported separately after pushing to avoid self-reference.
+
+Final staged document/secret checks are recorded below. They do not constitute clinical/legal or application assurance.
+
+`python scripts/check_secrets.py`: **161 tracked text files, zero findings**, exit 0; two new PNGs are binary. `python scripts/validate_p00.py`: **nine documents, twelve hazards/eight approvals, 208 assertions passed/zero failed**, exit 0. Its earlier intermediate failure was the README link to the not-yet-written P04 handoff; creating/completing the handoff resolved it. The P00 validator measures document integrity only and does not unblock clinical governance.
+
+A read-only Python here-string piped to `python -` enumerated tracked Markdown, checked balanced fences/local targets/anchors and ten handoff sections/separate gates, canonical APR/H rows and unchanged governance files, post-CI change scope, manifest digest equality for actual disk bytes AND `git show :path` index bytes, and complete `git diff --name-status` inventory. Actual output, exit 0:
+
+```text
+PASS: 53 Markdown files; 266 local links/anchors; balanced fences; 10 handoff sections
+PASS: hackathon PASS / clinical BLOCKED; 8 APR PENDING / 12 H OPEN; canonical registries unchanged
+PASS: 13 fixture hashes match disk and Git index; LF preserved
+PASS: 59 paths in file inventory; 7 documentation/screenshots-only delivery paths
+```
+
+`npm run format:check`, `git diff --cached --check`, `docker compose config --quiet`: exit 0. No executable change since exact green implementation snapshot. All twelve user P04 engineering criteria have observed implementation/negative/migration/browser/CI evidence and the complete review handoff. Human acceptance and P05 authorization remain pending; clinical-production remains BLOCKED. Final delivery SHA and its independently observed CI run are reported after push without recursive self-referential commits.

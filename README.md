@@ -20,7 +20,7 @@ Open [the demonstration](http://localhost:13000). API [liveness](http://localhos
 
 The API applies `0001_demo` then additive `0002_identity`, preserving two fictional templates and seeding four local demo accounts. Open [the identity workspace](http://localhost:13000/workspace); its public credentials section lists all logins, including `demo-a` / `demo-a-only` and `demo-b` / `demo-b-only`. Use separate browser profiles/private windows for A/B. Grant processing independently, create/copy a recipient-bound code, accept as B, then grant assessment separately. Withdraw one grant and refresh the other context: neutral unavailability appears. Assessment never grants disclosure; no reviewed output is generated. Empty knowledge and unauthorized access remain unavailable.
 
-Review the [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for the current gate and verified snapshot. Clinical-production governance stays BLOCKED. P04 needs review and separate authorization.
+Review the [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for the current gate and verified snapshot. Clinical-production governance stays BLOCKED. P03 is the reviewed P04 baseline; P05 needs review and separate authorization.
 
 ```powershell
 python scripts/smoke_stack.py
@@ -54,7 +54,7 @@ Without `TEST_DATABASE_URL`, PostgreSQL integration is explicitly skipped; it is
 
 ## Branch and review workflow
 
-`main` was established by a normal reviewed documentation merge; its [review and parent hashes](docs/evidence/p02-baseline-review.md) preserve all prior work. P02 uses `feature/p02-hackathon-foundation`. Push coherent feature checkpoints; review before merging into main. This task does not merge P02 or change GitHub's default branch. No force pushes or automatic phase advancement. P03 uses `feature/p03-identity-consent`, stacked on verified unmerged P02 tip `8ced1458cba1bf84deaf2fc4ce00f1d79aa5f70e`; neither feature branch is merged. P04 requires separate authorization.
+`main` was established by a normal reviewed documentation merge; its [review and parent hashes](docs/evidence/p02-baseline-review.md) preserve all prior work. P02 uses `feature/p02-hackathon-foundation`. Push coherent feature checkpoints; review before merging into main. This task does not merge P02 or change GitHub's default branch. No force pushes or automatic phase advancement. P03 uses `feature/p03-identity-consent`, stacked on verified unmerged P02 tip `8ced1458cba1bf84deaf2fc4ce00f1d79aa5f70e`; neither feature branch is merged. P04 is authorized by DEC-011; P05 requires handoff review and separate authorization.
 
 ## Historical design and clinical governance
 
