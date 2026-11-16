@@ -1,0 +1,295 @@
+{
+  "version": "gen-reference-1.0.0",
+  "entries": [
+    {
+      "gene_symbol": "HBB",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "CFTR",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "GJB2",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "PAH",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "MEFV",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "GBA1",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "ATP7B",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "HEXA",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "GALT",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "BTD",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "CYP21A2",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "SMN1",
+      "population": "unspecified",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    }
+  ],
+  "sources": [],
+  "review_note": "Time-boxed NLM Genetics review on 2026-11-16: cystic-fibrosis Frequency states disease occurrence in named populations, not carrier_frequency, allele_frequency_q or assay-specific detection_rate; Tay-Sachs Frequency gives no numeric carrier or detection value. No prevalence-to-carrier or q conversion performed. All 36 fields remain null with explicit reasons. Reviewed URLs: https://medlineplus.gov/genetics/condition/cystic-fibrosis/ and https://medlineplus.gov/genetics/condition/tay-sachs-disease/. NLM Genetics summaries are public domain per https://medlineplus.gov/about/using/usingcontent/. No numbers or source text copied."
+}

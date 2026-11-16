@@ -7,3 +7,4 @@ Dockerfile text eol=lf
 # Fixture integrity hashes cover exact bytes; preserve LF on Windows and Linux checkouts.
 data/synthetic/reports/** text eol=lf
 data/public/** text eol=lf
+services/api/src/app/p06/** text eol=lf

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { ReportWorkspace } from "./report-workspace";
+import { RiskCard } from "./risk-card";
 import {
   identityApi,
   DemoRequestError,
@@ -371,6 +372,15 @@ export function IdentityWorkspace() {
                   session={session}
                   currentCase={cases[0]}
                   permissions={permissions}
+                  refresh={() => load(session)}
+                  perform={action}
+                />
+                <RiskCard
+                  parentBusy={busy}
+                  session={session}
+                  currentCase={cases[0]}
+                  permissions={permissions}
+                  joints={joints}
                   refresh={() => load(session)}
                   perform={action}
                 />

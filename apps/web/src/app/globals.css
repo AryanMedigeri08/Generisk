@@ -794,3 +794,12 @@ footer span span {
     scroll-behavior: auto;
   }
 }
+.risk-card,
+.risk-output {
+  min-inline-size: 0;
+  overflow-wrap: anywhere;
+}
+.risk-card .choice-buttons {
+  flex-wrap: wrap;
+  margin-block: 12px;
+}

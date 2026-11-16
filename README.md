@@ -15,7 +15,7 @@ Open [workspace](http://localhost:13000/workspace) or [public demo panel](http:/
 
 P04 provides [fixture-only synthetic report management](docs/p04-api.md). P05 adds a [public attributed demo panel](data/public/SOURCES.md) and nine gene-level fixtures under DEC-012. In `/workspace`, grant processing, select a gene-level synthetic scenario, then grant fresh processing to view it. A/B can independently select none, CFTR or HBB carrier fixtures; uncertain/not-tested inputs require review. The predefined A none-to-CFTR correction preserves the original. Changed input invalidates old permissions/outputs. Reports remain owner-only; partners/support/fictional professionals are denied. No arbitrary upload, medical interpretation, risk calculation or report RAG/AI. [Schema](docs/report-schema.md), [P04 evidence](docs/evidence/p04-validation.md), [P05 handoff](handoffs/P05-to-P06.md).
 
-The owner-authorized normal merge of P04 and its P03/P02 ancestry is on `main`, now GitHub's default branch. P05 is delivered separately on `feature/p05-public-panel-unlock` for review; it is not merged. Clinical governance stays BLOCKED. P06 is not started and requires separate authorization.
+The reviewed P05 stack and its P04/P03/P02 ancestry are merged into `main`, GitHub's default branch. P06 is delivered on `feature/p06-risk-engine` for review and is not merged. Clinical governance stays BLOCKED; P07 requires separate authorization.
 
 **Synthetic Demo — Not for Clinical Use.** P03 adds fictional local identity, independent consent, recipient-bound invitations and transactional audit to the Next.js/FastAPI/PostgreSQL foundation. No real records, genetic results, medical answers, integrations or appointments.
 
