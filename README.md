@@ -2,6 +2,8 @@
 
 Generisk brings independent consent, traceable synthetic reports and attributed gene references into one local demonstration.
 
+P06 adds exact, consent-scoped synthetic educational calculations: [contract](docs/risk-contract.md), [handoff](handoffs/P06-to-P07.md); no clinical authorization or P07 implementation.
+
 **Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. No risk calculation, diagnosis or clinical interpretation in P05.
 
 ```powershell

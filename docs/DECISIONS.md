@@ -1,5 +1,11 @@
 # Decision log
 
+## DEC-013 — Authorized P06 deterministic educational arithmetic
+
+2026-11-16, Asia/Calcutta. ACCEPTED as owner's explicit P06-only direction in the attached chat request (a99a7c3f-e93b-418a-bb1a-96040ca01a7c/Pasted text.txt); not independent authority verification or clinical/legal approval. Authorizes normal merge of green P05 delivery d38ba35 into main (merge `c9b876894fd122c57808c0ebe6646808fb3dd2b8`), dedicated `feature/p06-risk-engine`, exact synthetic-only educational engine, separate reference-values release, three scoped endpoints, one workspace card and lean evidence/tests/handoff. [Contract](risk-contract.md) written first; [ADR-009](adr/ADR-009-exact-educational-rules.md) records assumptions, purpose-scoped consent extension and limited shared-gene release.
+
+This message supersedes older P05 prohibitions only within P06's explicit arithmetic scope: no real people/reports/variants, clinical claims, missing-number defaults, verdicts, advice, risk-result persistence, LLM/RAG, P07 education UI or next-phase work. Preserve panel hash c92acb05afe29452a4cf1ed30c8ebf6502e019c829e1a870d9a55959835ad3bf. APRs PENDING, H01–H12 OPEN; P00/full clinical P01 BLOCKED. P06 is not authorized to merge itself; review handoff before separate P07 authorization.
+
 ## DEC-012 — P05 public panel and gene-level synthetic reports
 
 2026-11-16, Asia/Calcutta. ACCEPTED as the owner's explicit P05-only instruction in this chat. [GENERISK_SOLUTION.md](../GENERISK_SOLUTION.md), supplied on P00 ref 13b3464, is the current hackathon master plan and supersedes older phase names/restrictions only within the new authorized scope.
