@@ -1,0 +1,6 @@
+[
+  {"id":"demo-user-a","username":"demo-a","display_name":"Fictional participant A","role":"individual","password":"demo-a-only","case_id":"syn-case-01"},
+  {"id":"demo-user-b","username":"demo-b","display_name":"Fictional participant B","role":"individual","password":"demo-b-only","case_id":"syn-case-02"},
+  {"id":"demo-user-counsellor","username":"demo-counsellor","display_name":"Fictional counsellor role","role":"counsellor","password":"demo-counsellor-only","case_id":null},
+  {"id":"demo-user-support","username":"demo-support","display_name":"Fictional support administrator","role":"support","password":"demo-support-only","case_id":null}
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "id": "syn-case-01",
+    "display_name": "Fictional participant A",
+    "scenario": "Explore a private individual journey. No report, genetic finding or assessment is present.",
+    "locale": "en",
+    "demo_status": "foundation_only",
+    "is_synthetic": true
+  },
+  {
+    "id": "syn-case-02",
+    "display_name": "Fictional participant B",
+    "scenario": "Explore an independent partner journey. Invitations and consent will be designed in a later phase.",
+    "locale": "ar",
+    "demo_status": "foundation_only",
+    "is_synthetic": true
+  }
+]

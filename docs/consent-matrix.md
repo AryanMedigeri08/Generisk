@@ -1,6 +1,10 @@
 # Independent consent, permissions and withdrawal design
 
+P04 amendment (2026-11-16, DEC-011): own current input processing is required for report content/metadata/history/import/correction. Partner/joint choices never grant raw report access. All professional/support report access defaults deny because C-PROF report purpose remains unresolved; existing case-metadata access is unchanged. Input changes invoke P03 supersession atomically, requiring fresh processing and affected assessment/disclosure choices rather than automatic carry-forward. [Provenance](report-provenance.md) records correction/withdrawal ordering and audit rollback. No APR-04 or H02/H05/H06/H09 closure or clinical consent approval.
+
 **DESIGN-ONLY / NOT APPROVED** | Draft 0.1 | 2026-11-15, Asia/Calcutta
+
+Fictional hackathon P03 implements a bounded subset under DEC-010; see [ADR-006](adr/ADR-006-demo-identity-consent.md) and [runtime API](p03-api.md). Processing includes assigned fictional counsellor metadata access only; this shortcut does not settle the professional-purpose choices below. No legal consent form or real-world clinical processing is approved.
 
 Scope: [DEC-008 amendment v1](DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation). No consent service or legal consent form is implemented. P00 and full P01 remain BLOCKED.
 

@@ -1,6 +1,10 @@
 # Proposed system architecture
 
+P04 hackathon amendment (2026-11-16, DEC-011): [ADR-007](adr/ADR-007-synthetic-report-storage.md) and [P04 API](p04-api.md) add bounded fixture-only report validation/storage to the existing monolith. Owner+current processing and P03's transaction/audit protect immutable original TEXT/validated JSONB, provenance and constrained active revisions. Professional metadata access does not grant reports. No object store, arbitrary upload, external source, report RAG/model path or clinical interpretation. Historical clinical-service design below stays unapproved; P00/full clinical P01 BLOCKED.
+
 **DESIGN-ONLY / NOT APPROVED** | Draft 0.1 | 2026-11-15, Asia/Calcutta
+
+Current fictional hackathon implementation: [ADR-005](adr/ADR-005-hackathon-foundation.md), [ADR-006](adr/ADR-006-demo-identity-consent.md) and [P03 API](p03-api.md) describe the implemented P02/P03 boundaries under DEC-009/DEC-010. The clinical-service proposal below remains historical and unapproved; P00/full clinical P01 stay BLOCKED.
 
 Scope: [DEC-008 amendment v1](DECISIONS.md#dec-008-amendment-v1--restricted-documentation-activation). No service, database, identity provider or deployment is created. P00 and full P01 remain BLOCKED.
 
