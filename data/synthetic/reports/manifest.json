@@ -131,6 +131,105 @@
       "label": "A: invalid correction with absent predecessor",
       "operation": "amend",
       "expected": "malformed"
+    },
+    {
+      "id": "fixture-a-v2-none",
+      "file": "valid/a-v2-none.json",
+      "sha256": "59e6b19ebab463ce1dccb91bf58bcc1d21da8aae034c89b709f6ec27a84a15cb",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: gene demo none",
+      "operation": "import",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-a-v2-carrier-cftr",
+      "file": "valid/a-v2-carrier-cftr.json",
+      "sha256": "4223dc3875e069fdf8ff3d9537d2f1266c2ae235315718c54f418818236c8984",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: gene demo carrier cftr",
+      "operation": "import",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-a-v2-carrier-hbb",
+      "file": "valid/a-v2-carrier-hbb.json",
+      "sha256": "7f92faf5970f2a0452cec5f0f955fc5dab942293ba8fc99115ecebb0ec03e913",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: gene demo carrier hbb",
+      "operation": "import",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-a-v2-amend-none-cftr",
+      "file": "valid/a-v2-amend-none-cftr.json",
+      "sha256": "5fe4488e268220c3364c00ea30d356a442ffd3ae9fade7da561186bb28a33c8e",
+      "owner_id": "demo-user-a",
+      "case_id": "syn-case-01",
+      "label": "A: gene demo amend none cftr",
+      "operation": "amend",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-b-v2-none",
+      "file": "valid/b-v2-none.json",
+      "sha256": "b924347792a5ef144138f7d1e9baf9859c886477c96ac88807bd9e51f6356522",
+      "owner_id": "demo-user-b",
+      "case_id": "syn-case-02",
+      "label": "B: gene demo none",
+      "operation": "import",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-b-v2-carrier-cftr",
+      "file": "valid/b-v2-carrier-cftr.json",
+      "sha256": "2aae661e11305dfaa6cc8ed38a2931ea6bd28cd1592b3154d3cdc928542d7bf2",
+      "owner_id": "demo-user-b",
+      "case_id": "syn-case-02",
+      "label": "B: gene demo carrier cftr",
+      "operation": "import",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-b-v2-carrier-hbb",
+      "file": "valid/b-v2-carrier-hbb.json",
+      "sha256": "3da97a15d1d06caa70d84e3a0f7ad7745c10c28015cf1ab037faa39c11b40a6a",
+      "owner_id": "demo-user-b",
+      "case_id": "syn-case-02",
+      "label": "B: gene demo carrier hbb",
+      "operation": "import",
+      "expected": "accepted",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-b-v2-uncertain-cftr",
+      "file": "valid/b-v2-uncertain-cftr.json",
+      "sha256": "856a2f380084faa31aaa217441246482be1d8a48cd6b53531d5e46e69543bf6c",
+      "owner_id": "demo-user-b",
+      "case_id": "syn-case-02",
+      "label": "B: gene demo uncertain cftr",
+      "operation": "import",
+      "expected": "review_required",
+      "schema_version": "amanah-report-2"
+    },
+    {
+      "id": "fixture-b-v2-cftr-not-tested",
+      "file": "valid/b-v2-cftr-not-tested.json",
+      "sha256": "885b2db5c46a65e9459759a899d0134255d8aba20162aab56d764dfb70e157da",
+      "owner_id": "demo-user-b",
+      "case_id": "syn-case-02",
+      "label": "B: gene demo cftr not tested",
+      "operation": "import",
+      "expected": "review_required",
+      "schema_version": "amanah-report-2"
     }
   ]
 }

@@ -9,6 +9,7 @@ const roots = new Set([
   "joints",
   "professional",
   "reports",
+  "panel",
 ]);
 
 function denied(status = 403) {
@@ -28,6 +29,9 @@ async function proxy(
   context: { params: Promise<{ path: string[] }> },
 ) {
   const { path } = await context.params;
+  const publicPanel = path[0] === "panel";
+  if (publicPanel && request.method !== "GET") return denied(405);
+  if (publicPanel && path.length > 2) return denied(404);
   const configured = new URL(
     process.env.DEMO_WEB_ORIGIN ?? "http://localhost:13000",
   );
@@ -66,6 +70,7 @@ async function proxy(
     Origin: origin ?? configured.origin,
   };
   for (const name of ["cookie", "x-csrf-token"]) {
+    if (publicPanel) continue;
     const value = request.headers.get(name);
     if (value) headers[name] = value;
   }

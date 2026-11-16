@@ -1,0 +1,688 @@
+{
+  "panel_id": "gen-panel-demo-v1",
+  "version": "1.0.0",
+  "label": "Generisk demo panel, illustrative subset, NOT the Abu Dhabi clinical panel.",
+  "curated_on": "2026-11-16",
+  "disclaimer": "Synthetic demonstration, not for clinical use; public gene-level references do not interpret a person or report. No risk calculations.",
+  "genes": [
+    {
+      "gene_symbol": "HBB",
+      "hgnc_id": "HGNC:4827",
+      "symbol_source_id": "hgnc-hbb",
+      "conditions": [
+        {
+          "name_en": "Beta-thalassemia",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Reduced production of a hemoglobin component can cause anemia with varying severity.",
+          "source_id": "nlm-beta-thalassemia"
+        },
+        {
+          "name_en": "Sickle cell disease",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Altered hemoglobin can damage red blood cells and interfere with blood flow.",
+          "source_id": "nlm-sickle-cell-disease"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "CFTR",
+      "hgnc_id": "HGNC:1884",
+      "symbol_source_id": "hgnc-cftr",
+      "conditions": [
+        {
+          "name_en": "Cystic fibrosis",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Changes in salt transport can lead to thick mucus and problems affecting the lungs and digestion.",
+          "source_id": "nlm-cystic-fibrosis"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "GJB2",
+      "hgnc_id": "HGNC:4284",
+      "symbol_source_id": "hgnc-gjb2",
+      "conditions": [
+        {
+          "name_en": "Autosomal recessive nonsyndromic hearing loss (DFNB1A)",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "This inherited form of hearing loss can occur without other associated health features.",
+          "source_id": "nlm-nonsyndromic-hearing-loss"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "PAH",
+      "hgnc_id": "HGNC:8582",
+      "symbol_source_id": "hgnc-pah",
+      "conditions": [
+        {
+          "name_en": "Phenylketonuria",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Difficulty processing phenylalanine can cause this substance to accumulate and affect development.",
+          "source_id": "nlm-phenylketonuria"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "MEFV",
+      "hgnc_id": "HGNC:6998",
+      "symbol_source_id": "hgnc-mefv",
+      "conditions": [
+        {
+          "name_en": "Familial Mediterranean fever, recessive form",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Recurring inflammation can cause fever and painful episodes; this entry concerns the usual recessive form.",
+          "source_id": "nlm-familial-mediterranean-fever"
+        }
+      ],
+      "engine_support": "educational_only",
+      "support_note": "Educational only: mixed inheritance and variable expression require context beyond a gene-only status; only the usual recessive form is listed.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "GBA1",
+      "hgnc_id": "HGNC:4177",
+      "symbol_source_id": "hgnc-gba1",
+      "conditions": [
+        {
+          "name_en": "Gaucher disease",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "A fatty substance can accumulate in tissues and affect organs, bones and sometimes the nervous system.",
+          "source_id": "nlm-gaucher-disease"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "ATP7B",
+      "hgnc_id": "HGNC:870",
+      "symbol_source_id": "hgnc-atp7b",
+      "conditions": [
+        {
+          "name_en": "Wilson disease",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Difficulty removing excess copper can affect the liver and nervous system.",
+          "source_id": "nlm-wilson-disease"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "HEXA",
+      "hgnc_id": "HGNC:4878",
+      "symbol_source_id": "hgnc-hexa",
+      "conditions": [
+        {
+          "name_en": "Tay-Sachs disease",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Failure to break down certain fatty materials can damage nerve cells and affect movement and development.",
+          "source_id": "nlm-tay-sachs-disease"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "GALT",
+      "hgnc_id": "HGNC:4135",
+      "symbol_source_id": "hgnc-galt",
+      "conditions": [
+        {
+          "name_en": "Classic galactosemia (type I)",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Difficulty processing the sugar galactose can affect several organs, especially early in life.",
+          "source_id": "nlm-galactosemia"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "BTD",
+      "hgnc_id": "HGNC:1122",
+      "symbol_source_id": "hgnc-btd",
+      "conditions": [
+        {
+          "name_en": "Biotinidase deficiency",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Difficulty recycling the vitamin biotin can affect several body systems, with severity varying by form.",
+          "source_id": "nlm-biotinidase-deficiency"
+        }
+      ],
+      "engine_support": "supported",
+      "support_note": "Future synthetic gene-level demo scope only; not a validated assay, condition diagnosis or clinical engine.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "CYP21A2",
+      "hgnc_id": "HGNC:2600",
+      "symbol_source_id": "hgnc-cyp21a2",
+      "conditions": [
+        {
+          "name_en": "21-hydroxylase-deficient congenital adrenal hyperplasia",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Reduced activity of an adrenal enzyme can disrupt hormone production.",
+          "source_id": "nlm-21-hydroxylase-deficiency"
+        }
+      ],
+      "engine_support": "educational_only",
+      "support_note": "Educational only: pseudogene-related assay complexity is not represented by this gene-level demonstration.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    },
+    {
+      "gene_symbol": "SMN1",
+      "hgnc_id": "HGNC:11117",
+      "symbol_source_id": "hgnc-smn1",
+      "conditions": [
+        {
+          "name_en": "Spinal muscular atrophy",
+          "name_ar": null,
+          "inheritance": "autosomal_recessive",
+          "severity_band": "variable",
+          "summary": "Loss of nerve cells that control muscles can lead to varying degrees of muscle weakness.",
+          "source_id": "nlm-spinal-muscular-atrophy"
+        }
+      ],
+      "engine_support": "educational_only",
+      "support_note": "Educational only: copy-number and silent-carrier complexity is not represented by this gene-level demonstration.",
+      "reference_values": {
+        "carrier_frequency": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no matching population and disease-allele definition selected; prevalence is not substituted for carrier frequency."
+        },
+        "allele_frequency_q": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no disease-allele aggregate and population definition selected; no variant-level data ingested or frequency derived."
+        },
+        "detection_rate": {
+          "value": null,
+          "basis": "illustrative",
+          "source_id": null,
+          "note": "Unavailable: no assay, analytic scope or validation dataset defined; a clinical detection rate cannot be assigned."
+        }
+      }
+    }
+  ],
+  "sources": [
+    {
+      "id": "hgnc-hbb",
+      "title": "HGNC approved symbol and ID: HBB",
+      "url": "https://rest.genenames.org/fetch/symbol/HBB",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-beta-thalassemia",
+      "title": "MedlinePlus Genetics: Beta-thalassemia",
+      "url": "https://medlineplus.gov/genetics/condition/beta-thalassemia/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "nlm-sickle-cell-disease",
+      "title": "MedlinePlus Genetics: Sickle cell disease",
+      "url": "https://medlineplus.gov/genetics/condition/sickle-cell-disease/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-cftr",
+      "title": "HGNC approved symbol and ID: CFTR",
+      "url": "https://rest.genenames.org/fetch/symbol/CFTR",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-cystic-fibrosis",
+      "title": "MedlinePlus Genetics: Cystic fibrosis",
+      "url": "https://medlineplus.gov/genetics/condition/cystic-fibrosis/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-gjb2",
+      "title": "HGNC approved symbol and ID: GJB2",
+      "url": "https://rest.genenames.org/fetch/symbol/GJB2",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-nonsyndromic-hearing-loss",
+      "title": "MedlinePlus Genetics: Autosomal recessive nonsyndromic hearing loss (DFNB1A)",
+      "url": "https://medlineplus.gov/genetics/condition/nonsyndromic-hearing-loss/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-pah",
+      "title": "HGNC approved symbol and ID: PAH",
+      "url": "https://rest.genenames.org/fetch/symbol/PAH",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-phenylketonuria",
+      "title": "MedlinePlus Genetics: Phenylketonuria",
+      "url": "https://medlineplus.gov/genetics/condition/phenylketonuria/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-mefv",
+      "title": "HGNC approved symbol and ID: MEFV",
+      "url": "https://rest.genenames.org/fetch/symbol/MEFV",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-familial-mediterranean-fever",
+      "title": "MedlinePlus Genetics: Familial Mediterranean fever, recessive form",
+      "url": "https://medlineplus.gov/genetics/condition/familial-mediterranean-fever/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-gba1",
+      "title": "HGNC approved symbol and ID: GBA1",
+      "url": "https://rest.genenames.org/fetch/symbol/GBA1",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-gaucher-disease",
+      "title": "MedlinePlus Genetics: Gaucher disease",
+      "url": "https://medlineplus.gov/genetics/condition/gaucher-disease/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-atp7b",
+      "title": "HGNC approved symbol and ID: ATP7B",
+      "url": "https://rest.genenames.org/fetch/symbol/ATP7B",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-wilson-disease",
+      "title": "MedlinePlus Genetics: Wilson disease",
+      "url": "https://medlineplus.gov/genetics/condition/wilson-disease/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-hexa",
+      "title": "HGNC approved symbol and ID: HEXA",
+      "url": "https://rest.genenames.org/fetch/symbol/HEXA",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-tay-sachs-disease",
+      "title": "MedlinePlus Genetics: Tay-Sachs disease",
+      "url": "https://medlineplus.gov/genetics/condition/tay-sachs-disease/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-galt",
+      "title": "HGNC approved symbol and ID: GALT",
+      "url": "https://rest.genenames.org/fetch/symbol/GALT",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-galactosemia",
+      "title": "MedlinePlus Genetics: Classic galactosemia (type I)",
+      "url": "https://medlineplus.gov/genetics/condition/galactosemia/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-btd",
+      "title": "HGNC approved symbol and ID: BTD",
+      "url": "https://rest.genenames.org/fetch/symbol/BTD",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-biotinidase-deficiency",
+      "title": "MedlinePlus Genetics: Biotinidase deficiency",
+      "url": "https://medlineplus.gov/genetics/condition/biotinidase-deficiency/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-cyp21a2",
+      "title": "HGNC approved symbol and ID: CYP21A2",
+      "url": "https://rest.genenames.org/fetch/symbol/CYP21A2",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-21-hydroxylase-deficiency",
+      "title": "MedlinePlus Genetics: 21-hydroxylase-deficient congenital adrenal hyperplasia",
+      "url": "https://medlineplus.gov/genetics/condition/21-hydroxylase-deficiency/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    },
+    {
+      "id": "hgnc-smn1",
+      "title": "HGNC approved symbol and ID: SMN1",
+      "url": "https://rest.genenames.org/fetch/symbol/SMN1",
+      "retrieved_on": "2026-11-16",
+      "field": "response.docs[0].symbol, hgnc_id, status=Approved",
+      "license_url": "https://www.genenames.org/about/license/",
+      "license_note": "HGNC data released under CC0; HGNC attribution retained; no variant or individual data collected."
+    },
+    {
+      "id": "nlm-spinal-muscular-atrophy",
+      "title": "MedlinePlus Genetics: Spinal muscular atrophy",
+      "url": "https://medlineplus.gov/genetics/condition/spinal-muscular-atrophy/",
+      "retrieved_on": "2026-11-16",
+      "field": "Description; Causes (named gene association); Inheritance (recessive form only)",
+      "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+      "license_note": "NLM identifies Genetics summaries as public-domain content; our wording is original and attributed; no images, OMIM or GeneReviews text copied."
+    }
+  ]
+}

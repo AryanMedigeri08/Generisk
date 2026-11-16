@@ -1,7 +1,10 @@
+import json
 from datetime import datetime
 from typing import Annotated, Final, Literal
 
 from pydantic import BaseModel, ConfigDict, Field, model_validator
+
+from app.p05.panel import GeneSymbol
 
 Marker = Literal["syn-marker-orbit", "syn-marker-lantern", "syn-marker-kite"]
 Owner = Literal["demo-user-a", "demo-user-b"]
@@ -94,6 +97,79 @@ class SyntheticReport(StrictModel):
         return self
 
 
+class GeneCoverage(StrictModel):
+    included_genes: list[GeneSymbol] = Field(min_length=1, max_length=20)
+    excluded_genes: list[GeneSymbol] = Field(max_length=20)
+    limitations: list[
+        Literal["fictional-only", "gene-level-only", "limited-panel", "not-tested"]
+    ] = Field(min_length=1, max_length=4)
+
+
+class GeneObservation(StrictModel):
+    id: SourceId
+    gene_symbol: GeneSymbol
+    status: Literal["carrier", "no_pathogenic_variant_detected", "variant_uncertain", "not_tested"]
+    validity: Literal["recorded", "missing", "uncertain"]
+
+
+class GeneReport(StrictModel):
+    schema_version: Literal["amanah-report-2"]
+    synthetic: Literal[True]
+    report_id: SourceId
+    revision_id: SourceId
+    revision: int = Field(ge=1, le=20)
+    owner_id: Owner
+    case_id: Case
+    laboratory_id: Literal["syn-lab-imaginary"]
+    sample: Sample
+    created_at: datetime
+    issued_at: datetime
+    panel: Literal["gen-panel-demo-v1"]
+    panel_version: str = Field(pattern=r"^[0-9a-f]{64}$")
+    coverage: GeneCoverage | None
+    observations: list[GeneObservation] = Field(max_length=20)
+    status: Literal["final", "preliminary", "amended"]
+    supersedes_revision_id: SourceId | None
+    amendment_reason: Literal["synthetic-field-correction", "synthetic-coverage-correction"] | None
+    provenance: Source
+    disclaimer: Literal["Fictional synthetic report. Not clinically interpretable."]
+
+    @model_validator(mode="after")
+    def consistency(self) -> "GeneReport":
+        if self.created_at.tzinfo is None or self.issued_at.tzinfo is None:
+            raise ValueError("Timezone required")
+        if self.created_at > self.issued_at or self.provenance.source_version != self.revision:
+            raise ValueError("Source timeline/version inconsistent")
+        if len({item.id for item in self.observations}) != len(self.observations):
+            raise ValueError("Duplicate observation identifier")
+        if len({item.gene_symbol for item in self.observations}) != len(self.observations):
+            raise ValueError("Duplicate gene observation")
+        if self.coverage:
+            included, excluded = self.coverage.included_genes, self.coverage.excluded_genes
+            if len(set(included)) != len(included) or len(set(excluded)) != len(excluded):
+                raise ValueError("Duplicate coverage gene")
+            if set(included) & set(excluded):
+                raise ValueError("Conflicting coverage gene")
+            if any(item.gene_symbol not in included for item in self.observations):
+                raise ValueError("Observation outside declared coverage")
+        if self.status == "amended":
+            if self.revision < 2 or not self.supersedes_revision_id or not self.amendment_reason:
+                raise ValueError("Amendment relationship required")
+        elif self.revision != 1 or self.supersedes_revision_id or self.amendment_reason:
+            raise ValueError("Initial version inconsistent")
+        return self
+
+
+ReportDocument = Annotated[SyntheticReport | GeneReport, Field(discriminator="schema_version")]
+
+
+def parse_report(raw: str | bytes) -> SyntheticReport | GeneReport:
+    data = json.loads(raw)
+    if isinstance(data, dict) and data.get("schema_version") == "amanah-report-2":
+        return GeneReport.model_validate_json(raw)
+    return SyntheticReport.model_validate_json(raw)
+
+
 class ManifestEntry(StrictModel):
     id: FixtureId
     file: Annotated[str, Field(pattern=r"^(valid|invalid)/[a-z0-9-]+\.json$", max_length=90)]
@@ -103,6 +179,7 @@ class ManifestEntry(StrictModel):
     label: str = Field(max_length=100)
     operation: Literal["import", "amend"]
     expected: Category
+    schema_version: Literal["amanah-report-1", "amanah-report-2"] = "amanah-report-1"
 
 
 class Manifest(StrictModel):
@@ -132,6 +209,7 @@ class FixtureOut(BaseModel):
     label: str
     operation: Literal["import", "amend"]
     expected: Category
+    schema_version: Literal["amanah-report-1", "amanah-report-2"] = "amanah-report-1"
 
 
 class Receipt(BaseModel):
@@ -148,7 +226,7 @@ class Receipt(BaseModel):
 
 
 class HistoryOut(Receipt):
-    operation: Literal["import", "amend"]
+    operation: Literal["import", "amend", "scenario"]
     fixture_id: str
     created_at: datetime
 
@@ -174,10 +252,11 @@ class ReportOut(BaseModel):
     active_revision_handle: str | None
     versions: list[VersionOut]
     synthetic_only: Literal[True] = True
+    selected_gene_scenario: bool | None = None
 
 
 class ContentOut(BaseModel):
     report_handle: str
     revision: VersionOut
-    content: SyntheticReport
+    content: ReportDocument
     disclaimer: Literal["Fictional synthetic report. Not clinically interpretable."] = DISCLAIMER

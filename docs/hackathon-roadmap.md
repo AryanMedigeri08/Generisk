@@ -1,5 +1,9 @@
 # Synthetic-only hackathon milestones and acceptance
 
+Current phase naming follows [GENERISK_SOLUTION.md](../GENERISK_SOLUTION.md), supplied by the owner on 2026-11-16, and DEC-012. P02–P04 were normally merged into main at `876b25ffabb42986c9a16c6c6bb0c803ce6cddef` (green CI); GitHub default is main. Earlier unmerged/phase-stop notes below are historical snapshots, superseded only by this explicit instruction.
+
+**P05 CURRENT:** attributed public gene panel/read-only API/catalogue, amanah-report-2 synthetic fixtures and safe scenario selection, no risk engine. Public gene/condition names allowed; all people/labs/samples/reports remain synthetic. P06 deterministic educational risk and P07 education content/studio are future, separately authorized work. No real data, variants, clinical claims, LLM/RAG or changes to APR/H states. Delivery: [P05-to-P06 review handoff](../handoffs/P05-to-P06.md), maximum 150 lines.
+
 Date: 2026-11-15, Asia/Calcutta | Authority: DEC-009 current user project direction
 
 ## Scope and governance
