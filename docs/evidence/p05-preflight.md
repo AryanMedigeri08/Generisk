@@ -1,0 +1,8 @@
+# P05 preflight — 2026-11-16, Asia/Calcutta
+
+- Fetched origin from a clean P04 working tree. P04 `0377224b7c495b351b69002d11eed5bf27750b98`; main before merge `8f900d1dc9cec5ebc0ece9dafad93770e822e741`; default `feature/p00-product-governance`, tip `13b3464dd9c1b66311ff7bd3b624f975a3bd1c9f` (contains GENERISK_SOLUTION.md).
+- Read the solution plan from that exact P00 ref first, then decisions/roadmap/P04 handoff/schema/validation/API, actual P04/provider/fixture/UI code. Solution plan controls new hackathon phase names; only P05 is authorized by this owner's message (DEC-012), not P06+.
+- P04 exact delivery [CI 43860921437](https://github.com/AryanMedigeri08/Generisk/actions/runs/43860921437): completed/success, all three jobs success; exact head verified using GitHub API. No credential values printed.
+- Authorized `git merge --no-ff origin/feature/p04-synthetic-report-ingestion` on main, no conflicts. Pushed merge `876b25ffabb42986c9a16c6c6bb0c803ce6cddef`; parents are the two expected refs above. Merge CI must be green before P05 implementation; red CI/conflicts stop work.
+- Synthetic people/labs/samples/reports only; public gene-level references now allowed. No real records, variant details, risk/interpretation, LLM/RAG or education studio. APR statuses/hazards unchanged. Main/default/feature outcomes and real tests are summarized in the single P05 handoff.
+- Merge [CI 43865994279](https://github.com/AryanMedigeri08/Generisk/actions/runs/43865994279) completed/success, all jobs green. Created `feature/p05-public-panel-unlock` from that merge. Copied only GENERISK_SOLUTION.md from the specified P00 ref. Authorized GitHub REST settings update succeeded: default branch now main; refreshed origin/HEAD. No manual default-branch step needed.

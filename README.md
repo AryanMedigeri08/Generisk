@@ -1,4 +1,15 @@
-# Amanah Genetics (Generisk)
+# Generisk (Amanah Genetics)
+
+Generisk brings independent consent, traceable synthetic reports and attributed gene references into one local demonstration.
+
+**Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. No risk calculation, diagnosis or clinical interpretation in P05.
+
+```powershell
+docker compose up --build -d --wait --wait-timeout 180
+```
+
+Open [workspace](http://localhost:13000/workspace) or [public demo panel](http://localhost:13000/panel). See [GENERISK_SOLUTION.md](GENERISK_SOLUTION.md) for the current hackathon plan (P06/P07 are future work) and [P05 handoff](handoffs/P05-to-P06.md) for actual results.
+
 
 P04 adds [fixture-only synthetic report management](docs/p04-api.md) under DEC-011: select a packaged fictional report in `/workspace`, validate/import it, inspect coverage/provenance and apply a predefined correction while preserving originals. Changed input supersedes old permissions; grant current processing again before viewing. Reports are owner-only; partners/support/fictional professionals are denied. No arbitrary upload, medical interpretation, risk calculation or report RAG/AI. [Schema](docs/report-schema.md), [provenance](docs/report-provenance.md), [validation](docs/report-validation.md), [evidence](docs/evidence/p04-validation.md), [P04 review handoff](handoffs/P04-to-P05.md). P05 is not started.
 
