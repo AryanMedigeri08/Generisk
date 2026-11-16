@@ -1,5 +1,17 @@
 # Decision log
 
+## DEC-011 — Authorized P04 synthetic report ingestion and provenance
+
+2026-11-16, Asia/Calcutta. ACCEPTED as user project direction for P04 only. Source: the current user's 17-section “Amanah Genetics — P04 Hackathon Implementation Authorization”, naming reviewed P03 delivery `5cde32ff56d5243ab29b9a05b7a8fc6dfdebfc3d`. This is not medical/legal approval or independent authority verification. The explicit new instruction supersedes P03's next-phase stop only for its listed P04 scope.
+
+Fetched remote history and reviewed the P03 handoff, evidence, architecture/consent/data/threat designs, actual sessions/consent/joint/audit code, migrations and tests. Exact baseline CI run 43720510611 is completed/success, all three jobs success. P03 is unmerged, so `feature/p04-synthetic-report-ingestion` starts directly at that delivery commit, stacked on P03/P02. No merge, default-branch change, force push or rewrite.
+
+Scope: bounded allowlisted fictional JSON fixtures, deterministic typed validation and provenance, immutable original revisions plus active/superseded relationships, transactional PostgreSQL import/correction and P03 version invalidation, owner-only report management in `/workspace`, negative/concurrency/migration/browser tests, evidence and P04-to-P05 review handoff. Contract is FHIR R4 concept-inspired, not conformant or clinically validated. No arbitrary upload/path/URL input, real/de-identified clinical data, genetic sequences/pathogenicity, risk/diagnosis/recommendations, report RAG/embedding/model execution, real integrations/deployment or P05+ implementation.
+
+Report access additionally requires own case and current processing grant. P03 fictional counsellor metadata permission does not authorize report content; professional access remains default-deny pending a separately defined purpose. Partner invitations/assessment/disclosure grant no raw report access. Accepted report changes advance P03 input versions and invalidate old dependent choices/outputs atomically; fresh current processing/assessment/disclosure is required rather than silently carrying consent forward. Required audit failure rolls back sensitive changes.
+
+P00/full clinical P01 remain BLOCKED, APR-01–APR-08 PENDING and H01–H12 OPEN. No hazard/approval closure or clinical readiness. Use actual engineering PASS/FAIL/BLOCKED evidence; review the final handoff before any separately authorized P05.
+
 Date: 2026-11-15 (Asia/Calcutta). Historical P00/P01 design decisions are preserved below. DEC-009 authorizes a separate synthetic-only hackathon engineering track. Product direction is not expert approval; P00/full clinical P01 remain BLOCKED for real-world service.
 
 | ID | Decision | Reason / consequence | Approval state |

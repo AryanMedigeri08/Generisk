@@ -16,6 +16,7 @@ P00/full clinical P01 remain BLOCKED. APR-01 through APR-08 stay PENDING; H01 th
 | P02 foundation — engineering PASS | Web/API/PostgreSQL/local Compose, fictional fixtures, safe providers and initial deny-all interfaces | Green exact tip 8ced145; preserved as the stacked parent, still unmerged |
 | P03 identity/consent — engineering PASS | Fictional sessions, independent invitations/versioned choices, relationship checks and transactional audit | Exact implementation 1ed2bf1; green run 43719879238; [evidence](evidence/p03-validation.md), [handoff](../handoffs/P03-to-P04.md); human review pending, unmerged |
 | Later demo journeys — NOT AUTHORIZED HERE | Reviewed fictional ingestion/review/navigation and optional curated education | Separate scoped instructions, fixtures and engineering gates; no unsupported clinical claims |
+| P04 report ingestion — CURRENT | DEC-011: allowlisted synthetic fixtures, validation/provenance, immutable revisions, owner/processing controls and amendment invalidation | Stacked on reviewed P03 5cde32f; actual PostgreSQL/Compose/browser/CI evidence and P04-to-P05 review handoff required; no interpretation/RAG/P05 |
 | Any real-world service | Outside hackathon authorization | Reopen intended use, lawful basis/operator, clinical/legal/security approvals and original clinical gates |
 
 ## P02 hackathon engineering acceptance criteria
