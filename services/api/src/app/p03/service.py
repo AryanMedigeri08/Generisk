@@ -494,7 +494,8 @@ def expire_permissions(db: Session) -> None:
 def decide_consent(ctx: Context, body: ConsentIn) -> ConsentOut:
     if ctx.actor.role != "individual":
         fail(404, "RESOURCE_UNAVAILABLE", "Resource unavailable.")
-    fingerprint = digest(json.dumps(body.model_dump(exclude={"idempotency_key"}), sort_keys=True))
+    excluded = {"idempotency_key", "purpose"} if body.purpose == "legacy" else {"idempotency_key"}
+    fingerprint = digest(json.dumps(body.model_dump(exclude=excluded), sort_keys=True))
     old = ctx.db.get(Idempotency, {"user_id": ctx.actor.id, "key": body.idempotency_key})
     if old:
         if old.fingerprint != fingerprint:
@@ -502,7 +503,15 @@ def decide_consent(ctx: Context, body: ConsentIn) -> ConsentOut:
         consent = ctx.db.get(Consent, old.consent_id)
         assert consent is not None
         return consent_view(consent, True)
-    if body.scope == "processing":
+    if body.purpose == "educational_risk" and body.scope == "assessment":
+        owner = owner_for(ctx.db, ctx.actor.id)
+        if body.case_id != owner.case_id or body.joint_id is not None:
+            fail(404, "RESOURCE_UNAVAILABLE", "Resource unavailable.")
+        target = owner.input_version
+        key = f"assessment:{owner.case_id}:v{target}:educational_risk"
+    elif body.scope == "processing":
+        if body.purpose != "legacy":
+            fail(422, "VALIDATION_ERROR", "Unsupported demonstration scope.")
         owner = owner_for(ctx.db, ctx.actor.id)
         if body.case_id != owner.case_id or body.joint_id is not None:
             fail(404, "RESOURCE_UNAVAILABLE", "Resource unavailable.")
@@ -515,8 +524,12 @@ def decide_consent(ctx: Context, body: ConsentIn) -> ConsentOut:
         key = f"{body.scope}:{joint.id}:v{target}"
         if body.scope == "disclosure":
             key += ":participants"
-            if not joint.placeholder_reviewed:
+            if body.purpose == "educational_risk":
+                key += ":educational_risk"
+            elif not joint.placeholder_reviewed:
                 fail(409, "OUTPUT_UNAVAILABLE", "No reviewed placeholder output is available.")
+        elif body.purpose != "legacy":
+            fail(422, "VALIDATION_ERROR", "Unsupported demonstration scope.")
     if body.target_version != target:
         fail(409, "VERSION_CONFLICT", "Refresh the current scope and version.")
     consent = ctx.db.scalar(
@@ -577,6 +590,9 @@ def withdraw_consent(ctx: Context, consent_id: str, body: WithdrawIn) -> Consent
         ctx,
         ConsentIn(
             scope=cast(Scope, consent.scope),
+            purpose="educational_risk"
+            if consent.scope_key.endswith(":educational_risk")
+            else "legacy",
             case_id=consent.case_id,
             joint_id=consent.joint_id,
             target_version=consent.target_version,

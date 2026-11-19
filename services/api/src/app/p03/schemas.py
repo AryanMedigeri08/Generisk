@@ -51,6 +51,7 @@ class InviteOut(BaseModel):
 
 class ConsentIn(StrictInput):
     scope: Scope
+    purpose: Literal["legacy", "educational_risk"] = "legacy"
     case_id: str | None = Field(default=None, max_length=64)
     joint_id: str | None = Field(default=None, max_length=36)
     target_version: int = Field(ge=1)

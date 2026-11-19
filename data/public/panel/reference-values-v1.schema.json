@@ -1,0 +1,201 @@
+{
+  "$defs": {
+    "Entry": {
+      "additionalProperties": false,
+      "properties": {
+        "gene_symbol": {
+          "maxLength": 15,
+          "pattern": "^[A-Z][A-Z0-9]{1,14}$",
+          "title": "Gene Symbol",
+          "type": "string"
+        },
+        "population": {
+          "const": "unspecified",
+          "title": "Population",
+          "type": "string"
+        },
+        "reference_values": {
+          "$ref": "#/$defs/ReferenceValues"
+        }
+      },
+      "required": [
+        "gene_symbol",
+        "population",
+        "reference_values"
+      ],
+      "title": "Entry",
+      "type": "object"
+    },
+    "PublicSource": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 80,
+          "pattern": "^[a-z0-9-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "title": {
+          "maxLength": 180,
+          "minLength": 5,
+          "title": "Title",
+          "type": "string"
+        },
+        "url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "Url",
+          "type": "string"
+        },
+        "retrieved_on": {
+          "format": "date",
+          "title": "Retrieved On",
+          "type": "string"
+        },
+        "field": {
+          "maxLength": 250,
+          "minLength": 5,
+          "title": "Field",
+          "type": "string"
+        },
+        "license_url": {
+          "format": "uri",
+          "maxLength": 2083,
+          "minLength": 1,
+          "title": "License Url",
+          "type": "string"
+        },
+        "license_note": {
+          "maxLength": 500,
+          "minLength": 20,
+          "title": "License Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "title",
+        "url",
+        "retrieved_on",
+        "field",
+        "license_url",
+        "license_note"
+      ],
+      "title": "PublicSource",
+      "type": "object"
+    },
+    "ReferenceValue": {
+      "additionalProperties": false,
+      "properties": {
+        "value": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Value"
+        },
+        "basis": {
+          "enum": [
+            "sourced",
+            "illustrative"
+          ],
+          "title": "Basis",
+          "type": "string"
+        },
+        "source_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Source Id"
+        },
+        "note": {
+          "maxLength": 350,
+          "minLength": 15,
+          "title": "Note",
+          "type": "string"
+        }
+      },
+      "required": [
+        "value",
+        "basis",
+        "source_id",
+        "note"
+      ],
+      "title": "ReferenceValue",
+      "type": "object"
+    },
+    "ReferenceValues": {
+      "additionalProperties": false,
+      "properties": {
+        "carrier_frequency": {
+          "$ref": "#/$defs/ReferenceValue"
+        },
+        "allele_frequency_q": {
+          "$ref": "#/$defs/ReferenceValue"
+        },
+        "detection_rate": {
+          "$ref": "#/$defs/ReferenceValue"
+        }
+      },
+      "required": [
+        "carrier_frequency",
+        "allele_frequency_q",
+        "detection_rate"
+      ],
+      "title": "ReferenceValues",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "version": {
+      "const": "gen-reference-1.0.0",
+      "title": "Version",
+      "type": "string"
+    },
+    "entries": {
+      "items": {
+        "$ref": "#/$defs/Entry"
+      },
+      "maxItems": 40,
+      "minItems": 1,
+      "title": "Entries",
+      "type": "array"
+    },
+    "sources": {
+      "items": {
+        "$ref": "#/$defs/PublicSource"
+      },
+      "maxItems": 40,
+      "title": "Sources",
+      "type": "array"
+    },
+    "review_note": {
+      "maxLength": 1000,
+      "minLength": 30,
+      "title": "Review Note",
+      "type": "string"
+    }
+  },
+  "required": [
+    "version",
+    "entries",
+    "sources",
+    "review_note"
+  ],
+  "title": "References",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

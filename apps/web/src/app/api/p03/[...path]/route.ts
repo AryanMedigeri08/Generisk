@@ -10,6 +10,7 @@ const roots = new Set([
   "professional",
   "reports",
   "panel",
+  "risk",
 ]);
 
 function denied(status = 403) {
@@ -30,6 +31,20 @@ async function proxy(
 ) {
   const { path } = await context.params;
   const publicPanel = path[0] === "panel";
+  const publicWhatif =
+    path[0] === "risk" && path.length === 2 && path[1] === "whatif";
+  const privateRisk =
+    path[0] === "risk" &&
+    path.length === 2 &&
+    ["my-assessment", "couple-assessment"].includes(path[1]);
+  if (path[0] === "risk") {
+    if (!publicWhatif && !privateRisk) return denied(404);
+    if (
+      (publicWhatif && request.method !== "POST") ||
+      (privateRisk && request.method !== "GET")
+    )
+      return denied(405);
+  }
   if (publicPanel && request.method !== "GET") return denied(405);
   if (publicPanel && path.length > 2) return denied(404);
   const configured = new URL(
@@ -70,9 +85,21 @@ async function proxy(
     Origin: origin ?? configured.origin,
   };
   for (const name of ["cookie", "x-csrf-token"]) {
-    if (publicPanel) continue;
+    if (publicPanel || publicWhatif) continue;
     const value = request.headers.get(name);
     if (value) headers[name] = value;
+  }
+  if (privateRisk) {
+    const joint = request.headers.get("x-risk-joint");
+    if (joint) {
+      if (!/^[a-f0-9-]{36}$/.test(joint)) return denied(404);
+      headers["X-Risk-Joint"] = joint;
+    }
+    const pin = request.headers.get("x-risk-binding");
+    if (pin) {
+      if (!/^[a-f0-9]{64}$/.test(pin)) return denied(409);
+      headers["X-Risk-Binding"] = pin;
+    }
   }
   let body: string | undefined;
   if (request.method === "POST") {

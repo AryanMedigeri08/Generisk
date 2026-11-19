@@ -1,0 +1,1 @@
+"""Synthetic educational arithmetic only."""

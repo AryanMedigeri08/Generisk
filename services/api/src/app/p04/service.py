@@ -186,16 +186,20 @@ def history(ctx: Context) -> list[HistoryOut]:
 
 
 def selected_gene_revision(ctx: Context) -> str | None:
-    return ctx.db.scalar(
-        select(ImportOutcome.revision_id)
-        .join(ReportRevision, ImportOutcome.revision_id == ReportRevision.id)
+    selected = ctx.db.scalar(
+        select(ReportRevision)
+        .join(ImportOutcome, ImportOutcome.revision_id == ReportRevision.id)
         .where(
             ImportOutcome.actor_id == ctx.actor.id,
             ImportOutcome.category.in_(("accepted", "review_required")),
-            ReportRevision.content["schema_version"].as_string() == "amanah-report-2",
         )
         .order_by(ImportOutcome.input_version_after.desc(), ImportOutcome.created_at.desc())
         .limit(1)
+    )
+    return (
+        selected.id
+        if selected and selected.content.get("schema_version") == "amanah-report-2"
+        else None
     )
 
 

@@ -24,6 +24,7 @@ from app.modules.knowledge import EmptyKnowledgeProvider
 from app.p03.router import create_router
 from app.p04.router import create_report_router
 from app.p05.router import public_panel_router
+from app.p06.router import create_risk_router
 from app.schemas import DemoCaseOut, DemoCasesOut, KnowledgeStatus
 
 logger = logging.getLogger("amanah.requests")
@@ -122,6 +123,7 @@ def create_app(settings: Settings | None = None, engine: Engine | None = None) -
     application.include_router(create_router(db, config))
     application.include_router(create_report_router(db, config))
     application.include_router(public_panel_router())
+    application.include_router(create_risk_router(db, config))
 
     return application
 
