@@ -6,13 +6,15 @@ export type ContentBundle = ReturnType<typeof loadContent>;
 const LocaleContext = createContext<ContentBundle>(loadContent());
 export function ContentProvider({
   language = "en",
+  bundle,
   children,
 }: {
   language?: Language;
+  bundle?: ContentBundle;
   children: React.ReactNode;
 }) {
   return (
-    <LocaleContext.Provider value={loadContent(language)}>
+    <LocaleContext.Provider value={bundle ?? loadContent(language)}>
       {children}
     </LocaleContext.Provider>
   );

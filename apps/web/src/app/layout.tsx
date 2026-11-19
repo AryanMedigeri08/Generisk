@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
+import { ContentProvider, ContentSkipLink } from "../content/locale";
 
 export const metadata: Metadata = {
   title: "Amanah Genetics | Synthetic demo",
@@ -14,10 +15,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <a className="skip-link" href="#main">
-          Skip to main content
-        </a>
-        {children}
+        <ContentProvider>
+          <ContentSkipLink />
+          {children}
+        </ContentProvider>
       </body>
     </html>
   );

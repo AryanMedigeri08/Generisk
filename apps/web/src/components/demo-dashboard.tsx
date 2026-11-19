@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { StudioLink } from "../content/locale";
 import { useState } from "react";
 import { type DemoSnapshot, unavailableSnapshot } from "../lib/demo";
 
@@ -46,6 +47,7 @@ export function DemoDashboard({
             Amanah<span className="brand-subtitle">GENETICS</span>
           </span>
         </Link>
+        <StudioLink />
         <Link className="phase-badge" href="/workspace">
           P03 / PRIVATE DEMO
         </Link>

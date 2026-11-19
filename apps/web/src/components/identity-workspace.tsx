@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { StudioLink } from "../content/locale";
 import { useEffect, useState } from "react";
 import { ReportWorkspace } from "./report-workspace";
 import { RiskCard } from "./risk-card";
@@ -223,6 +224,7 @@ export function IdentityWorkspace() {
           Amanah
           <span className="brand-subtitle">GENETICS / LOCAL IDENTITY DEMO</span>
         </Link>
+        <StudioLink />
         <span className="phase-badge">P03 / INDEPENDENT CHOICE</span>
       </header>
       <main id="main" tabIndex={-1} className="identity-workspace">

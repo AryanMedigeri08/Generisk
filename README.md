@@ -2,24 +2,38 @@
 
 Generisk brings independent consent, traceable synthetic reports and attributed gene references into one local demonstration.
 
-P06 adds exact, consent-scoped synthetic educational calculations: [contract](docs/risk-contract.md), [handoff](handoffs/P06-to-P07.md); no clinical authorization or P07 implementation.
+P07 adds the public [Education Studio](http://localhost:13000/learn): seven interactive English lessons and plain-language explanations of P06 outputs. [Studio guide](docs/education-studio.md); [P07 handoff](handoffs/P07-to-P08.md).
 
-**Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. No risk calculation, diagnosis or clinical interpretation in P05.
+**Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. Educational calculations use the synthetic P06 model; no diagnosis or clinical interpretation is authorized.
 
 ```powershell
 docker compose up --build -d --wait --wait-timeout 180
 ```
 
-Open [workspace](http://localhost:13000/workspace) or [public demo panel](http://localhost:13000/panel). See [GENERISK_SOLUTION.md](GENERISK_SOLUTION.md) for the current hackathon plan (P06/P07 are future work) and [P05 handoff](handoffs/P05-to-P06.md) for actual results.
+Open [Learn](http://localhost:13000/learn), [workspace](http://localhost:13000/workspace) or the [public demo panel](http://localhost:13000/panel). See [GENERISK_SOLUTION.md](GENERISK_SOLUTION.md) for the hackathon plan and the phase handoffs for observed delivery results.
 
 
-P04 provides [fixture-only synthetic report management](docs/p04-api.md). P05 adds a [public attributed demo panel](data/public/SOURCES.md) and nine gene-level fixtures under DEC-012. In `/workspace`, grant processing, select a gene-level synthetic scenario, then grant fresh processing to view it. A/B can independently select none, CFTR or HBB carrier fixtures; uncertain/not-tested inputs require review. The predefined A none-to-CFTR correction preserves the original. Changed input invalidates old permissions/outputs. Reports remain owner-only; partners/support/fictional professionals are denied. No arbitrary upload, medical interpretation, risk calculation or report RAG/AI. [Schema](docs/report-schema.md), [P04 evidence](docs/evidence/p04-validation.md), [P05 handoff](handoffs/P05-to-P06.md).
+P04 provides [fixture-only synthetic report management](docs/p04-api.md). P05 adds a [public attributed demo panel](data/public/SOURCES.md) and nine gene-level fixtures under DEC-012. In `/workspace`, grant processing, select a gene-level synthetic scenario, then grant fresh processing to view it. A/B can independently select none, CFTR or HBB carrier fixtures; uncertain/not-tested inputs require review. The predefined A none-to-CFTR correction preserves the original. Changed input invalidates old permissions/outputs. Reports remain owner-only; partners/support/fictional professionals are denied. No arbitrary upload, clinical interpretation or report RAG/AI. P06 educational estimates are separately consent-scoped. [Schema](docs/report-schema.md), [P04 evidence](docs/evidence/p04-validation.md), [P05 handoff](handoffs/P05-to-P06.md).
 
-The reviewed P05 stack and its P04/P03/P02 ancestry are merged into `main`, GitHub's default branch. P06 is delivered on `feature/p06-risk-engine` for review and is not merged. Clinical governance stays BLOCKED; P07 requires separate authorization.
+The reviewed P06 stack and its P05/P04/P03/P02 ancestry are merged into `main`, GitHub's default branch, by normal merge `91ce02f1b7288c35fef1892846487b3a5e20cf6f`. P07 is delivered on `feature/p07-education-studio` for review, without merging. Clinical governance stays BLOCKED; P08 requires review and separate authorization.
 
 **Synthetic Demo — Not for Clinical Use.** P03 adds fictional local identity, independent consent, recipient-bound invitations and transactional audit to the Next.js/FastAPI/PostgreSQL foundation. No real records, genetic results, medical answers, integrations or appointments.
 
 Current scope is [DEC-009](docs/DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization), [DEC-010 P03 authorization](docs/DECISIONS.md#dec-010--authorized-synthetic-p03-identity-and-consent) and the [hackathon milestones/engineering gates](docs/hackathon-roadmap.md). Historical clinical-production P00/full P01 remain **BLOCKED**, eight approvals **PENDING**, twelve hazards **OPEN**. An engineering PASS does not imply clinical certification, regulatory compliance or authorization for real health information.
+
+## Learn without signing in
+
+[Education Studio](http://localhost:13000/learn) includes copies, carriers, independent chances, shared ancestors, test limits, neutral options and fictional result explanations. Every lesson is **demo content — expert review pending**. Sources are attributed; retrieval does not establish clinical review.
+
+Use copy buttons with a keyboard or drag them, compare seeded simulations, and explicitly request hypothetical server calculations. Only visited module IDs are kept in open-page memory; reload or clear them. No learner answers, option choices, cookies, analytics or progress API are used. The workspace retains its existing authentication, consent and stale-output checks.
+
+![GeneKeys teaching model](docs/screenshots/m2-desktop.png)
+
+![Independent chance simulation](docs/screenshots/m3-desktop.png)
+
+![Mobile teaching family tree](docs/screenshots/m4-mobile.png)
+
+All [14 desktop/mobile screenshots](docs/screenshots/) show synthetic teaching examples. [Content, language-extension and verification guide](docs/education-studio.md).
 
 ## Start the local demonstration
 
@@ -33,7 +47,7 @@ Open [the demonstration](http://localhost:13000). API [liveness](http://localhos
 
 The API applies `0001_demo` then additive `0002_identity`, preserving two fictional templates and seeding four local demo accounts. Open [the identity workspace](http://localhost:13000/workspace); its public credentials section lists all logins, including `demo-a` / `demo-a-only` and `demo-b` / `demo-b-only`. Use separate browser profiles/private windows for A/B. Grant processing independently, create/copy a recipient-bound code, accept as B, then grant assessment separately. Withdraw one grant and refresh the other context: neutral unavailability appears. Assessment never grants disclosure; no reviewed output is generated. Empty knowledge and unauthorized access remain unavailable.
 
-Review the historical [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for identity controls; the [P05 handoff](handoffs/P05-to-P06.md) records the current delivery. Clinical-production governance stays BLOCKED.
+Review the historical [P03 handoff](handoffs/P03-to-P04.md), [evidence](docs/evidence/p03-validation.md), [API](docs/p03-api.md) and [ADR-006](docs/adr/ADR-006-demo-identity-consent.md) for identity controls; the [P07 handoff](handoffs/P07-to-P08.md) records the current delivery. Clinical-production governance stays BLOCKED.
 
 ```powershell
 python scripts/smoke_stack.py
@@ -67,7 +81,7 @@ Without `TEST_DATABASE_URL`, PostgreSQL integration is explicitly skipped; it is
 
 ## Branch and review workflow
 
-`main` was established by a normal reviewed documentation merge; its [review and parent hashes](docs/evidence/p02-baseline-review.md) preserve all prior work. P02 uses `feature/p02-hackathon-foundation`. Push coherent feature checkpoints; review before merging into main. This task does not merge P02 or change GitHub's default branch. No force pushes or automatic phase advancement. P03 uses `feature/p03-identity-consent`, stacked on verified unmerged P02 tip `8ced1458cba1bf84deaf2fc4ce00f1d79aa5f70e`; neither feature branch is merged. P04 is authorized by DEC-011; P05 requires handoff review and separate authorization.
+`main` preserves the normal merge history through reviewed P06; its earlier [baseline review](docs/evidence/p02-baseline-review.md) remains historical evidence. P07 uses `feature/p07-education-studio` under DEC-014. Review the P07 handoff before authorizing a merge or P08. No force pushes, history rewriting or automatic phase advancement.
 
 ## Historical design and clinical governance
 
