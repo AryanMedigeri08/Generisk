@@ -47,3 +47,18 @@ All 36 frequency/q/detection slots have value:null, basis:illustrative, source_i
 Names/relationships have 25 attributed records (12 HGNC, 13 NLM); they are not numerical reference values. Arabic names remain null. Severity_band:variable is broad descriptive metadata, not personalized severity or triage. CYP21A2/SMN1 are educational_only; MEFV is also educational_only because its inheritance/expression caveats exceed this gene-only demonstration. GJB2 entry selects the recessive nonsyndromic form; other inheritance/conditions are excluded. No Abu Dhabi panel equivalence, clinical validity, approval, genomic diagnosis or risk interpretation is claimed.
 
 The checked-in JSON Schema is generated from services/api/src/app/p05/panel.py. The public version hash covers exact LF JSON bytes, pinned by .gitattributes; report v2 binds that hash. Public references never contain private records. Clinical APR/H records remain unresolved.
+
+## P07 Education Studio — retrieved 2026-11-19
+
+Original English wording, all cards demo-unreviewed; retrieval is not expert approval. No images, logos, GeneReviews/OMIM or licensed encyclopedia text copied. No model/RAG corpus populated.
+
+| ID | Primary page | Checked field | Reuse / licence |
+|---|---|---|---|
+| edu-nlm-gene | [What is a gene?](https://medlineplus.gov/genetics/understanding/basics/gene/) | Opening explanation and two inherited copies | NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement. [Terms](https://medlineplus.gov/about/using/usingcontent/) |
+| edu-nlm-inheritance | [Patterns of inheritance](https://medlineplus.gov/genetics/understanding/inheritance/inheritancepatterns/) | Autosomal recessive row | NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement. [Terms](https://medlineplus.gov/about/using/usingcontent/) |
+| edu-nlm-chance | [Inheritance and chance](https://medlineplus.gov/genetics/understanding/inheritance/riskassessment/) | Autosomal recessive paragraph and independent pregnancies | NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement. [Terms](https://medlineplus.gov/about/using/usingcontent/) |
+| edu-nlm-results | [Interpreting genetic test results](https://medlineplus.gov/genetics/understanding/testing/interpretingresults/) | Negative results, limitations and uncertain significance | NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement. [Terms](https://medlineplus.gov/about/using/usingcontent/) |
+| edu-nlm-consult | [What happens during a genetic consultation?](https://medlineplus.gov/genetics/understanding/consult/expectations/) | Independent choices and reproductive options | NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement. [Terms](https://medlineplus.gov/about/using/usingcontent/) |
+| edu-nci-related | [NCI Dictionary: consanguinity](https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/consanguinity) | Definition: shared ancestors | NCI text free of copyright unless marked; original wording, no logos/images copied; no endorsement. [Terms](https://www.cancer.gov/policies/copyright-reuse) |
+
+All six listed pages and both reuse-policy pages were retrieved. not_verified source list: none. UAE availability wording is an explicit limitation, not verified legal eligibility or a service claim. Teaching c/d/q presets are assumptions, not sourced frequencies.

@@ -1,0 +1,27 @@
+{
+  "module_id": "genes-and-copies",
+  "module_number": "M1",
+  "eyebrow": "Small instructions. Shared beginnings.",
+  "title": "Genes and copies",
+  "summary": "Start with a pair of copies.",
+  "duration": "3 min",
+  "cards": [
+    {
+      "card_id": "m1-copies",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "A gene is part of the picture",
+      "body": [
+        "Many genes help cells make proteins or control other genes.",
+        "For the autosomal genes in this lesson, people usually have two copies. One comes from each biological parent.",
+        "Tap each copy to explore. These shapes are a teaching model, not a test result."
+      ],
+      "widget": "gene-keys",
+      "sources": ["edu-nlm-gene"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["gene", "copy"]
+    }
+  ]
+}

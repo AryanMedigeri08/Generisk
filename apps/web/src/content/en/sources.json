@@ -1,0 +1,62 @@
+{
+  "edu-nlm-gene": {
+    "id": "edu-nlm-gene",
+    "title": "What is a gene?",
+    "url": "https://medlineplus.gov/genetics/understanding/basics/gene/",
+    "retrieved_on": "2026-11-19",
+    "field": "Opening explanation and two inherited copies",
+    "source_check": "verified",
+    "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+    "license_note": "NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement."
+  },
+  "edu-nlm-inheritance": {
+    "id": "edu-nlm-inheritance",
+    "title": "Patterns of inheritance",
+    "url": "https://medlineplus.gov/genetics/understanding/inheritance/inheritancepatterns/",
+    "retrieved_on": "2026-11-19",
+    "field": "Autosomal recessive row",
+    "source_check": "verified",
+    "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+    "license_note": "NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement."
+  },
+  "edu-nlm-chance": {
+    "id": "edu-nlm-chance",
+    "title": "Inheritance and chance",
+    "url": "https://medlineplus.gov/genetics/understanding/inheritance/riskassessment/",
+    "retrieved_on": "2026-11-19",
+    "field": "Autosomal recessive paragraph and independent pregnancies",
+    "source_check": "verified",
+    "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+    "license_note": "NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement."
+  },
+  "edu-nlm-results": {
+    "id": "edu-nlm-results",
+    "title": "Interpreting genetic test results",
+    "url": "https://medlineplus.gov/genetics/understanding/testing/interpretingresults/",
+    "retrieved_on": "2026-11-19",
+    "field": "Negative results, limitations and uncertain significance",
+    "source_check": "verified",
+    "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+    "license_note": "NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement."
+  },
+  "edu-nlm-consult": {
+    "id": "edu-nlm-consult",
+    "title": "What happens during a genetic consultation?",
+    "url": "https://medlineplus.gov/genetics/understanding/consult/expectations/",
+    "retrieved_on": "2026-11-19",
+    "field": "Independent choices and reproductive options",
+    "source_check": "verified",
+    "license_url": "https://medlineplus.gov/about/using/usingcontent/",
+    "license_note": "NLM Genetics material identified as public domain; original wording, no images or licensed encyclopedia text copied; no endorsement."
+  },
+  "edu-nci-related": {
+    "id": "edu-nci-related",
+    "title": "NCI Dictionary: consanguinity",
+    "url": "https://www.cancer.gov/publications/dictionaries/genetics-dictionary/def/consanguinity",
+    "retrieved_on": "2026-11-19",
+    "field": "Definition: shared ancestors",
+    "source_check": "verified",
+    "license_url": "https://www.cancer.gov/policies/copyright-reuse",
+    "license_note": "NCI text free of copyright unless marked; original wording, no logos/images copied; no endorsement."
+  }
+}

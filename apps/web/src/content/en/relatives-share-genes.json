@@ -1,0 +1,27 @@
+{
+  "module_id": "relatives-share-genes",
+  "module_number": "M4",
+  "eyebrow": "Family paths, without judgement.",
+  "title": "Relatives share genes",
+  "summary": "Follow shared ancestors in a teaching model.",
+  "duration": "4 min",
+  "cards": [
+    {
+      "card_id": "m4-family",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "Some family paths meet",
+      "body": [
+        "Relatives can share ancestors and inherited gene copies.",
+        "Explore a diagram without entering your family history. No family is being judged.",
+        "The server uses a teaching assumption, not a measured frequency for a real condition."
+      ],
+      "widget": "family-tree",
+      "sources": ["edu-nci-related", "edu-nlm-gene"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["ancestor", "chance"]
+    }
+  ]
+}

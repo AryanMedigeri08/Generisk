@@ -1,0 +1,27 @@
+{
+  "module_id": "carriers",
+  "module_number": "M2",
+  "eyebrow": "One copy from each parent.",
+  "title": "Understanding carriers",
+  "summary": "Build the four possible pairs.",
+  "duration": "4 min",
+  "cards": [
+    {
+      "card_id": "m2-carriers",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "A carrier is a person, not a verdict",
+      "body": [
+        "For this recessive teaching model, a carrier has one working copy and one changed copy.",
+        "Carriers usually do not have that condition. This model does not describe every gene or condition.",
+        "Choose a preset, then pass one copy from each parent. Every combination stays visible in the table."
+      ],
+      "widget": "gene-keys",
+      "sources": ["edu-nlm-inheritance"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["carrier", "copy", "recessive"]
+    }
+  ]
+}

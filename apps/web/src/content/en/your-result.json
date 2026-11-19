@@ -1,0 +1,27 @@
+{
+  "module_id": "your-result",
+  "module_number": "M7",
+  "eyebrow": "Meaning, with permission.",
+  "title": "Understanding a result",
+  "summary": "Read a fictional preview, then visit your private workspace.",
+  "duration": "3 min",
+  "cards": [
+    {
+      "card_id": "m7-result",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "A code needs context",
+      "body": [
+        "These are fictional message previews, not anyone’s report.",
+        "Your signed-in workspace checks current permissions before showing its own fictional assessment.",
+        "A changed report or permission makes an earlier view stale. Ask for a new calculation explicitly."
+      ],
+      "widget": "none",
+      "sources": ["edu-nlm-results", "edu-nlm-consult"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["uncertain", "chance"]
+    }
+  ]
+}

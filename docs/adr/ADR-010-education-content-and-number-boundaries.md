@@ -1,0 +1,15 @@
+# ADR-010 — Education content and number boundaries
+
+2026-11-19. ACCEPTED under DEC-014, owner's explicit P07-only chat instruction. Clinical gates unchanged. Content/schema/loader precede UI. No new runtime dependency: React, SVG, CSS and existing TypeScript/Next tooling suffice.
+
+Use one English JSON module per lesson plus UI, glossary/source and complete P06 message/caveat dictionaries. Typed runtime loader validates version/language/card identifiers/widget/source/review metadata. Components render content, tokens and returned numbers; no lesson prose in JSX. Locale selection is an explicit loader boundary, English only; future translations require matching keys and review, not component rewrites. No Arabic/TTS/quiz/reading-level switch implemented here.
+
+A single fixed Mendelian module owns the three generic fractions and four-cell segregation model. GeneKeys selects copies; seeded PRNG draws fixed model outcomes and counts simulated families, never infers an individual risk. Simulations explicitly show different fictional families and independent draws; seed and ten-run strip are reproducible. Simulation counting is not new population/residual arithmetic. No gene-specific formulas, frequencies or browser calculation of P06 outputs.
+
+FamilyTree/NegativeBar send only explicit teaching presets to the unchanged stateless what-if proxy; responses are displayed as exact fractions/natural frequencies. Native HTML meter value/max render returned k/n geometrically, without client probability arithmetic, rounding or invented percentages. Absolute numbers precede any relative comparison. Not-sure/unknown/unsupported responses have no numbers; errors clear old output. No real population frequency or laboratory performance claimed.
+
+ResultExplainer maps only enumerated gen-risk-1 states/messages/caveats to original English text; unknown keys/contracts fail closed to an unavailable explanation. Original codes/fractions remain in expandable technical details for transparency and existing tests. P06 consent, binding pins, stale/unavailable behavior and explicit calculation remain unchanged; no auto-recompute or new release surface. Public M7 examples are explicitly fictional previews, never private data.
+
+All lesson state, draws, selected relationship, teaching presets and checklist state are React memory only. Visited module IDs live in a Learn layout provider, with clear control; no localStorage, cookies, analytics, progress API or server writes. What-if requests are explicit hypothetical calculation requests, not learner progress storage, and exclude private credentials. Sources are retrieved primary NLM/NCI pages with dates/licence notes and original wording; every card stays demo-unreviewed. Any retrieval failure is explicitly not_verified, never an invented source or sign-off.
+
+No actual option choice or referral is recorded. Four equal, neutral option cards and a questions checklist do not imply eligibility or a preferred route. P08+ requires separate authorization; P00/full clinical P01, APR and hazard statuses unchanged.

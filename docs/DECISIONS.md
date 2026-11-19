@@ -1,5 +1,11 @@
 # Decision log
 
+## DEC-014 — Authorized P07 English Education Studio
+
+2026-11-19, Asia/Calcutta. ACCEPTED as the owner's explicit P07-only attached instruction (`4f0a8d2e-5ca9-47a1-b78b-83cacfeb42b0/Pasted text.txt`), project direction rather than clinical/legal authority. Authorizes normal merge of green P06 delivery dfdff2d into main (`91ce02f1b7288c35fef1892846487b3a5e20cf6f`), `feature/p07-education-studio`, source-attributed unreviewed English lessons M1–M7, bounded fixed-model simulations, existing what-if API consumers, P06 message renderer in workspace, accessible UI/screenshots/tests and listed lean docs. [Preflight](evidence/p07-preflight.md); [ADR-010](adr/ADR-010-education-content-and-number-boundaries.md).
+
+Only fixed generic Mendelian constants are permitted in browser arithmetic; population/residual numbers remain server results. No server learner persistence/analytics, quiz, Arabic/TTS, polished joint release/options recording/referral, LLM/RAG, new heavy dependency or P08 work. Preserve all synthetic/educational labels, original panel/rules/reference bindings and P06 consent/invalidation. P00/full clinical P01 BLOCKED, APR-01–APR-08 PENDING, H01–H12 OPEN. P07 itself is not authorized to merge; review its handoff before any separately authorized P08.
+
 ## DEC-013 — Authorized P06 deterministic educational arithmetic
 
 2026-11-16, Asia/Calcutta. ACCEPTED as owner's explicit P06-only direction in the attached chat request (a99a7c3f-e93b-418a-bb1a-96040ca01a7c/Pasted text.txt); not independent authority verification or clinical/legal approval. Authorizes normal merge of green P05 delivery d38ba35 into main (merge `c9b876894fd122c57808c0ebe6646808fb3dd2b8`), dedicated `feature/p06-risk-engine`, exact synthetic-only educational engine, separate reference-values release, three scoped endpoints, one workspace card and lean evidence/tests/handoff. [Contract](risk-contract.md) written first; [ADR-009](adr/ADR-009-exact-educational-rules.md) records assumptions, purpose-scoped consent extension and limited shared-gene release.
