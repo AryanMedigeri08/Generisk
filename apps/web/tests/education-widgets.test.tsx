@@ -115,6 +115,25 @@ it("renders family-tree gold natural frequencies and F exactly, clears them on c
     screen.getByText(content.risk.messages["risk.counsellor_context"]),
   ).toBeInTheDocument();
 });
+it("draws the intervening generations for cousin paths without treating cousins as siblings", () => {
+  const { container } = render(<FamilyTree />);
+  const generations = () =>
+    container.querySelectorAll("[data-generation-node]");
+  expect(generations()).toHaveLength(2);
+  for (const [relationship, count] of [
+    ["second_cousins", 4],
+    ["first_cousins_once_removed", 3],
+    ["double_first_cousins", 4],
+    ["unrelated", 0],
+    ["not_sure", 0],
+  ] as const) {
+    fireEvent.change(screen.getByLabelText(ui.relationship), {
+      target: { value: relationship },
+    });
+    expect(generations()).toHaveLength(count);
+  }
+  expect(model).not.toHaveBeenCalled();
+});
 it("renders the residual gold number and native bar bounds without rounding or client risk arithmetic", async () => {
   model.mockResolvedValue(
     result({

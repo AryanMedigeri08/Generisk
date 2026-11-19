@@ -16,7 +16,7 @@ Synthetic demonstration. Educational estimate. Not a diagnosis. Not for clinical
 | M6 `options` | Four equal neutral cards, no selected route; memory-only questions checklist; UAE availability caveat |
 | M7 `your-result` | Fictional own/shared/unavailable previews; ResultExplainer also renders the authenticated workspace output |
 
-The family tree illustrates shared paths; it is not a pedigree editor or a family-history assessment. One hundred dots represent different fictional families, one pregnancy each. The fixed single-gene recessive model does not describe every gene, condition or person.
+The family tree illustrates shared paths, including the intervening generations for cousin relationships; it is not a pedigree editor or a family-history assessment. A regression test checks generation nodes for each relationship token. One hundred dots represent different fictional families, one pregnancy each. The fixed single-gene recessive model does not describe every gene, condition or person.
 
 ## Content and language boundary
 

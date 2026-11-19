@@ -23,44 +23,74 @@ function FamilyDiagram({ relationship }: { relationship: Relationship }) {
   const double = relationship === "double_first_cousins";
   const removed = relationship === "first_cousins_once_removed";
   const second = relationship === "second_cousins";
+  // Each intermediate circle is a generation, not an inferred family member.
+  // Double first cousins share both ancestor couples through two sibling pairs.
+  const ancestorXs = double ? [70, 130, 310, 370] : [150, 290];
+  const intermediate = double
+    ? [
+        { x: 70, y: 130 },
+        { x: 140, y: 130 },
+        { x: 300, y: 130 },
+        { x: 370, y: 130 },
+      ]
+    : related
+      ? [
+          { x: 110, y: 125 },
+          { x: 330, y: 125 },
+          ...(second ? [{ x: 110, y: 200 }] : []),
+          ...(second || removed ? [{ x: 330, y: 200 }] : []),
+        ]
+      : [];
+  const a = { x: double ? 105 : 110, y: removed ? 240 : 270 };
+  const b = { x: double ? 335 : 330, y: removed ? 300 : 270 };
   return (
     <figure className="family-diagram">
-      <svg viewBox="0 0 440 270" role="img" aria-label={ui.family_tree}>
+      <svg viewBox="0 0 440 365" role="img" aria-label={ui.family_tree}>
         <g className={related ? "tree-path shared" : "tree-path"} fill="none">
-          <path
-            d={
-              related
-                ? "M150 45H290M220 45V90H110V215M220 90H330V215"
-                : "M150 45V90H110V215M290 45V90H330V215"
-            }
-          />
-          {double && (
-            <path d="M90 45H150M120 45V115H110M290 45H350M320 45V115H330" />
+          {double ? (
+            <>
+              <path d="M70 40H130M100 40V80H140V130M100 80H300V130" />
+              <path d="M310 40H370M340 40V100H70V130M340 100H370V130" />
+              <path d="M70 130H140M105 130V270M300 130H370M335 130V270" />
+            </>
+          ) : related ? (
+            <path
+              d={`M150 40H290M220 40V85H110V125M220 85H330V125M110 125V${a.y}M330 125V${b.y}`}
+            />
+          ) : (
+            <path d="M150 40V85H110V270M290 40V85H330V270" />
           )}
-          {second && (
-            <path d="M110 90V125H140V165H110M330 90V125H300V165H330" />
-          )}
-          {removed && <path d="M330 155V185H365V215" />}
-          <path d="M110 215V240H330V215M220 240V260" />
+          <path d={`M${a.x} ${a.y}V330H${b.x}V${b.y}M220 330V355`} />
         </g>
-        {(double ? [90, 150, 290, 350] : [150, 290]).map((x) => (
+        {ancestorXs.map((x) => (
           <g
             key={x}
             className={related ? "ancestor-node shared" : "ancestor-node"}
           >
-            <circle cx={x} cy={45} r={18} />
+            <circle cx={x} cy={40} r={15} />
           </g>
         ))}
-        <text x="220" y="18" textAnchor="middle">
+        <text x="220" y="15" textAnchor="middle">
           {ui.ancestor}
         </text>
+        <g className={related ? "ancestor-node shared" : "ancestor-node"}>
+          {intermediate.map(({ x, y }) => (
+            <circle
+              key={`${x}-${y}`}
+              cx={x}
+              cy={y}
+              r={12}
+              data-generation-node="true"
+            />
+          ))}
+        </g>
         <g className="tree-person">
-          <circle cx="110" cy="215" r="18" />
-          <text x="110" y="190" textAnchor="middle">
+          <circle cx={a.x} cy={a.y} r={18} />
+          <text x={a.x} y={a.y - 25} textAnchor="middle">
             {ui.parent_node_a}
           </text>
-          <circle cx={removed ? 365 : 330} cy="215" r="18" />
-          <text x={removed ? 365 : 330} y="190" textAnchor="middle">
+          <circle cx={b.x} cy={b.y} r={18} />
+          <text x={b.x} y={b.y - 25} textAnchor="middle">
             {ui.parent_node_b}
           </text>
         </g>

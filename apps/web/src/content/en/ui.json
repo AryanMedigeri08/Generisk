@@ -94,7 +94,7 @@
   "after": "After the negative result",
   "native_bar": "Model carrier chance: {label}",
   "family_tree": "Illustrative shared-ancestor diagram",
-  "ancestor": "Shared ancestor",
+  "ancestor": "Ancestor generation",
   "shared_path": "Highlighted path: shared ancestor",
   "parent_node_a": "Parent A",
   "parent_node_b": "Parent B",
