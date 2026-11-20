@@ -213,6 +213,46 @@ def test_secure_cookie_for_explicit_local_https(demo: DemoHarness) -> None:
         assert "secure" in response.headers["set-cookie"].lower()
 
 
+def test_hosted_login_origin_rotation_and_restart(
+    demo: DemoHarness, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    origin = "https://judges.example.org"
+    config = Settings(
+        hosted_demo=True,
+        web_origin=origin,
+        cookie_secure=True,
+        database_url=demo.config.database_url.replace("postgresql+psycopg:", "postgresql:"),
+    )
+    assert config.database_url == demo.config.database_url
+    for role in ("A", "B", "COUNSELLOR", "SUPPORT"):
+        monkeypatch.setenv(f"AMANAH_PASSWORD_{role}", str(uuid4()))
+    password = os.environ["AMANAH_PASSWORD_A"]
+    seed_accounts(config.database_url, hosted=True)
+    headers = {"Origin": origin, "X-Demo-Request": "1"}
+    with TestClient(create_app(config), base_url=origin, headers=headers) as client:
+        for other in ("https://a-preview.example.org", HEADERS["Origin"], origin + "/path"):
+            assert client.get("/api/v1/auth/csrf", headers={"Origin": other}).status_code == 403
+        challenge = client.get("/api/v1/auth/csrf")
+        assert "secure" in challenge.headers["set-cookie"].lower()
+        client.headers["X-CSRF-Token"] = challenge.json()["csrf_token"]
+        endpoint = "/api/v1/auth/login"
+        assert (
+            client.post(
+                endpoint, json={"username": "demo-a", "password": "demo-a-only"}
+            ).status_code
+            == 401
+        )
+        assert (
+            client.post(endpoint, json={"username": "demo-a", "password": password}).status_code
+            == 200
+        )
+        seed_accounts(config.database_url, hosted=True)
+        assert client.get("/api/v1/auth/session").status_code == 200
+        monkeypatch.setenv("AMANAH_PASSWORD_A", str(uuid4()))
+        seed_accounts(config.database_url, hosted=True)
+        assert client.get("/api/v1/auth/session").status_code == 401
+
+
 def test_owner_cross_user_and_header_forgery(demo: DemoHarness) -> None:
     a, b = demo.login("demo-a"), demo.login("demo-b")
     assert a.get("/api/v1/private/cases/syn-case-01").status_code == 200

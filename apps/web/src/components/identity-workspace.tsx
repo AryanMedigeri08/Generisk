@@ -17,7 +17,7 @@ import {
   type Audit,
 } from "../lib/identity";
 
-export function IdentityWorkspace() {
+export function IdentityWorkspace({ hosted = false }: { hosted?: boolean }) {
   const [session, setSession] = useState<DemoSession | null>(null);
   const [loading, setLoading] = useState(true);
   const [busy, setBusy] = useState(false);
@@ -237,26 +237,37 @@ export function IdentityWorkspace() {
           <p>Checking your local demonstration session…</p>
         ) : !session ? (
           <section className="identity-card" aria-labelledby="signin-title">
-            <h2 id="signin-title">Choose a sample account</h2>
+            <h2 id="signin-title">
+              {hosted
+                ? "Sign in to the hosted demo"
+                : "Choose a sample account"}
+            </h2>
             <p>
-              Each partner has a separate sign-in. Choose one to begin. No
-              registration or personal details are needed.
+              {hosted
+                ? "Use the sample username and password provided by the demo organizer. Each partner signs in separately."
+                : "Each partner has a separate sign-in. Choose one to begin. No registration or personal details are needed."}
             </p>
-            <div className="guide-actions">
-              {(["a", "b"] as const).map((person) => (
-                <button
-                  key={person}
-                  disabled={busy}
-                  onClick={() =>
-                    void login("demo-" + person, "demo-" + person + "-only")
-                  }
-                >
-                  Continue as partner {person.toUpperCase()}
-                </button>
-              ))}
-            </div>
-            <details className="demo-credentials">
-              <summary>Sign in with a username instead</summary>
+            {!hosted && (
+              <div className="guide-actions">
+                {(["a", "b"] as const).map((person) => (
+                  <button
+                    key={person}
+                    disabled={busy}
+                    onClick={() =>
+                      void login("demo-" + person, "demo-" + person + "-only")
+                    }
+                  >
+                    Continue as partner {person.toUpperCase()}
+                  </button>
+                ))}
+              </div>
+            )}
+            <details className="demo-credentials" open={hosted || undefined}>
+              <summary>
+                {hosted
+                  ? "Demo account sign-in"
+                  : "Sign in with a username instead"}
+              </summary>
               <form onSubmit={signIn} className="identity-form">
                 <label htmlFor="username">Demo username</label>
                 <input
@@ -286,23 +297,25 @@ export function IdentityWorkspace() {
                 </button>
               </form>
             </details>
-            <details className="demo-credentials">
-              <summary>Public fictional demo credentials</summary>
-              <p>
-                These known local-only credentials are unsuitable for an
-                internet-facing service. Use separate browser contexts to act
-                independently.
-              </p>
-              <ul>
-                {["demo-a", "demo-b", "demo-counsellor", "demo-support"].map(
-                  (name) => (
-                    <li key={name}>
-                      <code>{name}</code> / <code>{name}-only</code>
-                    </li>
-                  ),
-                )}
-              </ul>
-            </details>
+            {!hosted && (
+              <details className="demo-credentials">
+                <summary>Public fictional demo credentials</summary>
+                <p>
+                  These known local-only credentials are unsuitable for an
+                  internet-facing service. Use separate browser contexts to act
+                  independently.
+                </p>
+                <ul>
+                  {["demo-a", "demo-b", "demo-counsellor", "demo-support"].map(
+                    (name) => (
+                      <li key={name}>
+                        <code>{name}</code> / <code>{name}-only</code>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </details>
+            )}
           </section>
         ) : (
           <>

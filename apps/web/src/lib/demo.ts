@@ -1,3 +1,5 @@
+import { apiOrigin } from "./api-origin";
+
 export type DemoCase = {
   id: string;
   display_name: string;
@@ -65,12 +67,13 @@ export function parseDemoCases(value: unknown): DemoCase[] {
 }
 
 export async function getDemoSnapshot(): Promise<DemoSnapshot> {
-  const base = process.env.API_INTERNAL_URL ?? "http://127.0.0.1:18000";
   try {
+    const base = apiOrigin();
     const [live, ready, fixtures] = await Promise.all(
       ["/health/live", "/health/ready", "/api/v1/demo/cases"].map((path) =>
         fetch(`${base}${path}`, {
           cache: "no-store",
+          redirect: "error",
           signal: AbortSignal.timeout(5000),
         }),
       ),
