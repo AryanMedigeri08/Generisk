@@ -4,6 +4,9 @@ import { useState } from "react";
 import { useContent } from "../content/locale";
 import { ResultExplainer } from "./learn/result-explainer";
 import type { RiskEnvelope } from "../lib/learn/risk";
+import { retrieveGuide } from "../lib/journey-demo";
+import { PersonalMode } from "./care-atlas/care-atlas";
+import "../app/care-atlas/atlas.css";
 import {
   identityApi,
   DemoRequestError,
@@ -42,6 +45,11 @@ export function RiskCard({
   const [localBusy, setBusy] = useState(false);
   const busy = localBusy || parentBusy;
   const [jointId, setJointId] = useState("");
+  const [openedJourney, setOpenedJourney] = useState<{
+    stamp: string;
+    binding: string;
+    preset: string;
+  }>();
   const joint =
     joints.find((j) => j.id === jointId) ??
     (joints.length === 1 ? joints[0] : undefined);
@@ -62,6 +70,7 @@ export function RiskCard({
     setMessage("");
     setOwn(null);
     setCouple(null);
+    setOpenedJourney(undefined);
     try {
       const response = await fetch(`/api/p03/risk/${kind}`, {
         cache: "no-store",
@@ -131,6 +140,90 @@ export function RiskCard({
         <h3>{title}</h3>
         <p>{output.label}</p>
         <ResultExplainer output={output} />
+        {output.contract_version === "gen-risk-1" &&
+          output.state !== "UNAVAILABLE" &&
+          output.bindings?.scope_hash && (
+            <div className="demo-result-journey">
+              <details>
+                <summary>Counselling preparation from public sources</summary>
+                {retrieveGuide(
+                  output.state === "SHARED_CARRIER"
+                    ? ["inheritance", "counselling"]
+                    : ["scope", "counselling"],
+                ).map((card) => (
+                  <article className="journey-note" key={card.id}>
+                    <h4>{card.title.en}</h4>
+                    <p>{card.summary.en}</p>
+                    <p>{card.prompt.en}</p>
+                    <a href={card.source} target="_blank" rel="noreferrer">
+                      MedlinePlus Genetics ↗
+                    </a>
+                  </article>
+                ))}
+              </details>
+              <button
+                type="button"
+                disabled={busy || !output.bindings.scope_hash}
+                onClick={async () => {
+                  setOpenedJourney(undefined);
+                  setBusy(true);
+                  setMessage("");
+                  try {
+                    const shared = output === couple;
+                    const response = await fetch(
+                      "/api/p03/risk/" +
+                        (shared ? "couple-assessment" : "my-assessment"),
+                      {
+                        cache: "no-store",
+                        credentials: "same-origin",
+                        headers: {
+                          "X-Demo-Request": "1",
+                          "X-Risk-Binding": output.bindings!.scope_hash!,
+                          ...(shared && joint
+                            ? { "X-Risk-Joint": joint.id }
+                            : {}),
+                        },
+                      },
+                    );
+                    const current = (await response.json()) as RiskOutput;
+                    if (
+                      !response.ok ||
+                      current.state === "UNAVAILABLE" ||
+                      current.bindings?.scope_hash !==
+                        output.bindings?.scope_hash
+                    )
+                      throw new Error();
+                    setOpenedJourney({
+                      stamp,
+                      binding: current.bindings!.scope_hash!,
+                      preset:
+                        current.state === "NO_SHARED_FINDING" ||
+                        current.state === "OWN_NO_FINDING"
+                          ? "follow-up"
+                          : "result",
+                    });
+                  } catch {
+                    setOwn(null);
+                    setCouple(null);
+                    setMessage("UNAVAILABLE");
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+              >
+                Open linked fictional care journey
+              </button>
+              {openedJourney?.stamp === stamp &&
+                openedJourney.binding === output.bindings.scope_hash && (
+                  <div
+                    className="care-atlas"
+                    aria-label="Linked fictional care journey"
+                  >
+                    <PersonalMode initialJourney={openedJourney.preset} />
+                  </div>
+                )}
+            </div>
+          )}
         <details className="risk-technical">
           <summary>{ui.technical}</summary>
           <p>{output.state}</p>

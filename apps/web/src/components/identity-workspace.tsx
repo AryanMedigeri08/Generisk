@@ -5,6 +5,7 @@ import { StudioLink } from "../content/locale";
 import { useEffect, useState } from "react";
 import { ReportWorkspace } from "./report-workspace";
 import { RiskCard } from "./risk-card";
+import { JourneyStudio } from "./journey-studio";
 import {
   identityApi,
   DemoRequestError,
@@ -330,7 +331,11 @@ export function IdentityWorkspace() {
                 </button>
               </div>
             </section>
-            <section className="identity-card" aria-labelledby="private-title">
+            <section
+              id="workspace-permissions"
+              className="identity-card"
+              aria-labelledby="private-title"
+            >
               <h2 id="private-title">Your authorized case metadata</h2>
               {cases.length ? (
                 cases.map((record) => (
@@ -388,6 +393,11 @@ export function IdentityWorkspace() {
                   joints={joints}
                   refresh={() => load(session)}
                   perform={action}
+                />
+                <JourneyStudio
+                  key={session.user_id}
+                  session={session}
+                  permissions={permissions}
                 />
                 <section
                   className="identity-card"

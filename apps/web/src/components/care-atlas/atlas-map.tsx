@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import {
   districts,
   facilities,
@@ -48,7 +49,8 @@ export function AtlasMap({
   origin,
   access,
   radius,
-  proposal,
+  proposals = [],
+  moveProposal,
   place,
   pinServices,
 }: {
@@ -59,10 +61,21 @@ export function AtlasMap({
   origin?: Point;
   access?: Access;
   radius?: number;
-  proposal?: Point;
+  proposals?: readonly Point[];
+  moveProposal?: (index: number, point: Point) => void;
   place?: (point: Point) => void;
   pinServices?: readonly Service[];
 }) {
+  const map = useRef<SVGSVGElement>(null);
+  function landPoint(clientX: number, clientY: number) {
+    const bounds = map.current?.getBoundingClientRect();
+    if (!bounds) return undefined;
+    const point = {
+      x: ((clientX - bounds.left) * mapSize.width) / bounds.width,
+      y: ((clientY - bounds.top) * mapSize.height) / bounds.height,
+    };
+    return pointOnLand(point) ? point : undefined;
+  }
   const active = visible.find((site) => site.id === selected);
   const connections = network
     ? referrals.flatMap((edge) => {
@@ -82,22 +95,15 @@ export function AtlasMap({
       >
         <div className="atlas-map">
           <svg
+            ref={map}
             className="atlas-cartography"
             viewBox="0 0 760 500"
             aria-hidden="true"
             onClick={
               place
                 ? (event) => {
-                    const bounds = event.currentTarget.getBoundingClientRect();
-                    const point = {
-                      x:
-                        ((event.clientX - bounds.left) * mapSize.width) /
-                        bounds.width,
-                      y:
-                        ((event.clientY - bounds.top) * mapSize.height) /
-                        bounds.height,
-                    };
-                    if (pointOnLand(point)) place(point);
+                    const point = landPoint(event.clientX, event.clientY);
+                    if (point) place(point);
                   }
                 : undefined
             }
@@ -140,7 +146,7 @@ export function AtlasMap({
                 const shade = area
                   ? area.coveredBefore
                     ? "#d6e8d7"
-                    : area.coveredAfter
+                    : area.coveredAfter || area.remoteReached > 0
                       ? "#a9d9c6"
                       : "#f0dec5"
                   : index % 2 === 1
@@ -165,17 +171,19 @@ export function AtlasMap({
                   strokeWidth={index < 3 ? 5 : 2}
                 />
               ))}
-              {proposal && radius !== undefined && (
-                <circle
-                  cx={proposal.x}
-                  cy={proposal.y}
-                  r={radius * unitsPerKm}
-                  fill="#2e8c7416"
-                  stroke="#0e6757"
-                  strokeWidth="2"
-                  strokeDasharray="5 6"
-                />
-              )}
+              {radius !== undefined &&
+                proposals.map((point, index) => (
+                  <circle
+                    key={index}
+                    cx={point.x}
+                    cy={point.y}
+                    r={radius * unitsPerKm}
+                    fill="#2e8c7416"
+                    stroke="#0e6757"
+                    strokeWidth="2"
+                    strokeDasharray="5 6"
+                  />
+                ))}
             </g>
             <path
               d={landOutline}
@@ -298,16 +306,27 @@ export function AtlasMap({
               </button>
             );
           })}
-          {proposal && (
+          {proposals.map((point, index) => (
             <span
+              key={index}
               className="atlas-proposal"
-              style={position(proposal)}
-              aria-label="Proposed site"
+              style={position(point)}
+              aria-label={
+                index === 0 ? "Proposed site" : "Proposed site " + (index + 1)
+              }
               role="img"
+              draggable={Boolean(moveProposal)}
+              onDragStart={(event) =>
+                event.dataTransfer.setData("text/plain", String(index))
+              }
+              onDragEnd={(event) => {
+                const point = landPoint(event.clientX, event.clientY);
+                if (point) moveProposal?.(index, point);
+              }}
             >
               +
             </span>
-          )}
+          ))}
         </div>
       </div>
     </div>

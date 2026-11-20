@@ -21,11 +21,17 @@ The reviewed P06 stack and its P05/P04/P03/P02 ancestry are merged into `main`, 
 
 Current scope is [DEC-009](docs/DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization), [DEC-010 P03 authorization](docs/DECISIONS.md#dec-010--authorized-synthetic-p03-identity-and-consent) and the [hackathon milestones/engineering gates](docs/hackathon-roadmap.md). Historical clinical-production P00/full P01 remain **BLOCKED**, eight approvals **PENDING**, twelve hazards **OPEN**. An engineering PASS does not imply clinical certification, regulatory compliance or authorization for real health information.
 
+## Run the AMAN Genome demo
+
+Open [Journey Studio](http://localhost:13000/journey) for English and Arabic consultation preparation, a fictional family graph, and a downloadable summary. In the [workspace](http://localhost:13000/workspace), a consented calculation can open a linked fictional itinerary with a follow-up checklist.
+
+The [demo walkthrough](docs/aman-genome-demo.md) covers the full journey and the optional local model. The default demo needs no API keys.
+
 ## Explore Care Atlas
 
 Open [Care Atlas](http://localhost:13000/care-atlas) from the home page or workspace. **Personal** matches a fictional journey step to nearby simulated services. **Ecosystem** filters 12 facilities across six service layers and shows 10 fictional referral links. **Policy** compares baseline and proposed coverage for six fictional districts. Try placing a counselling site in South Ridge with a 7 km radius to bring 59,000 additional simulated residents within reach.
 
-The map uses an invented coastline and straight-line distances. Policy counts each district's population at its centre and excludes travel schedules, capacity and waiting times. The atlas runs in the browser with fixed synthetic fixtures and keeps selections in memory. It is a non-clinical demonstration without provider listings, bookings or referrals to real services.
+The map uses an invented coastline. Policy can compare several sites, simulated telehealth, a road-distance multiplier and a waiting-time limit. Capacity is reported separately from coverage. [Atlas Data](http://localhost:13000/care-atlas/data) packages a larger synthetic dataset for JSON, GeoJSON, CSV and PostgreSQL. Atlas choices stay in browser memory.
 
 ## Learn without signing in
 

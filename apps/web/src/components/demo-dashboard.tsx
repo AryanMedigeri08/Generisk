@@ -71,6 +71,9 @@ export function DemoDashboard({
             <Link className="atlas-entry" href="/care-atlas">
               Open Care Atlas <span aria-hidden="true">↗</span>
             </Link>
+            <Link className="atlas-entry" href="/journey">
+              Open Journey Studio <span aria-hidden="true">↗</span>
+            </Link>
           </div>
           <div className="hero-art" aria-hidden="true">
             <div className="orbit orbit-one" />

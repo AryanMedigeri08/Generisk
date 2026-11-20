@@ -887,3 +887,100 @@ footer span span {
   grid-column: 1 / -1;
   accent-color: #54795b;
 }
+.journey-studio {
+  background: #f8fbf7;
+}
+.journey-heading {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  align-items: center;
+  justify-content: space-between;
+}
+.journey-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(290px, 100%), 1fr));
+  gap: 16px;
+}
+.journey-grid > section {
+  padding: 14px;
+  background: white;
+  border: 1px solid #cddbd2;
+  border-radius: 8px;
+}
+.journey-grid h3 {
+  margin-block-start: 0;
+}
+.journey-studio .journey-field {
+  display: grid;
+  gap: 4px;
+  margin-block: 10px;
+}
+.journey-studio .journey-choice {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-block: 10px;
+}
+.journey-choice input[type="checkbox"] {
+  min-height: auto;
+  width: 18px;
+  height: 18px;
+  flex: none;
+  accent-color: #245d4d;
+}
+.journey-grid a {
+  color: #075a4e;
+  text-decoration: underline;
+}
+.journey-options {
+  list-style: disc;
+  padding-inline-start: 20px;
+  margin-block: 8px;
+  font-size: 14px;
+}
+.journey-note {
+  background: #edf5ee;
+  border: 1px solid #c6d8cb;
+  padding: 12px;
+  margin-block: 10px;
+  border-radius: 7px;
+}
+.journey-family {
+  padding: 0;
+  margin-block: 10px;
+}
+.journey-family ul {
+  margin-inline-start: 14px;
+  padding-inline-start: 10px;
+  border-inline-start: 2px solid #8bac9a;
+}
+.journey-family li {
+  list-style: none;
+  margin-block: 4px;
+}
+.journey-family button {
+  width: 100%;
+  text-align: start;
+}
+.journey-family small {
+  display: block;
+}
+.journey-studio button[aria-pressed="true"] {
+  background: #173f37;
+  color: white;
+}
+.demo-result-journey {
+  margin-block: 14px;
+}
+.demo-result-journey .care-atlas {
+  min-height: 0;
+  padding: 10px;
+}
+.demo-result-journey .atlas-columns {
+  grid-template-columns: minmax(0, 1fr);
+}
+.demo-result-journey .atlas-controls {
+  grid-template-columns: repeat(auto-fit, minmax(min(235px, 100%), 1fr));
+  align-items: start;
+}

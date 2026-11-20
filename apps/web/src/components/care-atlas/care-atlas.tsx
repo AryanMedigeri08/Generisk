@@ -5,6 +5,7 @@ import { useState } from "react";
 import {
   districts,
   facilities,
+  facilityOperations,
   findServices,
   journeys,
   languages,
@@ -36,6 +37,7 @@ function FacilityDetails({
   const district = districts.find(
     (district) => district.id === facility.district,
   )!;
+  const operations = facilityOperations(facility.id);
   return (
     <div className="atlas-detail" aria-live="polite">
       <div>
@@ -66,24 +68,43 @@ function FacilityDetails({
               : "Unavailable in this scenario"}
           </dd>
         </div>
+        <div>
+          <dt>Modeled wait</dt>
+          <dd>{operations.waitDays} days</dd>
+        </div>
       </dl>
     </div>
   );
 }
 
-function PersonalMode() {
-  const [journeyIndex, setJourney] = useState(0);
+export function PersonalMode({
+  initialJourney = "result",
+}: {
+  initialJourney?: string;
+}) {
+  const [journeyIndex, setJourney] = useState(
+    Math.max(
+      0,
+      journeys.findIndex((item) => item.id === initialJourney),
+    ),
+  );
   const [stepIndex, setStep] = useState(0);
   const [originId, setOrigin] = useState<DistrictId>("south");
   const [language, setLanguage] = useState<Language | "">("");
   const [stepFree, setStepFree] = useState(false);
   const [selectedId, setSelected] = useState<string>();
+  const [milestones, setMilestones] = useState<
+    Partial<
+      Record<Service, { facility: string; status: "planned" | "completed" }>
+    >
+  >({});
   const journey = journeys[journeyIndex];
   const step = journey.steps[stepIndex];
   const origin = districts.find((district) => district.id === originId)!;
   const matches = findServices(step.service, origin.center, language, stepFree);
   const active =
     matches.find(({ facility }) => facility.id === selectedId) ?? matches[0];
+  const milestone = milestones[step.service];
 
   return (
     <div className="atlas-columns">
@@ -103,6 +124,7 @@ function PersonalMode() {
               setJourney(Number(event.target.value));
               setStep(0);
               setSelected(undefined);
+              setMilestones({});
             }}
           >
             {journeys.map((item, index) => (
@@ -218,10 +240,72 @@ function PersonalMode() {
               </select>
             </label>
             {active && (
-              <FacilityDetails
-                facility={active.facility}
-                distance={active.distance}
-              />
+              <>
+                <FacilityDetails
+                  facility={active.facility}
+                  distance={active.distance}
+                />
+                <div className="atlas-followup">
+                  <h3>Fictional follow-up tracker</h3>
+                  <p role="status">
+                    {milestone
+                      ? milestone.facility +
+                        " · " +
+                        (milestone.status === "planned"
+                          ? "Planned"
+                          : "Completed")
+                      : "No follow-up selected for this step."}
+                  </p>
+                  <div className="choice-buttons">
+                    <button
+                      type="button"
+                      className="atlas-secondary"
+                      onClick={() =>
+                        setMilestones((current) => ({
+                          ...current,
+                          [step.service]: {
+                            facility: active.facility.name,
+                            status: "planned",
+                          },
+                        }))
+                      }
+                    >
+                      Plan this fictional visit
+                    </button>
+                    {milestone?.status === "planned" && (
+                      <button
+                        type="button"
+                        className="atlas-secondary"
+                        onClick={() =>
+                          setMilestones((current) => ({
+                            ...current,
+                            [step.service]: {
+                              ...milestone,
+                              status: "completed",
+                            },
+                          }))
+                        }
+                      >
+                        Mark visit completed
+                      </button>
+                    )}
+                    {milestone && (
+                      <button
+                        type="button"
+                        className="atlas-secondary"
+                        onClick={() =>
+                          setMilestones((current) => ({
+                            ...current,
+                            [step.service]: undefined,
+                          }))
+                        }
+                      >
+                        Clear follow-up
+                      </button>
+                    )}
+                  </div>
+                </div>
+              </>
             )}
           </>
         ) : (
@@ -374,6 +458,7 @@ export function CareAtlas() {
         <nav aria-label="Site navigation">
           <Link href="/">Home</Link>
           <Link href="/learn">Learn</Link>
+          <Link href="/journey">Journey Studio</Link>
           <Link href="/workspace">Workspace</Link>
         </nav>
       </header>
@@ -414,6 +499,7 @@ export function CareAtlas() {
             All locations, facilities and population figures are fictional.
           </span>
           <span>Selections stay in this open view.</span>
+          <Link href="/care-atlas/data">Explore the synthetic dataset →</Link>
         </footer>
       </main>
     </div>

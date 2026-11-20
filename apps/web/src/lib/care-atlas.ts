@@ -27,6 +27,7 @@ export const landOutline = [
 ].join(" ");
 
 export function pointOnLand({ x, y }: Point) {
+  if (!Number.isFinite(x) || !Number.isFinite(y)) return false;
   if (x < 20 || x > mapSize.width - 20 || y > mapSize.height - 20) return false;
   const i = coast.findIndex(([coastX]) => coastX >= x);
   const [leftX, leftY] = coast[i - 1];
@@ -364,11 +365,22 @@ export function findServices(
 export function simulateAccess(
   service: Service,
   radius: number,
-  proposal?: Point,
+  proposal?: Point | readonly Point[],
+  options: {
+    roadEstimate?: boolean;
+    telehealth?: boolean;
+    maxWaitDays?: number;
+  } = {},
 ) {
-  const sites = facilities
-    .filter((facility) => facility.services.includes(service))
-    .map((facility) => facility.point);
+  const proposed = proposal ? ("x" in proposal ? [proposal] : proposal) : [];
+  const sites = facilities.filter((facility) =>
+    facility.services.includes(service),
+  );
+  const factor = options.roadEstimate ? 1.35 : 1;
+  const maxWait = options.maxWaitDays ?? Infinity;
+  const eligible = sites.filter(
+    (site) => facilityOperations(site.id).waitDays <= maxWait,
+  );
   const totalPopulation = districts.reduce(
     (sum, district) => sum + district.population,
     0,
@@ -378,19 +390,38 @@ export function simulateAccess(
   let baselineDistance = 0;
   let afterDistance = 0;
   const areas = districts.map((district) => {
-    const before = Math.min(
-      ...sites.map((site) => distanceKm(district.center, site)),
-    );
-    const after = proposal
-      ? Math.min(before, distanceKm(district.center, proposal))
-      : before;
-    const coveredBefore = before <= radius;
-    const coveredAfter = after <= radius;
+    const before =
+      factor *
+      Math.min(...sites.map((site) => distanceKm(district.center, site.point)));
+    const eligibleBefore =
+      factor *
+      Math.min(
+        ...eligible.map((site) => distanceKm(district.center, site.point)),
+      );
+    const proposedDistance =
+      factor *
+      Math.min(...proposed.map((point) => distanceKm(district.center, point)));
+    const after = Math.min(before, proposedDistance);
+    const coveredBefore = eligibleBefore <= radius;
+    const coveredAfter =
+      Math.min(eligibleBefore, maxWait >= 3 ? proposedDistance : Infinity) <=
+      radius;
+    const remoteReached =
+      !coveredAfter && options.telehealth && supportsRemote(service)
+        ? Math.floor(district.population * 0.6)
+        : 0;
     if (coveredBefore) baselineReached += district.population;
-    if (coveredAfter) afterReached += district.population;
+    afterReached += coveredAfter ? district.population : remoteReached;
     baselineDistance += before * district.population;
     afterDistance += after * district.population;
-    return { ...district, before, after, coveredBefore, coveredAfter };
+    return {
+      ...district,
+      before,
+      after,
+      coveredBefore,
+      coveredAfter,
+      remoteReached,
+    };
   });
   return {
     areas,
@@ -404,5 +435,31 @@ export function simulateAccess(
       afterDistance / totalPopulation,
     ] as const,
     totalPopulation,
+    appointmentCapacity: [
+      eligible.reduce(
+        (sum, site) => sum + facilityOperations(site.id).capacity,
+        0,
+      ),
+      eligible.reduce(
+        (sum, site) => sum + facilityOperations(site.id).capacity,
+        0,
+      ) +
+        (maxWait >= 3 ? 240 * proposed.length : 0) +
+        (options.telehealth && supportsRemote(service) ? 360 : 0),
+    ] as const,
   };
+}
+
+export function supportsRemote(service: Service) {
+  return (
+    service === "counselling" || service === "followup" || service === "support"
+  );
+}
+
+export function facilityOperations(id: string) {
+  const seed = Array.from(id).reduce(
+    (sum, letter) => sum + letter.charCodeAt(0),
+    0,
+  );
+  return { waitDays: 3 + (seed % 15), capacity: 120 + 30 * (seed % 8) };
 }
