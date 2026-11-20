@@ -39,12 +39,11 @@ describe("Care Atlas synthetic model", () => {
       coveredBefore: false,
       coveredAfter: true,
     });
-    const southBefore = baseline.areas.find(
-      (area) => area.id === "south",
-    )!.before;
-    expect(after.meanDistance[0] - after.meanDistance[1]).toBeCloseTo(
-      (southBefore * south.population) / baseline.totalPopulation,
-    );
+    const north = after.areas.find((area) => area.id === "north")!;
+    expect(north.after).toBeLessThan(north.before);
+    expect(north.coveredAfter).toBe(false);
+    expect(after.meanDistance[0]).toBeCloseTo(6.340536, 5);
+    expect(after.meanDistance[1]).toBeCloseTo(4.114822, 5);
     expect(simulateAccess("counselling", 15, south.center).reached[1]).toBe(
       370_000,
     );
