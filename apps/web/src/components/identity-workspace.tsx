@@ -235,6 +235,9 @@ export function IdentityWorkspace() {
           choices. No genetic result, clinical advice or real professional
           verification.
         </p>
+        <Link className="atlas-entry" href="/care-atlas">
+          Explore Care Atlas <span aria-hidden="true">↗</span>
+        </Link>
         <div role="status" aria-live="polite" className="workspace-message">
           {message}
         </div>

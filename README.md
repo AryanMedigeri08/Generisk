@@ -21,6 +21,12 @@ The reviewed P06 stack and its P05/P04/P03/P02 ancestry are merged into `main`, 
 
 Current scope is [DEC-009](docs/DECISIONS.md#dec-009--hackathon-only-scope-revision-and-p02-authorization), [DEC-010 P03 authorization](docs/DECISIONS.md#dec-010--authorized-synthetic-p03-identity-and-consent) and the [hackathon milestones/engineering gates](docs/hackathon-roadmap.md). Historical clinical-production P00/full P01 remain **BLOCKED**, eight approvals **PENDING**, twelve hazards **OPEN**. An engineering PASS does not imply clinical certification, regulatory compliance or authorization for real health information.
 
+## Explore Care Atlas
+
+Open [Care Atlas](http://localhost:13000/care-atlas) from the home page or workspace. **Personal** matches a fictional journey step to nearby simulated services. **Ecosystem** filters 12 facilities across six service layers and shows 10 fictional referral links. **Policy** compares baseline and proposed coverage for six fictional districts. Try placing a counselling site in South Ridge with a 7 km radius to bring 59,000 additional simulated residents within reach.
+
+The map uses an invented coastline and straight-line distances. Policy counts each district's population at its centre and excludes travel schedules, capacity and waiting times. The atlas runs in the browser with fixed synthetic fixtures and keeps selections in memory. It is a non-clinical demonstration without provider listings, bookings or referrals to real services.
+
 ## Learn without signing in
 
 [Education Studio](http://localhost:13000/learn) includes copies, carriers, independent chances, shared ancestors, test limits, neutral options and fictional result explanations. Every lesson is **demo content — expert review pending**. Sources are attributed; retrieval does not establish clinical review.

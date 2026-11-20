@@ -351,6 +351,15 @@ a {
   justify-content: space-between;
   align-items: center;
 }
+.atlas-entry {
+  display: block;
+  width: fit-content;
+  margin-block-start: 12px;
+  color: #075a4e;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}
 .wordmark {
   display: flex;
   gap: 12px;
