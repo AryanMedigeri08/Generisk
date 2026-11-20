@@ -930,6 +930,9 @@ footer span span {
   accent-color: #245d4d;
 }
 .journey-grid a {
+  display: inline-flex;
+  align-items: center;
+  min-block-size: 44px;
   color: #075a4e;
   text-decoration: underline;
 }

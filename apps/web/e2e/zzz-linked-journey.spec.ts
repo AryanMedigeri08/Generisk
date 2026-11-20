@@ -1,5 +1,7 @@
 import { expect, test } from "@playwright/test";
 
+test.use({ trace: "off" });
+
 test("an authorized result opens a fictional itinerary and withdrawing permission closes it", async ({
   page,
 }) => {
