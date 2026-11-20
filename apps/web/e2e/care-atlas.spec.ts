@@ -24,7 +24,7 @@ test("Care Atlas connects personal choices, referral layers and a calculated pol
     "canal-counsel",
   );
   await page
-    .getByLabel("Demo situation")
+    .getByLabel("What are you planning for?")
     .selectOption({ label: "Learning about screening" });
   await expect(
     page.getByText("No fictional facility matches these filters."),

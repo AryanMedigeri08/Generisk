@@ -25,9 +25,85 @@ export function parseGuideRequest(
     : undefined;
 }
 
+// At most eight public topic/language pairs. Repeated requests share the same model call.
+const groqCards = new Map<
+  string,
+  { until: number; selection: Promise<TopicId | undefined> }
+>();
+
+async function selectPublicCard(
+  topic: TopicId,
+  locale: DemoLanguage,
+  model: string,
+  key: string,
+) {
+  const candidates = publicContext[topic];
+  const cacheKey = topic + "/" + locale;
+  const previous = groqCards.get(cacheKey);
+  if (previous && previous.until > Date.now()) return previous.selection;
+  const selection = (async () => {
+    const response = await fetch(
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        cache: "no-store",
+        redirect: "error",
+        signal: AbortSignal.timeout(3500),
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + key,
+        },
+        body: JSON.stringify({
+          model,
+          temperature: 0,
+          max_completion_tokens: 128,
+          response_format: { type: "json_object" },
+          messages: [
+            {
+              role: "system",
+              content:
+                "Select the most useful follow-up reading from the candidates. Return JSON with only a context field containing a candidate ID.",
+            },
+            {
+              role: "user",
+              content: JSON.stringify({
+                topic,
+                candidates,
+                cards: retrieveGuide([topic, ...candidates]).map((card) => ({
+                  id: card.id,
+                  summary: card.summary[locale],
+                })),
+              }),
+            },
+          ],
+        }),
+      },
+    );
+    if (!response.ok) return undefined;
+    const body = await response.json();
+    const raw = body?.choices?.[0]?.message?.content;
+    if (typeof raw !== "string" || raw.length > 128) return undefined;
+    const choice = JSON.parse(raw)?.context;
+    return candidates.find((id) => id === choice);
+  })().catch(() => undefined);
+  groqCards.set(cacheKey, { until: Date.now() + 300_000, selection });
+  return selection;
+}
+
 export async function buildGuide(topic: TopicId, locale: DemoLanguage) {
   const candidates = publicContext[topic];
   const fallback = { ids: [topic, candidates[0]], mode: "curated" as const };
+  if (process.env.GROQ_API_KEY && process.env.GROQ_MODEL) {
+    const picked = await selectPublicCard(
+      topic,
+      locale,
+      process.env.GROQ_MODEL,
+      process.env.GROQ_API_KEY,
+    );
+    return picked
+      ? { ids: [topic, picked], mode: "assisted" as const }
+      : fallback;
+  }
   const endpoint = process.env.ATLAS_OLLAMA_URL;
   const model = process.env.ATLAS_OLLAMA_MODEL;
   if (!endpoint || !model) return fallback;

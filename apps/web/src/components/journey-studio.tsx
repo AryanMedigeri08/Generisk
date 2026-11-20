@@ -83,7 +83,17 @@ export function JourneyStudio({
   const tr = (en: string, ar: string) => (language === "en" ? en : ar);
   const entry = history[relative] ?? { status: "unknown", topic: "none" };
 
+  const visitPreferences = [
+    tr("Can I meet privately first?", "هل يمكنني التحدث على انفراد أولاً؟"),
+    tr(
+      "Can I request a counsellor of a preferred gender?",
+      "هل يمكنني طلب مستشار أو مستشارة حسب تفضيلي؟",
+    ),
+    tr("Can I bring someone I trust?", "هل يمكنني اصطحاب شخص أثق به؟"),
+  ];
+  const [preferences, setPreferences] = useState<number[]>([]);
   function clear() {
+    setPreferences([]);
     cancelAnswer();
     setHistory({});
     enableHistory(false);
@@ -150,6 +160,7 @@ export function JourneyStudio({
         "عرض ببيانات اصطناعية. غير مخصص للاستخدام السريري.",
       ),
       "",
+      ...preferences.map((i) => "• " + visitPreferences[i]),
       ...retrieveGuide(questions).map((card) => "• " + card.prompt[language]),
       ...(historyEnabled
         ? relatives.flatMap((node) => {
@@ -218,10 +229,10 @@ export function JourneyStudio({
       </div>
       <div className="journey-grid">
         <section>
-          <h3>{tr("Source-grounded explainer", "شرح مستند إلى المصادر")}</h3>
+          <h3>{tr("Understand a topic", "شرح مستند إلى المصادر")}</h3>
           <p>
             {tr(
-              "Choose a topic to retrieve a summary and a question from the public education library.",
+              "Choose a topic to read a short explanation. Tick the question underneath to add it to your visit notes.",
               "اختر موضوعاً لاسترجاع ملخص وسؤال من المكتبة التعليمية العامة.",
             )}
           </p>
@@ -251,8 +262,8 @@ export function JourneyStudio({
               <p>
                 {assisted
                   ? tr(
-                      "Curated sources · Local model selected a companion topic",
-                      "مصادر منتقاة · اختار النموذج المحلي موضوعاً مكملاً",
+                      "Curated sources · Suggested further reading",
+                      "مصادر منتقاة · قراءة إضافية مقترحة",
                     )
                   : tr("Curated sources", "مصادر منتقاة")}
               </p>
@@ -295,7 +306,7 @@ export function JourneyStudio({
           <h3>{tr("Family Health Graph", "خريطة صحة العائلة")}</h3>
           <p>
             {tr(
-              "Use fictional roles and separate reported details from documented examples.",
+              "Choose a relative, then mark a detail as reported, documented, or unknown. Use the sample choices provided.",
               "استخدم أدواراً وهمية وميّز بين التفاصيل المتداولة والأمثلة الموثقة.",
             )}
           </p>
@@ -311,10 +322,7 @@ export function JourneyStudio({
                 }
               }}
             />
-            {tr(
-              "Enable the fictional family graph",
-              "فعّل خريطة العائلة الوهمية",
-            )}
+            {tr("Add a sample family history", "فعّل خريطة العائلة الوهمية")}
           </label>
           {historyEnabled && (
             <>
@@ -350,7 +358,7 @@ export function JourneyStudio({
                 </select>
               </label>
               <label className="journey-field">
-                {tr("Fictional detail", "تفصيل وهمي")}
+                {tr("Sample detail", "تفصيل وهمي")}
                 <select
                   disabled={entry.status === "unknown"}
                   value={entry.topic}
@@ -379,6 +387,27 @@ export function JourneyStudio({
               "استخدم الأسئلة نفسها لأي مسار ترغب في مناقشته. تفضيلاتك توجه الحوار.",
             )}
           </p>
+          <fieldset className="guide-check">
+            <legend>
+              {tr("Questions about the visit", "أسئلة حول الزيارة")}
+            </legend>
+            {visitPreferences.map((label, i) => (
+              <label key={i} className="journey-choice">
+                <input
+                  type="checkbox"
+                  checked={preferences.includes(i)}
+                  onChange={(e) => {
+                    const on = e.target.checked;
+                    setPreferences((old) =>
+                      on ? [...old, i] : old.filter((value) => value !== i),
+                    );
+                    setNotice(undefined);
+                  }}
+                />
+                {label}
+              </label>
+            ))}
+          </fieldset>
           <ul className="journey-options">
             <li>{tr("Genetic counselling", "الاستشارة الوراثية")}</li>
             <li>{tr("Ask about further testing", "السؤال عن فحوص إضافية")}</li>
@@ -392,6 +421,32 @@ export function JourneyStudio({
               {tr("Continue at your own pace", "المتابعة بالوتيرة التي تناسبك")}
             </li>
           </ul>
+          <details>
+            <summary>
+              {tr(
+                "Questions about testing and family planning",
+                "أسئلة عن الفحوص وتكوين الأسرة",
+              )}
+            </summary>
+            <p>
+              {tr(
+                "During pregnancy, screening and diagnostic tests answer different questions. Ask what a particular test could clarify and whether you want that information.",
+                "أثناء الحمل تجيب فحوص التحري والفحوص التشخيصية عن أسئلة مختلفة. اسأل عمّا يمكن لفحص معين توضيحه وما إذا كنت ترغب في تلك المعلومة.",
+              )}{" "}
+              <a href="https://medlineplus.gov/lab-tests/prenatal-cell-free-dna-screening/">
+                MedlinePlus ↗
+              </a>
+            </p>
+            <p>
+              {tr(
+                "With IVF, PGT-M can test embryos for a specific inherited condition. A specialist can explain its limits, suitability and local availability. Taking time or choosing no testing are also options.",
+                "مع الإخصاب خارج الجسم يمكن فحص الأجنة لحالة وراثية محددة باستخدام PGT-M. يشرح المختص حدود الفحص وملاءمته وتوفره محلياً. ويمكن أيضاً التريث أو اختيار عدم إجراء الفحص.",
+              )}{" "}
+              <a href="https://www.hfea.gov.uk/treatments/embryo-testing-and-treatments-for-disease/pre-implantation-genetic-testing-for-monogenic-disorders-pgt-m-and-pre-implantation-genetic-testing-for-chromosomal-structural-rearrangements-pgt-sr/">
+                HFEA ↗
+              </a>
+            </p>
+          </details>
           <p>
             <Link href="/learn/carriers">
               {tr("Explore the inheritance simulator", "استكشف محاكي الوراثة")}{" "}
@@ -449,7 +504,8 @@ export function JourneyStudio({
             </>
           )}
           <p>
-            {questions.length} {tr("selected questions", "أسئلة مختارة")}
+            {questions.length + preferences.length}{" "}
+            {tr("selected questions", "أسئلة مختارة")}
           </p>
           <div className="choice-buttons">
             <button type="button" onClick={exportSummary}>
@@ -463,7 +519,7 @@ export function JourneyStudio({
             {notice === "cleared"
               ? tr("Page selections cleared.", "مُسحت اختيارات الصفحة.")
               : notice === "downloaded"
-                ? tr("Fictional summary prepared.", "تم إعداد الملخص الوهمي.")
+                ? tr("Your summary is ready.", "تم إعداد الملخص الوهمي.")
                 : ""}
           </p>
         </section>

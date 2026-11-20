@@ -16,6 +16,7 @@ import {
   type Language,
   type Service,
 } from "../../lib/care-atlas";
+import { downloadDemoFile } from "../../lib/journey-demo";
 import { AtlasMap } from "./atlas-map";
 import { PolicyMode } from "./policy-mode";
 
@@ -113,11 +114,12 @@ export function PersonalMode({
           <p className="atlas-kicker">Personal mode</p>
           <h2>Sketch your care journey</h2>
           <p>
-            Choose a fictional situation and see which services fit each step.
+            Choose a starting district and a step below. The map lists sample
+            services that match your preferences.
           </p>
         </div>
         <label className="atlas-field">
-          Demo situation
+          What are you planning for?
           <select
             value={journeyIndex}
             onChange={(event) => {
@@ -199,6 +201,48 @@ export function PersonalMode({
           />{" "}
           Step-free entry
         </label>
+        {Object.values(milestones).some(Boolean) && (
+          <section className="atlas-prep">
+            <h3>Steps in your plan</h3>
+            <ul>
+              {journey.steps.map(({ service }) => {
+                const item = milestones[service];
+                return item ? (
+                  <li key={service}>
+                    {services[service].name} · {item.facility} · {item.status}
+                  </li>
+                ) : null;
+              })}
+            </ul>
+            <button
+              type="button"
+              className="atlas-secondary"
+              onClick={() =>
+                downloadDemoFile(
+                  "aman-care-plan.txt",
+                  [
+                    "AMAN Genome · Sample care plan · No appointment booked",
+                    journey.name,
+                    ...journey.steps.flatMap(({ service }) => {
+                      const item = milestones[service];
+                      return item
+                        ? [
+                            services[service].name +
+                              " · " +
+                              item.facility +
+                              " · " +
+                              item.status,
+                          ]
+                        : [];
+                    }),
+                  ].join("\n"),
+                )
+              }
+            >
+              Download visit plan
+            </button>
+          </section>
+        )}
         <Link href="/learn/options">
           Explore counselling questions in Learn →
         </Link>
@@ -246,7 +290,7 @@ export function PersonalMode({
                   distance={active.distance}
                 />
                 <div className="atlas-followup">
-                  <h3>Fictional follow-up tracker</h3>
+                  <h3>Your visit plan</h3>
                   <p role="status">
                     {milestone
                       ? milestone.facility +
@@ -270,7 +314,7 @@ export function PersonalMode({
                         }))
                       }
                     >
-                      Plan this fictional visit
+                      Plan this sample visit
                     </button>
                     {milestone?.status === "planned" && (
                       <button
@@ -447,21 +491,14 @@ function EcosystemMode() {
   );
 }
 
-export function CareAtlas() {
-  const [mode, setMode] = useState<Mode>("personal");
+export function CareAtlas({
+  initialMode = "personal",
+}: {
+  initialMode?: Mode;
+}) {
+  const [mode, setMode] = useState<Mode>(initialMode);
   return (
     <div className="care-atlas">
-      <header className="atlas-header">
-        <Link href="/" className="atlas-brand">
-          <span aria-hidden="true">✳</span> AMAN GENOME
-        </Link>
-        <nav aria-label="Site navigation">
-          <Link href="/">Home</Link>
-          <Link href="/learn">Learn</Link>
-          <Link href="/journey">Journey Studio</Link>
-          <Link href="/workspace">Workspace</Link>
-        </nav>
-      </header>
       <main id="main" tabIndex={-1} className="atlas-main">
         <div className="atlas-intro">
           <div>

@@ -1,8 +1,6 @@
-# Generisk (Amanah Genetics)
+# AMAN Genome (Generisk)
 
-Generisk brings independent consent, traceable synthetic reports and attributed gene references into one local demonstration.
-
-P07 adds the public [Education Studio](http://localhost:13000/learn): seven interactive English lessons and plain-language explanations of P06 outputs. [Studio guide](docs/education-studio.md); [P07 handoff](handoffs/P07-to-P08.md).
+[Start the guided couple example](http://localhost:13000/start). Choose two sample reports, explore the finding together, try an interactive lesson, then prepare questions and a sample care visit. No login or API key is required.
 
 **Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. Educational calculations use the synthetic P06 model; no diagnosis or clinical interpretation is authorized.
 

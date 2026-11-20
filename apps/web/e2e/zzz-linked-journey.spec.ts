@@ -6,6 +6,7 @@ test("an authorized result opens a fictional itinerary and withdrawing permissio
   page,
 }) => {
   await page.goto("/workspace");
+  await page.getByText("Sign in with a username instead").click();
   await page.getByLabel("Demo username").fill("demo-a");
   await page.getByLabel("Demo password").fill("demo-a-only");
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
@@ -19,12 +20,14 @@ test("an authorized result opens a fictional itinerary and withdrawing permissio
     "Your processing choice: granted",
   );
   await page
-    .getByRole("button", { name: "Grant own demo assessment", exact: true })
+    .getByRole("button", { name: "Allow my report summary", exact: true })
     .click();
   await page
-    .getByRole("button", { name: "Calculate own demo summary", exact: true })
+    .getByRole("button", { name: "Show my report summary", exact: true })
     .click();
-  await expect(page.getByRole("region", { name: "Own demo" })).toBeVisible();
+  await expect(
+    page.getByRole("region", { name: "My report summary" }),
+  ).toBeVisible();
   const privateGuideCalls: string[] = [];
   page.on("request", (request) => {
     if (request.url().includes("/api/atlas/"))
@@ -36,18 +39,21 @@ test("an authorized result opens a fictional itinerary and withdrawing permissio
       Boolean(request.headers()["x-risk-binding"]),
   );
   await page
-    .getByRole("button", { name: "Open linked fictional care journey" })
+    .getByRole("button", { name: "Plan a visit from this result" })
     .click();
   expect((await pinned).method()).toBe("GET");
   await expect(
     page.getByRole("region", { name: "Personal services" }),
   ).toBeVisible();
-  await page.getByRole("button", { name: "Plan this fictional visit" }).click();
+  await page.getByRole("button", { name: "Plan this sample visit" }).click();
   await page.getByRole("button", { name: "Mark visit completed" }).click();
   await expect(page.getByText(/· Completed$/)).toBeVisible();
   expect(privateGuideCalls).toEqual([]);
   await page
-    .getByRole("button", { name: "Withdraw own demo assessment", exact: true })
+    .getByRole("button", {
+      name: "Withdraw my summary permission",
+      exact: true,
+    })
     .click();
   await expect(
     page.getByRole("region", { name: "Personal services" }),

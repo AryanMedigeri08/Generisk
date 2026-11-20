@@ -4,20 +4,8 @@ import type { PanelData } from "../lib/panel";
 export function PanelCatalog({ data }: { data: PanelData | null }) {
   return (
     <>
-      <a href="#main" className="skip-link">
-        Skip to main content
-      </a>
-      <div className="demo-banner">
-        SYNTHETIC DEMONSTRATION — NOT FOR CLINICAL USE
-      </div>
-      <header className="site-header">
-        <Link href="/" className="wordmark">
-          Generisk
-        </Link>
-        <Link href="/workspace">Fictional workspace</Link>
-      </header>
       <main id="main" className="identity-workspace public-panel" tabIndex={-1}>
-        <p className="eyebrow">P05 / PUBLIC REFERENCE CATALOGUE</p>
+        <p className="eyebrow">PUBLIC REFERENCE LIBRARY</p>
         <h1>Demo gene panel</h1>
         <p>
           <strong>
@@ -33,7 +21,8 @@ export function PanelCatalog({ data }: { data: PanelData | null }) {
         <p>
           “Supported” describes the bounded synthetic fixture scope for future
           work. It does not establish assay performance or clinical validity.
-          Education lessons and risk estimates are future phases.
+          Explore the <Link href="/learn">interactive lessons</Link> to learn
+          about inheritance.
         </p>
         {!data ? (
           <p role="status">
@@ -132,7 +121,7 @@ export function PanelCatalog({ data }: { data: PanelData | null }) {
         )}
       </main>
       <footer>
-        <Link href="/workspace">Back to fictional workspace</Link>
+        <Link href="/workspace">Open the private workspace</Link>
         <span>Synthetic demonstration only. No medical advice.</span>
       </footer>
     </>

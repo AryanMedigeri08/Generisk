@@ -47,7 +47,7 @@ describe("independent identity workspace", () => {
     fireEvent.click(screen.getByRole("button", { name: "Sign in" }));
     expect(
       await screen.findByRole("heading", {
-        name: "Your authorized case metadata",
+        name: "Your report permissions",
       }),
     ).toBeInTheDocument();
     expect(api).toHaveBeenCalledWith("auth/login", "fictional-prelogin-csrf", {

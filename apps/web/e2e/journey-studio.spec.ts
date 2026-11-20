@@ -18,11 +18,11 @@ test("bilingual journey retrieves public sources, exports fictional history and 
     .first()
     .check();
   await page
-    .getByRole("checkbox", { name: "Enable the fictional family graph" })
+    .getByRole("checkbox", { name: "Add a sample family history" })
     .check();
   await page.getByRole("button", { name: /^Grandparent/ }).click();
   await page.getByLabel("Information status").selectOption("reported");
-  await page.getByLabel("Fictional detail").selectOption("screening");
+  await page.getByLabel("Sample detail").selectOption("screening");
   const file = page.waitForEvent("download");
   await page
     .getByRole("button", { name: "Download consultation summary" })
@@ -30,7 +30,7 @@ test("bilingual journey retrieves public sources, exports fictional history and 
   const summary = await file;
   const text = await readFile(await summary.path(), "utf8");
   expect(text).toContain("Grandparent");
-  expect(text).toContain("fictional test cover");
+  expect(text).toContain("sample test cover");
   await page.getByRole("button", { name: "العربية" }).click();
   await expect(page.locator(".journey-studio")).toHaveAttribute("dir", "rtl");
   await expect(

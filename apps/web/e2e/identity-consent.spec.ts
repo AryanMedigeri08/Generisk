@@ -5,6 +5,7 @@ test.use({ trace: "off" }); // Never retain session/CSRF/invitation secrets in b
 
 async function signIn(page: Page, username: string) {
   await page.goto("/workspace");
+  await page.getByText("Sign in with a username instead").click();
   await page.getByLabel("Demo username").fill(username);
   await page.getByLabel("Demo password").fill(`${username}-only`);
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
@@ -158,7 +159,7 @@ test.describe.serial("P03 independent synthetic identities and choices", () => {
     await expect(page.getByRole("button", { name: "Sign out" })).toBeVisible();
     await page.getByRole("button", { name: "Sign out" }).click();
     await expect(
-      page.getByRole("heading", { name: "Sign in to a fictional account" }),
+      page.getByRole("heading", { name: "Choose a sample account" }),
     ).toBeVisible();
     const status = await page.evaluate(
       async () =>
@@ -176,7 +177,9 @@ test.describe.serial("P03 independent synthetic identities and choices", () => {
   }, info) => {
     await page.setViewportSize({ width: 375, height: 812 });
     await page.goto("/workspace");
-    await expect(page.getByLabel("Demo username")).toBeVisible();
+    await expect(
+      page.getByRole("button", { name: "Continue as partner A" }),
+    ).toBeVisible();
     await page.keyboard.press("Tab");
     await expect(
       page.getByRole("link", { name: "Skip to main content" }),

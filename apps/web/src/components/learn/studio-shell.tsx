@@ -1,7 +1,7 @@
 "use client";
 import { useContent } from "../../content/locale";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+
 import { createContext, useCallback, useContext, useState } from "react";
 import { interpolate } from "../../content/loader";
 const ProgressContext = createContext<{
@@ -15,8 +15,7 @@ export const useVisited = () => useContext(ProgressContext);
 export function StudioShell({ children }: { children: React.ReactNode }) {
   const content = useContent();
   const { ui, lessons } = content;
-  const [visited, setVisited] = useState<string[]>([]),
-    pathname = usePathname();
+  const [visited, setVisited] = useState<string[]>([]);
   const visit = useCallback(
     (id: string) => {
       if (lessons.some((m) => m.module_id === id))
@@ -28,22 +27,6 @@ export function StudioShell({ children }: { children: React.ReactNode }) {
     <ProgressContext.Provider value={{ visited, visit }}>
       <div className="learn-studio">
         <div className="learn-banner">{ui.banner}</div>
-        <header className="learn-header">
-          <Link href="/" className="learn-brand">
-            <span aria-hidden="true">✳</span>
-            {ui.brand}
-          </Link>
-          <nav aria-label={ui.navigation}>
-            <Link href="/">{ui.home}</Link>
-            <Link
-              href="/learn"
-              aria-current={pathname === "/learn" ? "page" : undefined}
-            >
-              {ui.learn}
-            </Link>
-            <Link href="/workspace">{ui.workspace}</Link>
-          </nav>
-        </header>
         <div className="learn-progress">
           <span>{ui.visited}</span>
           <progress

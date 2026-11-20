@@ -18,7 +18,7 @@ export const knowledgeCards = [
       ar: "يعتمد معنى النتيجة على نوع الفحص ونطاقه. قد تبقى أسئلة بعد نتيجة سلبية، والنتيجة غير المؤكدة لا تثبت التشخيص.",
     },
     prompt: {
-      en: "What did this fictional test cover, and what remains unknown?",
+      en: "What did this sample test cover, and what remains unknown?",
       ar: "ما الذي شمله هذا الفحص الوهمي، وما الذي لا يزال مجهولاً؟",
     },
     source:
@@ -63,7 +63,7 @@ export const knowledgeCards = [
       ar: "قد تشمل الاستشارة التاريخ الصحي للعائلة. يساعد تمييز المعلومات المعروفة من غير المؤكدة على مناقشة كل منها بشكل مناسب.",
     },
     prompt: {
-      en: "What fictional family history details could I clarify before a consultation?",
+      en: "What family history details could I clarify before a consultation?",
       ar: "ما تفاصيل التاريخ الصحي العائلي الوهمي التي يمكنني توضيحها قبل الاستشارة؟",
     },
     source:
@@ -98,7 +98,7 @@ export const relatives = [
   },
   {
     id: "self",
-    label: { en: "Fictional participant", ar: "المشارك الوهمي" },
+    label: { en: "Sample participant", ar: "المشارك الوهمي" },
     parent: "parent",
   },
   {
@@ -112,11 +112,11 @@ export type Relative = (typeof relatives)[number]["id"];
 export const historyStates = {
   unknown: { en: "Unknown", ar: "غير معروف" },
   reported: {
-    en: "Reported in the fictional family",
+    en: "Reported by a relative",
     ar: "ورد في رواية العائلة الوهمية",
   },
   documented: {
-    en: "Documented in the fictional example",
+    en: "Documented in a sample report",
     ar: "موثق في المثال الوهمي",
   },
 } as const;
@@ -125,11 +125,11 @@ export type HistoryState = keyof typeof historyStates;
 export const historyScenarios = {
   none: { en: "No topic selected", ar: "لم يُحدد موضوع" },
   followup: {
-    en: "Follow-up for an invented condition",
+    en: "Follow-up for a family condition",
     ar: "متابعة حالة وهمية",
   },
   screening: {
-    en: "A previous fictional screening visit",
+    en: "A previous screening visit",
     ar: "زيارة فحص وهمية سابقة",
   },
 } as const;

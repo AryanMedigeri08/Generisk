@@ -6,6 +6,7 @@ test.describe.configure({ retries: 0 }); // This full journey requires a fresh d
 
 async function signIn(page: Page, username: string) {
   await page.goto("/workspace");
+  await page.getByText("Sign in with a username instead").click();
   await page.getByLabel("Demo username").fill(username);
   await page.getByLabel("Demo password").fill(`${username}-only`);
   await page.getByRole("button", { name: "Sign in", exact: true }).click();
@@ -41,6 +42,7 @@ test("P04 fixture validation, provenance, independent access and correction work
     await signIn(a, "demo-a");
     await grantProcessing(a);
     const section = a.locator(".report-workspace");
+    await section.getByText("Other samples and validation tools").click();
     await section
       .getByLabel("Allowlisted synthetic fixture")
       .selectOption("fixture-a-unsupported");

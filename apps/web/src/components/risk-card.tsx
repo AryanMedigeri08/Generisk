@@ -211,7 +211,7 @@ export function RiskCard({
                   }
                 }}
               >
-                Open linked fictional care journey
+                Plan a visit from this result
               </button>
               {openedJourney?.stamp === stamp &&
                 openedJourney.binding === output.bindings.scope_hash && (
@@ -251,6 +251,38 @@ export function RiskCard({
   return (
     <section className="identity-card risk-card" aria-labelledby="risk-title">
       <h2 id="risk-title">{ui.risk_title}</h2>
+      <p>
+        After you select a gene-level report and renew processing, allow a
+        summary, then open it below.
+      </p>
+      <div className="choice-buttons">
+        <button
+          disabled={busy || !currentCase}
+          onClick={() => choice("assessment", "grant")}
+        >
+          {ui.grant_own}
+        </button>
+        <button disabled={busy} onClick={() => calculate("my-assessment")}>
+          {ui.calculate_own}
+        </button>
+        <button
+          disabled={busy || !currentCase}
+          onClick={() => choice("assessment", "withdraw")}
+        >
+          {ui.withdraw_own}
+        </button>
+      </div>
+      <h3>Compare with a partner</h3>
+      <p>
+        {joint ? (
+          "Each partner needs to allow the comparison and separately choose whether to share the result."
+        ) : (
+          <>
+            To begin, <a href="#invite-title">invite your partner</a>. Each
+            person signs in separately.
+          </>
+        )}
+      </p>
       <label htmlFor="risk-joint">{ui.risk_joint}</label>
       <select
         id="risk-joint"
@@ -270,20 +302,8 @@ export function RiskCard({
           </option>
         ))}
       </select>
-      <p>{ui.banner}</p>
+
       <div className="choice-buttons">
-        <button
-          disabled={busy || !currentCase}
-          onClick={() => choice("assessment", "grant")}
-        >
-          {ui.grant_own}
-        </button>
-        <button
-          disabled={busy || !currentCase}
-          onClick={() => choice("assessment", "withdraw")}
-        >
-          {ui.withdraw_own}
-        </button>
         <button
           disabled={busy || !joint}
           onClick={() => choice("disclosure", "grant")}
@@ -292,30 +312,28 @@ export function RiskCard({
         </button>
         <button
           disabled={busy || !joint}
+          onClick={() => calculate("couple-assessment")}
+        >
+          {ui.calculate_shared}
+        </button>
+        <button
+          disabled={busy || !joint}
           onClick={() => choice("disclosure", "withdraw")}
         >
           {ui.withdraw_shared}
         </button>
       </div>
-      <div className="choice-buttons">
-        <button disabled={busy} onClick={() => calculate("my-assessment")}>
-          {ui.calculate_own}
-        </button>
-        <button disabled={busy} onClick={() => calculate("couple-assessment")}>
-          {ui.calculate_shared}
-        </button>
-        <button
-          disabled={busy}
-          onClick={() => {
-            setPins({});
-            setOwn(null);
-            setCouple(null);
-            setMessage("risk.new_binding_requested");
-          }}
-        >
-          {ui.new_binding}
-        </button>
-      </div>
+      <button
+        disabled={busy}
+        onClick={() => {
+          setPins({});
+          setOwn(null);
+          setCouple(null);
+          setMessage("risk.new_binding_requested");
+        }}
+      >
+        {ui.new_binding}
+      </button>
       <div role="status">
         {message && (
           <>

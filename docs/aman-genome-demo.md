@@ -6,6 +6,14 @@ Start the stack from the repository root with Docker Desktop running.
 docker compose up --build -d --wait --wait-timeout 180
 ```
 
+## Start here
+
+Open [the guided example](http://localhost:13000/start). In English or Arabic, choose a sample for each partner. The exercise reads CFTR statuses from six published synthetic report fixtures. Both carriers open the four-tile inheritance activity. An uncertain, untested or no-shared-finding example leads to a question about test limits. Finish with downloadable questions and a sample care plan. Public choices live in page memory and never change account permissions. The embedded care map uses English.
+
+For the private workflow, select **Continue as partner A** or **Continue as partner B**. The same account authentication and versioned consent checks apply. A partner invitation, permission to compare, and permission to disclose remain separate. Service diagnostics are available at [/status](http://localhost:13000/status).
+
+Optional Groq support uses the server environment variables `GROQ_API_KEY` and `GROQ_MODEL`. Configure them locally before starting Compose. With both set, the visit preparation library can request a related reading from Groq using only the public topic and candidate summaries. Responses are restricted to existing card IDs and cached by public topic and language. The curated library works offline without either model provider.
+
 ## Demo walkthrough
 
 1. Open [Journey Studio](http://localhost:13000/journey). Retrieve “Test scope and uncertainty,” select a question, and turn on the fictional family graph. Enter a reported example for the grandparent. Switch to Arabic and inspect the right-to-left layout. Download the consultation summary, then clear the page. The file contains only the selected stock questions and fictional history labels.

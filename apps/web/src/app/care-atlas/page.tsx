@@ -8,6 +8,17 @@ export const metadata: Metadata = {
     "Explore fictional genetic care pathways and simulate service access.",
 };
 
-export default function CareAtlasPage() {
-  return <CareAtlas />;
+export default async function CareAtlasPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ mode?: string }>;
+}) {
+  const { mode } = await searchParams;
+  return (
+    <CareAtlas
+      initialMode={
+        mode === "policy" || mode === "ecosystem" ? mode : "personal"
+      }
+    />
+  );
 }
