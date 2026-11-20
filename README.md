@@ -2,6 +2,8 @@
 
 [Start the guided couple example](http://localhost:13000/start). Choose two sample reports, explore the finding together, try an interactive lesson, then prepare questions and a sample care visit. No login or API key is required.
 
+The [AMAN Genome feature guide](docs/AMAN-Genome-Feature-Guide.docx) lists the English names shown in the app, a practical use case for each feature, and what each interaction adds to the demo.
+
 **Synthetic demonstration — not for clinical use.** People, reports, samples and laboratories are fictional; public gene/condition names are reference data. Educational calculations use the synthetic P06 model; no diagnosis or clinical interpretation is authorized.
 
 ```powershell
@@ -13,7 +15,7 @@ Open [Learn](http://localhost:13000/learn), [workspace](http://localhost:13000/w
 
 P04 provides [fixture-only synthetic report management](docs/p04-api.md). P05 adds a [public attributed demo panel](data/public/SOURCES.md) and nine gene-level fixtures under DEC-012. In `/workspace`, grant processing, select a gene-level synthetic scenario, then grant fresh processing to view it. A/B can independently select none, CFTR or HBB carrier fixtures; uncertain/not-tested inputs require review. The predefined A none-to-CFTR correction preserves the original. Changed input invalidates old permissions/outputs. Reports remain owner-only; partners/support/fictional professionals are denied. No arbitrary upload, clinical interpretation or report RAG/AI. P06 educational estimates are separately consent-scoped. [Schema](docs/report-schema.md), [P04 evidence](docs/evidence/p04-validation.md), [P05 handoff](handoffs/P05-to-P06.md).
 
-The reviewed P06 stack and its P05/P04/P03/P02 ancestry are merged into `main`, GitHub's default branch, by normal merge `91ce02f1b7288c35fef1892846487b3a5e20cf6f`. P07 is delivered on `feature/p07-education-studio` for review, without merging. Clinical governance stays BLOCKED; P08 requires review and separate authorization.
+The integrated demo includes P00 through P07, Care Atlas, Journey Studio and the guided couple example. Clinical governance remains BLOCKED. P08 requires review and separate authorization.
 
 **Synthetic Demo — Not for Clinical Use.** P03 adds fictional local identity, independent consent, recipient-bound invitations and transactional audit to the Next.js/FastAPI/PostgreSQL foundation. No real records, genetic results, medical answers, integrations or appointments.
 
