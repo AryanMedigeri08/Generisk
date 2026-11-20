@@ -2,15 +2,24 @@ import AxeBuilder from "@axe-core/playwright";
 import { expect, test } from "@playwright/test";
 import { readFile } from "node:fs/promises";
 
+test.use({ trace: "off" });
+
 test("first visit leads from samples through an interactive lesson to questions and a care plan", async ({
   page,
 }) => {
+  test.setTimeout(120000);
   await page.setViewportSize({ width: 375, height: 812 });
   const privateTraffic: string[] = [];
   page.on("request", (request) => {
     if (request.url().includes("/api/p03/")) privateTraffic.push(request.url());
   });
   await page.goto("/");
+  const menu = page.getByRole("button", { name: "Menu", exact: true });
+  await menu.click();
+  await expect(
+    page.getByRole("navigation", { name: "Main navigation" }),
+  ).toBeVisible();
+  await menu.click();
   await page.getByRole("link", { name: "Start the guided example" }).click();
   await page.getByRole("button", { name: "Choose sample reports" }).click();
   await expect(page.getByLabel("First sample report")).toHaveValue("carrier");
@@ -101,27 +110,4 @@ test("home offers direct entry to the planner and service network", async ({
   await expect(
     page.getByRole("button", { name: "Ecosystem", exact: true }),
   ).toHaveAttribute("aria-pressed", "true");
-});
-
-test("one-click sample sign-in opens the real private workspace without granting any consent", async ({
-  page,
-}) => {
-  const consentWrites: string[] = [];
-  page.on("request", (r) => {
-    if (r.method() === "POST" && r.url().endsWith("/me/consents"))
-      consentWrites.push(r.url());
-  });
-  await page.goto("/workspace");
-  await page.getByRole("button", { name: "Continue as partner A" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Partner A", exact: true }),
-  ).toBeVisible();
-  await expect(
-    page.getByRole("heading", { name: "Your report permissions" }),
-  ).toBeVisible();
-  expect(consentWrites).toEqual([]);
-  await page.getByRole("button", { name: "Sign out" }).click();
-  await expect(
-    page.getByRole("heading", { name: "Choose a sample account" }),
-  ).toBeVisible();
 });

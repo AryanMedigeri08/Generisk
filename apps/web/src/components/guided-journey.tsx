@@ -56,6 +56,10 @@ function LearningActivity({ shared, t }: { shared: boolean; t: Translate }) {
                 <span>
                   {t("Pair", "تركيبة")} {i + 1}
                 </span>
+                <span className="copy-pair" aria-hidden="true">
+                  <i className={pair.fromA} />
+                  <i className={pair.fromB} />
+                </span>
                 <strong>
                   {copy(pair.fromA)} + {copy(pair.fromB)}
                 </strong>
@@ -165,7 +169,8 @@ export function GuidedJourney() {
   const previous = useRef(0);
   useEffect(() => {
     if (previous.current !== step) {
-      title.current?.focus();
+      title.current?.focus({ preventScroll: true });
+      window.scrollTo({ top: 0, behavior: "instant" });
       previous.current = step;
     }
   }, [step]);

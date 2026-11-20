@@ -308,3 +308,56 @@
     margin-inline: 16px;
   }
 }
+
+.product-menu {
+  display: none;
+}
+.guide-page > p:not(.eyebrow),
+.learning-board > p,
+.home-grid article > p,
+.planner-entry > p {
+  margin-block: 12px 18px;
+}
+.guide-outline {
+  list-style: decimal;
+  padding-inline-start: 25px;
+}
+.guide-feedback a {
+  margin-inline-start: 4px;
+}
+.guide-page .copy-pair {
+  display: flex;
+  gap: 12px;
+  margin-block: 12px;
+  align-items: center;
+}
+.copy-pair i {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid currentColor;
+}
+.copy-pair .working {
+  border-radius: 50%;
+}
+.copy-pair .changed {
+  transform: rotate(45deg);
+  background: currentColor;
+  border-radius: 3px;
+}
+@media (max-width: 650px) {
+  .product-menu {
+    display: block;
+    min-height: 44px;
+    padding: 5px 14px;
+    border: 1px solid #a6b9aa;
+    border-radius: 7px;
+    color: var(--ink);
+  }
+  .product-nav nav {
+    width: 100%;
+  }
+  .product-nav nav[data-open="false"] {
+    display: none;
+  }
+}
