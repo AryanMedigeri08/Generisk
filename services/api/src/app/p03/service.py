@@ -122,16 +122,19 @@ class Context:
         self.user, self.auth_session = identity.user, identity.session
 
     def origin(self) -> None:
-        supplied = urlsplit(self.request.headers.get("origin", ""))
+        raw = self.request.headers.get("origin", "")
         configured = urlsplit(self.config.web_origin)
+        if self.config.hosted_demo:
+            trusted = raw == self.config.web_origin
+        else:
+            trusted = raw in {
+                configured.geturl(),
+                configured.geturl().replace("localhost", "127.0.0.1")
+                if configured.hostname == "localhost"
+                else configured.geturl().replace("127.0.0.1", "localhost"),
+            }
         if (
-            supplied.scheme != configured.scheme
-            or supplied.port != configured.port
-            or supplied.hostname not in {"localhost", "127.0.0.1"}
-            or supplied.path
-            or supplied.query
-            or supplied.fragment
-            or supplied.username
+            not trusted
             or self.request.headers.get("sec-fetch-site") == "cross-site"
             or self.request.headers.get("x-demo-request") != "1"
         ):

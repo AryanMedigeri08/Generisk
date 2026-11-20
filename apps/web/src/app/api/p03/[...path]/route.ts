@@ -1,4 +1,5 @@
 import type { NextRequest } from "next/server";
+import { apiOrigin } from "../../../../lib/api-origin";
 
 export const dynamic = "force-dynamic";
 const roots = new Set([
@@ -47,9 +48,20 @@ async function proxy(
   }
   if (publicPanel && request.method !== "GET") return denied(405);
   if (publicPanel && path.length > 2) return denied(404);
-  const configured = new URL(
-    process.env.DEMO_WEB_ORIGIN ?? "http://localhost:13000",
-  );
+  let configured: URL;
+  try {
+    configured = new URL(
+      process.env.DEMO_WEB_ORIGIN ?? "http://localhost:13000",
+    );
+    if (
+      process.env.VERCEL === "1" &&
+      (configured.protocol !== "https:" ||
+        configured.origin !== process.env.DEMO_WEB_ORIGIN)
+    )
+      return denied(503);
+  } catch {
+    return denied(503);
+  }
   const origin = request.headers.get("origin");
   if (
     !roots.has(path[0]) ||
@@ -66,14 +78,15 @@ async function proxy(
   if (origin) {
     try {
       const supplied = new URL(origin);
+      const loopback = ["localhost", "127.0.0.1"];
+      const localAlias =
+        loopback.includes(configured.hostname) &&
+        loopback.includes(supplied.hostname) &&
+        supplied.protocol === configured.protocol &&
+        supplied.port === configured.port;
       if (
-        supplied.protocol !== configured.protocol ||
-        supplied.port !== configured.port ||
-        !["localhost", "127.0.0.1"].includes(supplied.hostname) ||
-        supplied.pathname !== "/" ||
-        supplied.search ||
-        supplied.hash ||
-        supplied.username
+        origin !== supplied.origin ||
+        (supplied.origin !== configured.origin && !localAlias)
       )
         return denied();
     } catch {
@@ -84,10 +97,12 @@ async function proxy(
     "X-Demo-Request": "1",
     Origin: origin ?? configured.origin,
   };
-  for (const name of ["cookie", "x-csrf-token"]) {
-    if (publicPanel || publicWhatif) continue;
-    const value = request.headers.get(name);
-    if (value) headers[name] = value;
+  if (!publicPanel && !publicWhatif) {
+    const session = request.cookies.get("amanah_demo_session");
+    if (session)
+      headers.cookie = `amanah_demo_session=${encodeURIComponent(session.value)}`;
+    const token = request.headers.get("x-csrf-token");
+    if (token) headers["x-csrf-token"] = token;
   }
   if (privateRisk) {
     const joint = request.headers.get("x-risk-joint");
@@ -113,17 +128,14 @@ async function proxy(
     headers["Content-Type"] = "application/json";
   }
   try {
-    const upstream = await fetch(
-      `${process.env.API_INTERNAL_URL ?? "http://127.0.0.1:18000"}/api/v1/${path.join("/")}`,
-      {
-        method: request.method,
-        headers,
-        body,
-        cache: "no-store",
-        signal: AbortSignal.timeout(10000),
-        redirect: "error",
-      },
-    );
+    const upstream = await fetch(`${apiOrigin()}/api/v1/${path.join("/")}`, {
+      method: request.method,
+      headers,
+      body,
+      cache: "no-store",
+      signal: AbortSignal.timeout(10000),
+      redirect: "error",
+    });
     const data: unknown = await upstream.json();
     const response = Response.json(data, {
       status: upstream.status,

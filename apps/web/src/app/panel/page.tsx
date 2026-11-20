@@ -1,4 +1,5 @@
 import { PanelCatalog } from "../../components/panel-catalog";
+import { apiOrigin } from "../../lib/api-origin";
 import type { PanelData } from "../../lib/panel";
 
 export const dynamic = "force-dynamic";
@@ -6,14 +7,11 @@ export const dynamic = "force-dynamic";
 export default async function PanelPage() {
   let data: PanelData | null = null;
   try {
-    const response = await fetch(
-      `${process.env.API_INTERNAL_URL ?? "http://127.0.0.1:18000"}/api/v1/panel`,
-      {
-        cache: "no-store",
-        signal: AbortSignal.timeout(10000),
-        redirect: "error",
-      },
-    );
+    const response = await fetch(`${apiOrigin()}/api/v1/panel`, {
+      cache: "no-store",
+      signal: AbortSignal.timeout(10000),
+      redirect: "error",
+    });
     if (response.ok) {
       const value = await response.json();
       if (

@@ -31,6 +31,19 @@ beforeEach(() => {
 });
 
 describe("independent identity workspace", () => {
+  it("offers organizer-issued sign-in on the hosted workspace", async () => {
+    api.mockRejectedValue(
+      new DemoRequestError("AUTHENTICATION_REQUIRED", "Sign in"),
+    );
+    render(<IdentityWorkspace hosted />);
+    expect(
+      await screen.findByRole("button", { name: "Sign in" }),
+    ).toBeVisible();
+    expect(screen.queryByText("Continue as partner A")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Public fictional demo credentials"),
+    ).not.toBeInTheDocument();
+  });
   it("signs in with a prelogin CSRF challenge and no browser role flag", async () => {
     api.mockImplementation(async (path) => {
       if (path === "auth/session")

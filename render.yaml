@@ -1,0 +1,37 @@
+services:
+  - type: web
+    name: generisk-demo-api
+    runtime: docker
+    plan: free
+    region: frankfurt
+    dockerContext: .
+    dockerfilePath: ./services/api/Dockerfile
+    healthCheckPath: /health/ready
+    envVars:
+      - key: AMANAH_DATABASE_URL
+        fromDatabase:
+          name: generisk-demo-db
+          property: connectionString
+      - key: AMANAH_DEMO_ONLY
+        value: "true"
+      - key: AMANAH_HOSTED_DEMO
+        value: "true"
+      - key: AMANAH_COOKIE_SECURE
+        value: "true"
+      - key: AMANAH_WEB_ORIGIN
+        sync: false
+      - key: AMANAH_PASSWORD_A
+        generateValue: true
+      - key: AMANAH_PASSWORD_B
+        generateValue: true
+      - key: AMANAH_PASSWORD_COUNSELLOR
+        generateValue: true
+      - key: AMANAH_PASSWORD_SUPPORT
+        generateValue: true
+
+databases:
+  - name: generisk-demo-db
+    plan: free
+    region: frankfurt
+    postgresMajorVersion: "17"
+    ipAllowList: []

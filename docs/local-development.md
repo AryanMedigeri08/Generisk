@@ -25,7 +25,7 @@ Synthetic-only P02/P03 under DEC-009/DEC-010. Clinical gates remain BLOCKED. See
 
 ## One-command Docker startup
 
-Start Docker Desktop/Engine in Linux-container mode. From repository root run `docker compose up --build -d --wait --wait-timeout 180`. The web/API/database publish to 127.0.0.1 ports 13000/18000/15432. Compose defaults are public development placeholders, not real secrets. `.env.example` lists optional port/database settings; local `.env` files are ignored. Do not use external hosting or sensitive data.
+Start Docker Desktop/Engine in Linux-container mode. From repository root run `docker compose up --build -d --wait --wait-timeout 180`. The web/API/database publish to 127.0.0.1 ports 13000/18000/15432. Compose uses public development credentials for synthetic data. `.env.example` lists optional local overrides. For a hosted demonstration, use the [Vercel and Render deployment plan](deployment.md) and its separate credentials.
 
 API startup runs Alembic then the idempotent fictional seed before serving. Readiness requires the expected migration and at least one fixture. Web health checks the web process; `scripts/smoke_stack.py` verifies the complete frontend/API/database path and protected denials. `docker compose down` stops this project's services and preserves its synthetic volume. It does not stop unrelated projects.
 
