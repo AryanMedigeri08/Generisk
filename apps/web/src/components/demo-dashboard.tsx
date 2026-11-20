@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+
 import { useState } from "react";
 import { type DemoSnapshot, unavailableSnapshot } from "../lib/demo";
 
@@ -37,46 +38,7 @@ export function DemoDashboard({
         SYNTHETIC DEMONSTRATION <span aria-hidden="true">·</span> NOT FOR
         CLINICAL USE
       </div>
-      <header className="site-header">
-        <Link className="wordmark" href="/" aria-label="Amanah Genetics home">
-          <span className="brand-symbol" aria-hidden="true">
-            ✳
-          </span>
-          <span>
-            Amanah<span className="brand-subtitle">GENETICS</span>
-          </span>
-        </Link>
-        <Link className="phase-badge" href="/workspace">
-          P03 / PRIVATE DEMO
-        </Link>
-      </header>
-      <main id="main">
-        <section className="hero" aria-labelledby="hero-title">
-          <div className="hero-copy">
-            <p className="eyebrow">UNDERSTANDING STARTS WITH TRUST</p>
-            <h1 id="hero-title">
-              A thoughtful foundation.
-              <br />
-              <span>A fictional beginning.</span>
-            </h1>
-            <p className="hero-description">
-              Explore the building blocks of a privacy-first genetics education
-              experience. Every person and scenario here is invented.
-            </p>
-            <a className="hero-link" href="#demo-workspace">
-              Explore the demo <span aria-hidden="true">↗</span>
-            </a>
-          </div>
-          <div className="hero-art" aria-hidden="true">
-            <div className="orbit orbit-one" />
-            <div className="orbit orbit-two" />
-            <div className="orbit orbit-three" />
-            <div className="art-center">
-              a<span>built with care</span>
-            </div>
-            <span className="art-label">INDIVIDUAL CHOICE</span>
-          </div>
-        </section>
+      <main id="main" tabIndex={-1}>
         <section
           className="workspace"
           id="demo-workspace"
@@ -84,8 +46,8 @@ export function DemoDashboard({
         >
           <div className="section-heading">
             <div>
-              <p className="eyebrow">THE DEMONSTRATION WORKSPACE</p>
-              <h2 id="workspace-title">Small steps. Clear boundaries.</h2>
+              <p className="eyebrow">LOCAL DEMONSTRATION SERVICES</p>
+              <h1 id="workspace-title">Service status</h1>
             </div>
             <button
               className="refresh-button"
@@ -166,7 +128,7 @@ export function DemoDashboard({
                 ◇
               </span>
               <p className="eyebrow">PRIVATE BY DESIGN</p>
-              <h3 id="boundaries-title">A boundary worth keeping.</h3>
+              <h3 id="boundaries-title">Private accounts</h3>
               <p>
                 Sign in independently with fictional accounts. Processing,
                 assessment and disclosure are separate choices checked on the
@@ -188,13 +150,14 @@ export function DemoDashboard({
               ↗
             </span>
             <div>
-              <p className="eyebrow">EDUCATION, WHEN IT IS READY</p>
+              <p className="eyebrow">CLINICAL KNOWLEDGE SERVICE</p>
               <h3 id="knowledge-title">
                 Approved knowledge is not yet available.
               </h3>
               <p>
-                The approved corpus is empty. This demo returns a safe
-                unavailable state and does not generate medical answers.
+                The clinical knowledge service has no approved content.{" "}
+                <Link href="/learn">Open the public learning activities</Link>{" "}
+                for the educational demo.
               </p>
             </div>
             <span className="small-tag">NO MODEL CALLS</span>
@@ -203,7 +166,7 @@ export function DemoDashboard({
       </main>
       <footer>
         <span>
-          Amanah Genetics <span aria-hidden="true">/</span> Hackathon foundation
+          AMAN Genome <span aria-hidden="true">/</span> Hackathon foundation
         </span>
         <p>
           Fictional examples only. No medical advice, diagnosis or real-world

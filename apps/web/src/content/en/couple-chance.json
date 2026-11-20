@@ -1,0 +1,43 @@
+{
+  "module_id": "couple-chance",
+  "module_number": "M3",
+  "eyebrow": "A fresh chance each time.",
+  "title": "Chance across families",
+  "summary": "Explore patterns without predicting a child.",
+  "duration": "5 min",
+  "cards": [
+    {
+      "card_id": "m3-next100",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "Meet the next 100 families",
+      "body": [
+        "Each shape represents a different fictional family with one pregnancy. These are not children from one family.",
+        "This fixed model starts with two carriers of changes in the same recessive gene.",
+        "Runs vary around the model pattern. A run does not predict any family."
+      ],
+      "widget": "next-100",
+      "sources": ["edu-nlm-chance"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["chance", "recessive"]
+    },
+    {
+      "card_id": "m3-one",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "One pregnancy at a time",
+      "body": [
+        "Previous results do not change the next chance.",
+        "A short history can look uneven. The model stays the same for each new draw."
+      ],
+      "widget": "one-pregnancy",
+      "sources": ["edu-nlm-chance"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["chance"]
+    }
+  ]
+}

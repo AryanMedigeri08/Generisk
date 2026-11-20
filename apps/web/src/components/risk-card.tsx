@@ -1,6 +1,12 @@
 "use client";
 
 import { useState } from "react";
+import { useContent } from "../content/locale";
+import { ResultExplainer } from "./learn/result-explainer";
+import type { RiskEnvelope } from "../lib/learn/risk";
+import { retrieveGuide } from "../lib/journey-demo";
+import { PersonalMode } from "./care-atlas/care-atlas";
+import "../app/care-atlas/atlas.css";
 import {
   identityApi,
   DemoRequestError,
@@ -10,23 +16,7 @@ import {
   type Joint,
 } from "../lib/identity";
 
-type NumberValue = {
-  exact: { num: number; den: number };
-  natural_frequency: { k: number; n: number };
-  basis: string;
-};
-export type RiskOutput = {
-  state: string;
-  label: string;
-  message_keys: string[];
-  bindings?: { scope_hash: string };
-  genes?: {
-    gene_symbol: string;
-    state: string;
-    numbers: Record<string, NumberValue>;
-    caveat_codes: string[];
-  }[];
-};
+export type RiskOutput = RiskEnvelope;
 type Props = {
   session: DemoSession;
   currentCase?: PrivateCase;
@@ -46,6 +36,8 @@ export function RiskCard({
   perform,
   parentBusy = false,
 }: Props) {
+  const content = useContent();
+  const { ui } = content;
   const [own, setOwn] = useState<RiskOutput | null>(null);
   const [couple, setCouple] = useState<RiskOutput | null>(null);
   const [pins, setPins] = useState<Record<string, string>>({});
@@ -53,6 +45,11 @@ export function RiskCard({
   const [localBusy, setBusy] = useState(false);
   const busy = localBusy || parentBusy;
   const [jointId, setJointId] = useState("");
+  const [openedJourney, setOpenedJourney] = useState<{
+    stamp: string;
+    binding: string;
+    preset: string;
+  }>();
   const joint =
     joints.find((j) => j.id === jointId) ??
     (joints.length === 1 ? joints[0] : undefined);
@@ -73,6 +70,7 @@ export function RiskCard({
     setMessage("");
     setOwn(null);
     setCouple(null);
+    setOpenedJourney(undefined);
     try {
       const response = await fetch(`/api/p03/risk/${kind}`, {
         cache: "no-store",
@@ -139,34 +137,153 @@ export function RiskCard({
     if (!output) return null;
     return (
       <section aria-label={title} className="risk-output">
-        <h3>
-          {title}: {output.state}
-        </h3>
+        <h3>{title}</h3>
         <p>{output.label}</p>
-        <p>{output.message_keys.join(" · ")}</p>
-        <ul>
-          {output.genes?.map((g) => (
-            <li key={g.gene_symbol}>
-              <bdi>{g.gene_symbol}</bdi>: {g.state}
-              {Object.entries(g.numbers).map(([key, value]) => (
-                <span key={key}>
-                  {" "}
-                  · {key} {value.exact.num}/{value.exact.den} (
-                  {value.natural_frequency.k} in {value.natural_frequency.n}) ·{" "}
-                  {value.basis}
-                </span>
-              ))}
-              <span> {g.caveat_codes.join(" · ")}</span>
-            </li>
-          ))}
-        </ul>
+        <ResultExplainer output={output} />
+        {output.contract_version === "gen-risk-1" &&
+          output.state !== "UNAVAILABLE" &&
+          output.bindings?.scope_hash && (
+            <div className="demo-result-journey">
+              <details>
+                <summary>Counselling preparation from public sources</summary>
+                {retrieveGuide(
+                  output.state === "SHARED_CARRIER"
+                    ? ["inheritance", "counselling"]
+                    : ["scope", "counselling"],
+                ).map((card) => (
+                  <article className="journey-note" key={card.id}>
+                    <h4>{card.title.en}</h4>
+                    <p>{card.summary.en}</p>
+                    <p>{card.prompt.en}</p>
+                    <a href={card.source} target="_blank" rel="noreferrer">
+                      MedlinePlus Genetics ↗
+                    </a>
+                  </article>
+                ))}
+              </details>
+              <button
+                type="button"
+                disabled={busy || !output.bindings.scope_hash}
+                onClick={async () => {
+                  setOpenedJourney(undefined);
+                  setBusy(true);
+                  setMessage("");
+                  try {
+                    const shared = output === couple;
+                    const response = await fetch(
+                      "/api/p03/risk/" +
+                        (shared ? "couple-assessment" : "my-assessment"),
+                      {
+                        cache: "no-store",
+                        credentials: "same-origin",
+                        headers: {
+                          "X-Demo-Request": "1",
+                          "X-Risk-Binding": output.bindings!.scope_hash!,
+                          ...(shared && joint
+                            ? { "X-Risk-Joint": joint.id }
+                            : {}),
+                        },
+                      },
+                    );
+                    const current = (await response.json()) as RiskOutput;
+                    if (
+                      !response.ok ||
+                      current.state === "UNAVAILABLE" ||
+                      current.bindings?.scope_hash !==
+                        output.bindings?.scope_hash
+                    )
+                      throw new Error();
+                    setOpenedJourney({
+                      stamp,
+                      binding: current.bindings!.scope_hash!,
+                      preset:
+                        current.state === "NO_SHARED_FINDING" ||
+                        current.state === "OWN_NO_FINDING"
+                          ? "follow-up"
+                          : "result",
+                    });
+                  } catch {
+                    setOwn(null);
+                    setCouple(null);
+                    setMessage("UNAVAILABLE");
+                  } finally {
+                    setBusy(false);
+                  }
+                }}
+              >
+                Plan a visit from this result
+              </button>
+              {openedJourney?.stamp === stamp &&
+                openedJourney.binding === output.bindings.scope_hash && (
+                  <div
+                    className="care-atlas"
+                    aria-label="Linked fictional care journey"
+                  >
+                    <PersonalMode initialJourney={openedJourney.preset} />
+                  </div>
+                )}
+            </div>
+          )}
+        <details className="risk-technical">
+          <summary>{ui.technical}</summary>
+          <p>{output.state}</p>
+          <p>{output.message_keys.join(" · ")}</p>
+          <ul>
+            {output.genes?.map((g) => (
+              <li key={g.gene_symbol}>
+                <bdi>{g.gene_symbol}</bdi>: {g.state}
+                {Object.entries(g.numbers).map(([key, value]) => (
+                  <span key={key}>
+                    {" "}
+                    · {key} {value.exact.num}/{value.exact.den} (
+                    {value.natural_frequency.k} in {value.natural_frequency.n})
+                    · {value.basis}
+                  </span>
+                ))}
+                <span> {g.caveat_codes.join(" · ")}</span>
+              </li>
+            ))}
+          </ul>
+        </details>
       </section>
     );
   }
   return (
     <section className="identity-card risk-card" aria-labelledby="risk-title">
-      <h2 id="risk-title">Calculation (demo)</h2>
-      <label htmlFor="risk-joint">Shared demo request</label>
+      <h2 id="risk-title">{ui.risk_title}</h2>
+      <p>
+        After you select a gene-level report and renew processing, allow a
+        summary, then open it below.
+      </p>
+      <div className="choice-buttons">
+        <button
+          disabled={busy || !currentCase}
+          onClick={() => choice("assessment", "grant")}
+        >
+          {ui.grant_own}
+        </button>
+        <button disabled={busy} onClick={() => calculate("my-assessment")}>
+          {ui.calculate_own}
+        </button>
+        <button
+          disabled={busy || !currentCase}
+          onClick={() => choice("assessment", "withdraw")}
+        >
+          {ui.withdraw_own}
+        </button>
+      </div>
+      <h3>Compare with a partner</h3>
+      <p>
+        {joint ? (
+          "Each partner needs to allow the comparison and separately choose whether to share the result."
+        ) : (
+          <>
+            To begin, <a href="#invite-title">invite your partner</a>. Each
+            person signs in separately.
+          </>
+        )}
+      </p>
+      <label htmlFor="risk-joint">{ui.risk_joint}</label>
       <select
         id="risk-joint"
         value={joint?.id ?? ""}
@@ -178,65 +295,64 @@ export function RiskCard({
           setCouple(null);
         }}
       >
-        <option value="">Choose a joint request</option>
+        <option value="">{ui.choose_joint}</option>
         {joints.map((j) => (
           <option key={j.id} value={j.id}>
             {j.id.slice(0, 8)}
           </option>
         ))}
       </select>
-      <p>
-        Synthetic demonstration. Educational estimate. Not a diagnosis. Not for
-        clinical use.
-      </p>
+
       <div className="choice-buttons">
-        <button
-          disabled={busy || !currentCase}
-          onClick={() => choice("assessment", "grant")}
-        >
-          Grant own demo assessment
-        </button>
-        <button
-          disabled={busy || !currentCase}
-          onClick={() => choice("assessment", "withdraw")}
-        >
-          Withdraw own demo assessment
-        </button>
         <button
           disabled={busy || !joint}
           onClick={() => choice("disclosure", "grant")}
         >
-          Grant shared demo disclosure
+          {ui.grant_shared}
+        </button>
+        <button
+          disabled={busy || !joint}
+          onClick={() => calculate("couple-assessment")}
+        >
+          {ui.calculate_shared}
         </button>
         <button
           disabled={busy || !joint}
           onClick={() => choice("disclosure", "withdraw")}
         >
-          Withdraw shared demo disclosure
+          {ui.withdraw_shared}
         </button>
       </div>
-      <div className="choice-buttons">
-        <button disabled={busy} onClick={() => calculate("my-assessment")}>
-          Calculate own demo summary
-        </button>
-        <button disabled={busy} onClick={() => calculate("couple-assessment")}>
-          Calculate shared demo outcome
-        </button>
-        <button
-          disabled={busy}
-          onClick={() => {
-            setPins({});
-            setOwn(null);
-            setCouple(null);
-            setMessage("risk.new_binding_requested");
-          }}
-        >
-          Start new calculation binding
-        </button>
+      <button
+        disabled={busy}
+        onClick={() => {
+          setPins({});
+          setOwn(null);
+          setCouple(null);
+          setMessage("risk.new_binding_requested");
+        }}
+      >
+        {ui.new_binding}
+      </button>
+      <div role="status">
+        {message && (
+          <>
+            <p>
+              {message === "risk.new_binding_requested"
+                ? ui.new_binding_message
+                : (content.risk.messages[
+                    `risk.${message.toLowerCase()}` as keyof typeof content.risk.messages
+                  ] ?? ui.explanation_unavailable)}
+            </p>
+            <details>
+              <summary>{ui.technical}</summary>
+              <code>{message}</code>
+            </details>
+          </>
+        )}
       </div>
-      <p role="status">{message}</p>
-      {renderOutput(outputStamp === stamp ? own : null, "Own demo")}
-      {renderOutput(outputStamp === stamp ? couple : null, "Shared demo")}
+      {renderOutput(outputStamp === stamp ? own : null, ui.own_title)}
+      {renderOutput(outputStamp === stamp ? couple : null, ui.shared_title)}
     </section>
   );
 }

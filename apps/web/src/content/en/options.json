@@ -1,0 +1,27 @@
+{
+  "module_id": "options",
+  "module_number": "M6",
+  "eyebrow": "Your questions. Your own direction.",
+  "title": "Space for your choices",
+  "summary": "Explore questions without choosing a path.",
+  "duration": "3 min",
+  "cards": [
+    {
+      "card_id": "m6-options",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "There is no preset next step",
+      "body": [
+        "A genetic counsellor can discuss information, uncertainty, and options with you.",
+        "Your values and circumstances matter. These cards have equal prominence and no selected route.",
+        "The checklist holds questions only in this open page. Nothing is sent or saved."
+      ],
+      "widget": "options",
+      "sources": ["edu-nlm-consult"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["counsellor"]
+    }
+  ]
+}

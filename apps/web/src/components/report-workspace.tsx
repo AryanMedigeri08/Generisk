@@ -301,11 +301,14 @@ export function ReportWorkspace({
       className="identity-card report-workspace"
       aria-labelledby="reports-title"
     >
-      <p className="eyebrow">P04 / FICTIONAL SOURCE RECORDS</p>
-      <h2 id="reports-title">Synthetic report management</h2>
+      <h2 id="reports-title">Choose a sample report</h2>
       <p>
-        <Link href="/panel">Public demo panel and sources</Link> · P05
-        gene-level fixtures; no risk calculation or interpretation.
+        Choose a gene-level example below to use in your result. After changing
+        the report,{" "}
+        <a href="#workspace-permissions">
+          allow processing for the new version
+        </a>
+        , then <a href="#risk-title">open your result</a>.
       </p>
       <p>
         <strong>
@@ -313,13 +316,7 @@ export function ReportWorkspace({
         </strong>
       </p>
       <p>
-        Choose a packaged fictional fixture. There is no file upload, clinical
-        interpretation, AI explanation or report retrieval corpus.
-      </p>
-      <p>
-        Report changes supersede old input permissions. Review and grant
-        processing for the new input version above before viewing again. Joint
-        permissions and any old output also become unavailable.
+        <Link href="/panel">Explore gene names and sources</Link>
       </p>
       {!processing && (
         <p className="report-permission" role="status">
@@ -328,41 +325,6 @@ export function ReportWorkspace({
         </p>
       )}
       {error && <p role="status">{error}</p>}
-      <div className="inline-form">
-        <label>
-          Allowlisted synthetic fixture
-          <select
-            value={selected}
-            onChange={(event) => setSelected(event.target.value)}
-            disabled={busy}
-          >
-            {fixtures
-              .filter((item) => item.operation === "import")
-              .map((item) => (
-                <option key={item.id} value={item.id}>
-                  {item.label}
-                </option>
-              ))}
-          </select>
-        </label>
-        <button
-          disabled={busy || !processing || !selected}
-          onClick={() => void importFixture()}
-        >
-          Import selected fixture
-        </button>
-        <button
-          disabled={busy || !processing}
-          onClick={() =>
-            void operate(async () => {
-              await refresh();
-              await reloadReports();
-            })
-          }
-        >
-          Refresh reports
-        </button>
-      </div>
       {geneFixtures.length > 0 && (
         <div className="inline-form gene-scenario-controls">
           <label>
@@ -394,6 +356,44 @@ export function ReportWorkspace({
           </p>
         </div>
       )}
+      <details className="demo-credentials">
+        <summary>Other samples and validation tools</summary>
+        <div className="inline-form">
+          <label>
+            Allowlisted synthetic fixture
+            <select
+              value={selected}
+              onChange={(event) => setSelected(event.target.value)}
+              disabled={busy}
+            >
+              {fixtures
+                .filter((item) => item.operation === "import")
+                .map((item) => (
+                  <option key={item.id} value={item.id}>
+                    {item.label}
+                  </option>
+                ))}
+            </select>
+          </label>
+          <button
+            disabled={busy || !processing || !selected}
+            onClick={() => void importFixture()}
+          >
+            Import selected fixture
+          </button>
+          <button
+            disabled={busy || !processing}
+            onClick={() =>
+              void operate(async () => {
+                await refresh();
+                await reloadReports();
+              })
+            }
+          >
+            Refresh reports
+          </button>
+        </div>
+      </details>
       {receipt && (
         <div className="report-receipt" role="status" aria-live="polite">
           <h3>Validation outcome: {receipt.category.replaceAll("_", " ")}</h3>

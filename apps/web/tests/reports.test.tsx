@@ -168,7 +168,7 @@ describe("fictional report management", () => {
     });
     expect(refresh).toHaveBeenCalledTimes(1);
     expect(
-      screen.getByText(/Review and grant processing for the new input version/),
+      screen.getByText(/allow processing for the new version/),
     ).toBeInTheDocument();
   });
 

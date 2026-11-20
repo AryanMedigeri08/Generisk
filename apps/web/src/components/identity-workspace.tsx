@@ -1,9 +1,11 @@
 "use client";
 
 import Link from "next/link";
+
 import { useEffect, useState } from "react";
 import { ReportWorkspace } from "./report-workspace";
 import { RiskCard } from "./risk-card";
+import { JourneyStudio } from "./journey-studio";
 import {
   identityApi,
   DemoRequestError,
@@ -111,12 +113,16 @@ export function IdentityWorkspace() {
 
   async function signIn(event: React.FormEvent) {
     event.preventDefault();
+    await login(username, password);
+  }
+
+  async function login(account: string, passphrase: string) {
     await action(async () => {
       const challenge = await identityApi<{ csrf_token: string }>("auth/csrf");
       const current = await identityApi<DemoSession>(
         "auth/login",
         challenge.csrf_token,
-        { username, password },
+        { username: account, password: passphrase },
       );
       setPassword("");
       clear();
@@ -124,7 +130,7 @@ export function IdentityWorkspace() {
       await load(current);
       // Expose authenticated controls only after their current permission state is ready.
       setSession(current);
-      setMessage("Signed in to your fictional demonstration account.");
+      setMessage("Signed in. Start with your permission choice below.");
     });
   }
 
@@ -218,20 +224,11 @@ export function IdentityWorkspace() {
   return (
     <>
       <div className="demo-notice">SYNTHETIC DEMO — NOT FOR CLINICAL USE</div>
-      <header className="site-header">
-        <Link className="wordmark" href="/">
-          Amanah
-          <span className="brand-subtitle">GENETICS / LOCAL IDENTITY DEMO</span>
-        </Link>
-        <span className="phase-badge">P03 / INDEPENDENT CHOICE</span>
-      </header>
       <main id="main" tabIndex={-1} className="identity-workspace">
-        <p className="eyebrow">FICTIONAL PEOPLE. REAL PERMISSION BOUNDARIES.</p>
-        <h1>Independent by design.</h1>
+        <h1>Your private workspace</h1>
         <p className="workspace-intro">
-          A local demonstration of private sessions, invitations and separate
-          choices. No genetic result, clinical advice or real professional
-          verification.
+          Use a sample account to explore a report. You control whether it can
+          be used, compared with a partner’s, or shared.
         </p>
         <div role="status" aria-live="polite" className="workspace-message">
           {message}
@@ -240,31 +237,55 @@ export function IdentityWorkspace() {
           <p>Checking your local demonstration session…</p>
         ) : !session ? (
           <section className="identity-card" aria-labelledby="signin-title">
-            <h2 id="signin-title">Sign in to a fictional account</h2>
-            <form onSubmit={signIn} className="identity-form">
-              <label htmlFor="username">Demo username</label>
-              <input
-                id="username"
-                autoComplete="username"
-                value={username}
-                onChange={(event) => setUsername(event.target.value)}
-                required
-                maxLength={64}
-              />
-              <label htmlFor="password">Demo password</label>
-              <input
-                id="password"
-                type="password"
-                autoComplete="current-password"
-                value={password}
-                onChange={(event) => setPassword(event.target.value)}
-                required
-                maxLength={128}
-              />
-              <button className="primary-choice" disabled={busy} type="submit">
-                {busy ? "Signing in…" : "Sign in"}
-              </button>
-            </form>
+            <h2 id="signin-title">Choose a sample account</h2>
+            <p>
+              Each partner has a separate sign-in. Choose one to begin. No
+              registration or personal details are needed.
+            </p>
+            <div className="guide-actions">
+              {(["a", "b"] as const).map((person) => (
+                <button
+                  key={person}
+                  disabled={busy}
+                  onClick={() =>
+                    void login("demo-" + person, "demo-" + person + "-only")
+                  }
+                >
+                  Continue as partner {person.toUpperCase()}
+                </button>
+              ))}
+            </div>
+            <details className="demo-credentials">
+              <summary>Sign in with a username instead</summary>
+              <form onSubmit={signIn} className="identity-form">
+                <label htmlFor="username">Demo username</label>
+                <input
+                  id="username"
+                  autoComplete="username"
+                  value={username}
+                  onChange={(event) => setUsername(event.target.value)}
+                  required
+                  maxLength={64}
+                />
+                <label htmlFor="password">Demo password</label>
+                <input
+                  id="password"
+                  type="password"
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(event) => setPassword(event.target.value)}
+                  required
+                  maxLength={128}
+                />
+                <button
+                  className="primary-choice"
+                  disabled={busy}
+                  type="submit"
+                >
+                  {busy ? "Signing in…" : "Sign in"}
+                </button>
+              </form>
+            </details>
             <details className="demo-credentials">
               <summary>Public fictional demo credentials</summary>
               <p>
@@ -290,9 +311,15 @@ export function IdentityWorkspace() {
               aria-labelledby="session-title"
             >
               <div>
-                <h2 id="session-title">{session.display_name}</h2>
+                <h2 id="session-title">
+                  {session.username === "demo-a"
+                    ? "Partner A"
+                    : session.username === "demo-b"
+                      ? "Partner B"
+                      : session.display_name}
+                </h2>
                 <p>
-                  Fictional role: <strong>{session.role}</strong> · Session
+                  Sample account · <strong>{session.role}</strong> · Session
                   expires {new Date(session.expires_at).toLocaleTimeString()}
                 </p>
               </div>
@@ -325,22 +352,65 @@ export function IdentityWorkspace() {
                 </button>
               </div>
             </section>
-            <section className="identity-card" aria-labelledby="private-title">
-              <h2 id="private-title">Your authorized case metadata</h2>
+            {session.role === "individual" && (
+              <nav
+                className="workspace-guide"
+                aria-label="Private workspace steps"
+              >
+                <h2>Work through your report</h2>
+                <ol>
+                  <li>
+                    <a href="#workspace-permissions">
+                      Choose whether to allow processing
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#reports-title">
+                      Select a gene-level sample report
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#risk-title">
+                      Review permission and calculate your result
+                    </a>
+                  </li>
+                  <li>
+                    <a href="#invite-title">
+                      Invite a partner if you want a joint review
+                    </a>
+                  </li>
+                </ol>
+                <p>
+                  Changing reports asks for fresh permission. Each partner makes
+                  their own choices.
+                </p>
+              </nav>
+            )}
+            <section
+              id="workspace-permissions"
+              className="identity-card"
+              aria-labelledby="private-title"
+            >
+              <h2 id="private-title">Your report permissions</h2>
               {cases.length ? (
                 cases.map((record) => (
                   <article className="private-case" key={record.id}>
-                    <h3>{record.display_name}</h3>
-                    <p>
-                      {record.id} · Input version {record.input_version} ·
-                      Synthetic only
-                    </p>
-                    <p>{record.scenario}</p>
+                    <h3>Use this sample report</h3>
+                    <details className="demo-credentials">
+                      <summary>Sample record details</summary>
+                      <strong>{record.display_name}</strong>
+                      <p>
+                        {record.id} · Input version {record.input_version} ·
+                        Synthetic only
+                      </p>
+                      <p>{record.scenario}</p>
+                    </details>
                     {session.role === "individual" && (
                       <p>
-                        Processing permission also allows the assigned fictional
-                        counsellor to read this synthetic metadata. It grants no
-                        joint assessment or disclosure permission.
+                        Allow processing to open and use the sample report. An
+                        assigned demo counsellor can then see basic case
+                        details. Your partner still needs separate permission
+                        for a comparison and for sharing the result.
                       </p>
                     )}
                     {session.role === "individual" &&
@@ -383,6 +453,11 @@ export function IdentityWorkspace() {
                   joints={joints}
                   refresh={() => load(session)}
                   perform={action}
+                />
+                <JourneyStudio
+                  key={session.user_id}
+                  session={session}
+                  permissions={permissions}
                 />
                 <section
                   className="identity-card"
@@ -535,9 +610,9 @@ export function IdentityWorkspace() {
                       <div className="disclosure-boundary">
                         <h4>Separate result disclosure</h4>
                         <p>
-                          No reviewed output exists in the normal P03 flow.
-                          Assessment permission never releases a result. There
-                          are no clinical conclusions.
+                          Both partners decide whether a reviewed sample outcome
+                          can be shared. Permission to compare reports is a
+                          separate choice.
                         </p>
                         {joint.placeholder_reviewed ? (
                           controls("disclosure", joint)
@@ -615,7 +690,7 @@ export function IdentityWorkspace() {
         )}
       </main>
       <footer>
-        <Link href="/">Back to the foundation</Link>
+        <Link href="/">Return home</Link>
         <p>
           Synthetic demo only. No medical advice or real-world clinical
           authorization.

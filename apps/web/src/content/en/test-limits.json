@@ -1,0 +1,44 @@
+{
+  "module_id": "test-limits",
+  "module_number": "M5",
+  "eyebrow": "A result has a scope.",
+  "title": "Understanding test limits",
+  "summary": "Separate a negative result from certainty.",
+  "duration": "4 min",
+  "cards": [
+    {
+      "card_id": "m5-negative",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "What a negative result can leave unknown",
+      "body": [
+        "A test may not find every relevant gene change. Its scope matters.",
+        "Compare two assumptions for a teaching example. A result below complete detection leaves some carrier chance in this model.",
+        "Complete detection is a mathematical assumption here, not a claim about any laboratory."
+      ],
+      "widget": "negative-bar",
+      "sources": ["edu-nlm-results"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["negative", "carrier"]
+    },
+    {
+      "card_id": "m5-uncertain",
+      "version": "1.0.0",
+      "language": "en",
+      "reading_level": "simple",
+      "title": "Uncertain is not a prediction",
+      "body": [
+        "A variant of uncertain significance is a gene change whose health meaning is not yet clear.",
+        "It does not establish that someone has a condition.",
+        "Not tested means unknown, not absent. This card gives no numerical estimate."
+      ],
+      "widget": "uncertain-result",
+      "sources": ["edu-nlm-results"],
+      "review_status": "demo-unreviewed",
+      "source_check": "verified",
+      "glossary_terms": ["uncertain", "negative"]
+    }
+  ]
+}

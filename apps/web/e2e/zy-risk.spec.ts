@@ -19,6 +19,7 @@ test("synthetic people select neither, one and shared carriers with consent and 
       [b, "demo-b"],
     ] as const) {
       await page.goto("/workspace");
+      await page.getByText("Sign in with a username instead").click();
       await page.getByLabel("Demo username").fill(user);
       await page.getByLabel("Demo password").fill(user + "-only");
       await page.getByRole("button", { name: "Sign in", exact: true }).click();
@@ -77,7 +78,7 @@ test("synthetic people select neither, one and shared carriers with consent and 
         if (await assessment.isEnabled()) await assessment.click();
         await page
           .getByRole("button", {
-            name: "Grant own demo assessment",
+            name: "Allow my report summary",
             exact: true,
           })
           .click();
@@ -86,7 +87,7 @@ test("synthetic people select neither, one and shared carriers with consent and 
         ).toBeEnabled();
         await page
           .getByRole("button", {
-            name: "Grant shared demo disclosure",
+            name: "Allow sharing this result",
             exact: true,
           })
           .click();
@@ -97,13 +98,11 @@ test("synthetic people select neither, one and shared carriers with consent and 
     }
     async function shared(state: string) {
       await a
-        .getByRole("button", { name: "Start new calculation binding" })
+        .getByRole("button", { name: "Start a fresh calculation" })
         .click();
-      await a
-        .getByRole("button", { name: "Calculate shared demo outcome" })
-        .click();
+      await a.getByRole("button", { name: "Show the shared result" }).click();
       await expect(
-        a.getByRole("region", { name: "Shared demo", exact: true }),
+        a.getByRole("region", { name: "Our shared result", exact: true }),
       ).toContainText(state);
     }
     await choose(a, "fixture-a-v2-none");
@@ -112,31 +111,25 @@ test("synthetic people select neither, one and shared carriers with consent and 
     await shared("NO_SHARED_FINDING");
     await choose(a, "fixture-a-v2-carrier-cftr");
     await authorize();
-    await a
-      .getByRole("button", { name: "Start new calculation binding" })
-      .click();
-    await a.getByRole("button", { name: "Calculate own demo summary" }).click();
+    await a.getByRole("button", { name: "Start a fresh calculation" }).click();
+    await a.getByRole("button", { name: "Show my report summary" }).click();
     await expect(
-      a.getByRole("region", { name: "Own demo", exact: true }),
+      a.getByRole("region", { name: "My report summary", exact: true }),
     ).toContainText("CFTR: OWN_CARRIER");
     await shared("NO_SHARED_FINDING");
     await choose(b, "fixture-b-v2-carrier-cftr");
     await authorize();
     await shared("SHARED_CARRIER");
     await expect(
-      a.getByRole("region", { name: "Shared demo", exact: true }),
+      a.getByRole("region", { name: "Our shared result", exact: true }),
     ).toContainText("affected 1/4");
-    await b
-      .getByRole("button", { name: "Withdraw shared demo disclosure" })
-      .click();
+    await b.getByRole("button", { name: "Withdraw result sharing" }).click();
     await expect(
       b.getByRole("button", { name: "Refresh private state" }),
     ).toBeEnabled();
-    await a
-      .getByRole("button", { name: "Calculate shared demo outcome" })
-      .click();
+    await a.getByRole("button", { name: "Show the shared result" }).click();
     await expect(
-      a.getByRole("region", { name: "Shared demo", exact: true }),
+      a.getByRole("region", { name: "Our shared result", exact: true }),
     ).toContainText("UNAVAILABLE");
     await a.setViewportSize({ width: 375, height: 812 });
     expect(
@@ -151,9 +144,7 @@ test("synthetic people select neither, one and shared carriers with consent and 
         () => document.documentElement.scrollWidth <= window.innerWidth,
       ),
     ).toBe(true);
-    await a
-      .getByRole("button", { name: "Start new calculation binding" })
-      .focus();
+    await a.getByRole("button", { name: "Start a fresh calculation" }).focus();
     await a.keyboard.press("Enter");
     expect(await a.evaluate(() => Object.keys(localStorage))).toEqual([]);
   } finally {

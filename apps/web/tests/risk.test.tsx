@@ -142,14 +142,23 @@ it("requests an explicit purpose grant, displays codes/fractions and rejects a s
       is_synthetic: true as const,
     },
     permissions: [],
-    joints: [],
+    joints: [
+      {
+        id: "00000000-0000-4000-8000-000000000001",
+        version: 1,
+        output_version: 1,
+        status: "available_for_demo_review" as const,
+        can_disclose: true,
+        placeholder_reviewed: false,
+      },
+    ],
     refresh,
     perform: async (work: () => Promise<void>) => work(),
   };
   render(<RiskCard {...props} />);
   expect(fetcher).not.toHaveBeenCalled();
   fireEvent.click(
-    screen.getByRole("button", { name: "Grant own demo assessment" }),
+    screen.getByRole("button", { name: "Allow my report summary" }),
   );
   await waitFor(() =>
     expect(identityApi).toHaveBeenCalledWith(
@@ -163,7 +172,7 @@ it("requests an explicit purpose grant, displays codes/fractions and rejects a s
     ),
   );
   fireEvent.click(
-    screen.getByRole("button", { name: "Calculate shared demo outcome" }),
+    screen.getByRole("button", { name: "Show the shared result" }),
   );
   expect(await screen.findByText(/affected 1\/4/)).toBeInTheDocument();
   fetcher.mockResolvedValueOnce(
@@ -173,7 +182,7 @@ it("requests an explicit purpose grant, displays codes/fractions and rejects a s
     ),
   );
   fireEvent.click(
-    screen.getByRole("button", { name: "Calculate shared demo outcome" }),
+    screen.getByRole("button", { name: "Show the shared result" }),
   );
   expect(await screen.findByRole("status")).toHaveTextContent("STALE_BINDING");
   expect(fetcher).toHaveBeenCalledTimes(2);
@@ -183,10 +192,10 @@ it("requests an explicit purpose grant, displays codes/fractions and rejects a s
   );
   expect(screen.queryByText(/affected 1\/4/)).not.toBeInTheDocument();
   fireEvent.click(
-    screen.getByRole("button", { name: "Start new calculation binding" }),
+    screen.getByRole("button", { name: "Start a fresh calculation" }),
   );
   fireEvent.click(
-    screen.getByRole("button", { name: "Calculate shared demo outcome" }),
+    screen.getByRole("button", { name: "Show the shared result" }),
   );
   await waitFor(() => expect(fetcher).toHaveBeenCalledTimes(3));
   expect(fetcher.mock.calls[2][1]?.headers).not.toHaveProperty(

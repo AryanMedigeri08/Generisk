@@ -49,6 +49,7 @@ test("public panel and synthetic v2 scenario statuses work without clinical inte
   ).toBe(true);
   await page.setViewportSize({ width: 1280, height: 900 });
   await page.goto("/workspace");
+  await page.getByText("Sign in with a username instead").click();
   await page.getByLabel("Demo username").fill("demo-a");
   await page.getByLabel("Demo password").fill("demo-a-only");
   await page.getByRole("button", { name: "Sign in", exact: true }).click();

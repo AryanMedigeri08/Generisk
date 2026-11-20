@@ -6,6 +6,7 @@ test("browser reaches API and PostgreSQL through the demo boundary", async ({
   request,
 }, testInfo) => {
   await page.goto("/");
+  await page.getByRole("link", { name: "Service status" }).click();
   await expect(page).toHaveTitle(/Synthetic demo/);
   await expect(
     page.getByRole("heading", { name: "Fictional participant A" }),
@@ -49,7 +50,12 @@ test("mobile foundation stays within viewport and labels its limitations", async
 }, testInfo) => {
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto("/");
-  await expect(page.getByText("Independent sign-in required")).toBeVisible();
+  await expect(
+    page.getByRole("link", { name: "Start the guided example" }),
+  ).toBeVisible();
+  await expect(
+    page.getByText("Synthetic demonstration · Not for clinical use"),
+  ).toBeVisible();
   expect(
     await page.evaluate(
       () => document.documentElement.scrollWidth <= window.innerWidth,
